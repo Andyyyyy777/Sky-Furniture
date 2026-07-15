@@ -138,10 +138,24 @@ function categoryLabel(id) {
   return CATEGORY_OPTIONS.find((c) => c.id === id)?.label || id;
 }
 
+function resolveAdminAssetUrl(url) {
+  if (!url) return "";
+  if (/^(https?:|data:|blob:)/i.test(url)) return url;
+  let clean = String(url).replace(/^\//, "");
+  // Admin page is under /admin/ so assets are one level up
+  if (clean.startsWith("assets/")) return "../" + clean;
+  if (clean.startsWith("images/")) return "../assets/" + clean;
+  return "../" + clean;
+}
+
 function normalizeProduct(p) {
   const cat = LEGACY_CAT[p.category] || p.category || "living-room";
   const stockQty =
     p.stockQty != null ? Number(p.stockQty) : p.inStock === false ? 0 : 20;
+  const image = String(p.image || "").replace(/^\//, "");
+  const images = (Array.isArray(p.images) && p.images.length ? p.images : image ? [image] : [])
+    .map((u) => String(u || "").replace(/^\//, ""))
+    .filter(Boolean);
   return {
     id: Number(p.id) || Date.now(),
     name: p.name || "Untitled",
@@ -151,8 +165,8 @@ function normalizeProduct(p) {
     originalPrice: p.originalPrice != null && p.originalPrice !== "" ? Number(p.originalPrice) : null,
     rating: Number(p.rating) || 4.7,
     reviews: Number(p.reviews) || 0,
-    image: p.image || "",
-    images: Array.isArray(p.images) && p.images.length ? p.images : p.image ? [p.image] : [],
+    image: image || "",
+    images: images.length ? images : image ? [image] : [],
     description: p.description || "",
     details: Array.isArray(p.details) ? p.details : [],
     inStock: p.inStock !== false && stockQty > 0,
@@ -169,11 +183,33 @@ function catalogFromDataJs() {
 }
 
 function getProducts() {
+  // Always prefer fresh data.js when version changes
+  const liveVersion = String(window.SKY_CATALOG_VERSION || "");
+  try {
+    const savedVersion = localStorage.getItem("sky_catalog_version") || "";
+    if (liveVersion && savedVersion !== liveVersion) {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.setItem("sky_catalog_version", liveVersion);
+    }
+  } catch (_) {}
+
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const list = JSON.parse(raw);
-      if (Array.isArray(list) && list.length) return list.map(normalizeProduct);
+      if (Array.isArray(list) && list.length) {
+        // Patch any leftover unsplash / absolute-root paths from data.js
+        const seed = catalogFromDataJs();
+        const byId = new Map(seed.map((p) => [String(p.id), p]));
+        return list.map((p) => {
+          const n = normalizeProduct(p);
+          const fresh = byId.get(String(n.id));
+          if (fresh && (!n.image || /unsplash|placehold/i.test(n.image))) {
+            return { ...n, image: fresh.image, images: fresh.images };
+          }
+          return n;
+        });
+      }
     }
   } catch (_) {}
   const seed = catalogFromDataJs();
@@ -187,6 +223,11 @@ function getProducts() {
 function saveProducts(list, log = true) {
   const normalized = list.map(normalizeProduct);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
+  try {
+    if (window.SKY_CATALOG_VERSION) {
+      localStorage.setItem("sky_catalog_version", String(window.SKY_CATALOG_VERSION));
+    }
+  } catch (_) {}
   window.SKY_ADMIN_PRODUCTS = normalized;
   window.SKY_PRODUCTS_LIVE = normalized;
   if (log) logActivity(`Catalog saved (${normalized.length} products)`);
@@ -727,7 +768,7 @@ function loadProducts() {
       <td class="p-3"><input type="checkbox" class="row-check accent-ink" value="${p.id}" /></td>
       <td class="p-3">
         <div class="flex items-center gap-3 min-w-0">
-          <img src="${escapeHtml(p.image)}" alt="" class="admin-thumb" />
+          <img src="${escapeHtml(resolveAdminAssetUrl(p.image))}" alt="" class="admin-thumb" />
           <div class="min-w-0">
             <p class="font-medium truncate max-w-[200px]">${escapeHtml(p.name)}</p>
             <div class="flex flex-wrap gap-1.5 mt-0.5">
@@ -854,7 +895,7 @@ function setImagePreview(src) {
   const dataField = document.getElementById("pf-image-data");
   if (!img || !empty) return;
   if (src && String(src).trim()) {
-    img.src = src;
+    img.src = resolveAdminAssetUrl(src);
     img.classList.remove("hidden");
     empty.classList.add("hidden");
     clearBtn?.classList.remove("hidden");
@@ -1389,8 +1430,14 @@ document.getElementById("btn-seed")?.addEventListener("click", () => {
     status.className = "mt-3 text-sm text-red-600";
     return;
   }
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+    if (window.SKY_CATALOG_VERSION) {
+      localStorage.setItem("sky_catalog_version", String(window.SKY_CATALOG_VERSION));
+    }
+  } catch (_) {}
   saveProducts(catalog);
-  status.textContent = `Loaded ${catalog.length} luxury products from data.js.`;
+  status.textContent = `Loaded ${catalog.length} products with matching images.`;
   status.className = "mt-3 text-sm text-green-700";
   logActivity(`Seeded ${catalog.length} products from data.js`);
   loadProducts();
@@ -1401,6 +1448,9 @@ document.getElementById("btn-seed")?.addEventListener("click", () => {
 document.getElementById("btn-clear-catalog")?.addEventListener("click", () => {
   if (!confirm("Clear local catalog overrides and reload defaults from data.js?")) return;
   localStorage.removeItem(STORAGE_KEY);
+  try {
+    localStorage.removeItem("sky_catalog_version");
+  } catch (_) {}
   saveProducts(catalogFromDataJs());
   document.getElementById("seed-status").textContent = "Reset to data.js defaults.";
   logActivity("Cleared local overrides / reset catalog");
@@ -1413,17 +1463,23 @@ document.getElementById("btn-clear-catalog")?.addEventListener("click", () => {
 // Boot
 // ---------------------------------------------------------------------------
 function bootAdmin() {
-  initTheme();
-  initMobileDrawer();
-  initImageFields();
-  initViewShopLinks();
-
-  // Bind tab clicks on cloned mobile nav too
-  document.querySelectorAll(".tab-btn").forEach((btn) => {
-    btn.addEventListener("click", () => setTab(btn.dataset.tab));
-  });
-
-  checkAccess();
+  try {
+    initTheme();
+    initMobileDrawer();
+    initImageFields();
+    initViewShopLinks();
+    document.querySelectorAll(".tab-btn").forEach((btn) => {
+      btn.addEventListener("click", () => setTab(btn.dataset.tab));
+    });
+    checkAccess();
+  } catch (err) {
+    console.error("[Admin] boot failed", err);
+    try {
+      showLocalUnlock("Admin had a startup error — enter password to continue.");
+    } catch (_) {
+      alert("Admin failed to start: " + (err.message || err));
+    }
+  }
 }
 
 if (document.readyState === "loading") {

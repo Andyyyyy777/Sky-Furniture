@@ -3,27 +3,70 @@
  * Products: admin localStorage (sky_admin_products) → else assets/js/data.js
  */
 
+const CATALOG_VERSION_KEY = "sky_catalog_version";
+
+function resolveAssetUrl(url) {
+  if (!url) return "";
+  if (/^(https?:|data:|blob:)/i.test(url)) return url;
+  // Strip leading slash so paths work from site root without absolute-root issues
+  let clean = String(url).replace(/^\//, "");
+  // Admin lives in /admin/ so needs ../
+  try {
+    if (/\/admin(\/|$)/i.test(location.pathname || "")) {
+      if (!clean.startsWith("../")) clean = "../" + clean;
+    }
+  } catch (_) {}
+  return clean;
+}
+
 function loadProductCatalog() {
+  const liveVersion = String(window.SKY_CATALOG_VERSION || "");
+  try {
+    const savedVersion = localStorage.getItem(CATALOG_VERSION_KEY) || "";
+    // Drop stale admin overrides when catalog file was updated
+    if (liveVersion && savedVersion !== liveVersion) {
+      localStorage.removeItem("sky_admin_products");
+      localStorage.setItem(CATALOG_VERSION_KEY, liveVersion);
+    }
+  } catch (_) {}
+
   try {
     const admin = JSON.parse(localStorage.getItem("sky_admin_products") || "null");
     if (Array.isArray(admin) && admin.length) {
-      return admin.map(normalizeShopProduct);
+      // Prefer live file images when admin cache still has broken remote/missing paths
+      const fromFile = Array.isArray(window.SKY_PRODUCTS) ? window.SKY_PRODUCTS : [];
+      const fileById = new Map(fromFile.map((p) => [Number(p.id), p]));
+      return admin.map((p) => {
+        const fresh = fileById.get(Number(p.id));
+        if (fresh && fresh.image && String(p.image || "").includes("unsplash")) {
+          return normalizeShopProduct({ ...p, image: fresh.image, images: fresh.images || [fresh.image] });
+        }
+        return normalizeShopProduct(p);
+      });
     }
   } catch (_) {}
   const base = Array.isArray(window.SKY_PRODUCTS) ? window.SKY_PRODUCTS : [];
+  try {
+    if (liveVersion) localStorage.setItem(CATALOG_VERSION_KEY, liveVersion);
+  } catch (_) {}
   return base.map(normalizeShopProduct);
 }
 
 function normalizeShopProduct(p) {
   const legacy = { living: "living-room", "office-gaming": "office", sofa: "living-room", bed: "bedroom", table: "dining", lamps: "lighting", artifacts: "decor" };
   const category = legacy[p.category] || p.category || "living-room";
+  const image = resolveAssetUrl(p.image || "");
+  const images = (Array.isArray(p.images) && p.images.length ? p.images : p.image ? [p.image] : [])
+    .map(resolveAssetUrl)
+    .filter(Boolean);
   return {
     ...p,
     id: Number(p.id),
     category,
     price: Number(p.price) || 0,
     originalPrice: p.originalPrice != null ? Number(p.originalPrice) : null,
-    images: Array.isArray(p.images) && p.images.length ? p.images : p.image ? [p.image] : [],
+    image: image || (images[0] || ""),
+    images: images.length ? images : image ? [image] : [],
     details: Array.isArray(p.details) ? p.details : [],
     inStock: p.inStock !== false,
     active: p.active !== false

@@ -445,9 +445,16 @@
   </div>
 
   <script src="../assets/js/data.js"></script>
-  <!-- Optional local password (gitignored). Missing file is fine. -->
   <script src="../config/admin-access.js"></script>
-  <script src="../config/admin-access.local.js" onerror="void 0"></script>
+  <script>
+    // Optional private password override (file may not exist)
+    (function () {
+      var s = document.createElement("script");
+      s.src = "../config/admin-access.local.js";
+      s.onerror = function () { /* no private override */ };
+      document.body.appendChild(s);
+    })();
+  </script>
   <script type="module" src="admin.js"></script>
 </body>
 </html>
