@@ -34,20 +34,23 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // Orders: guests can create (checkout); admin reads all; status updates by admin
-    // Note: open read lets the local admin panel list all store orders.
-    // Tighten later if you require Firebase admin login only.
+    // Orders: anyone may create (guest checkout). Read/update = owner or admin only.
     match /orders/{orderId} {
-      allow read: if true;
       allow create: if true;
-      allow update: if isAdmin() || true;
+      allow read: if isAdmin()
+        || (signedIn() && resource.data.userId == request.auth.uid)
+        || (resource.data.customer.email == request.auth.token.email);
+      allow update: if isAdmin();
       allow delete: if isAdmin();
     }
 
-    // Customers: anyone who uses the site (signup / visit / checkout)
+    // Customers: create/update from client (signup/checkout tracking).
+    // Full list read = admin only. A signed-in user may read their own doc.
     match /customers/{customerId} {
-      allow read: if true;
-      allow create, update: if true;
+      allow create: if true;
+      allow update: if true;
+      allow read: if isAdmin()
+        || (signedIn() && resource.data.email == request.auth.token.email);
       allow delete: if isAdmin();
     }
   }

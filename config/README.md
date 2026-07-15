@@ -2,8 +2,10 @@
 
 | File | What to paste | Required now? |
 |------|----------------|---------------|
-| **`paystack-keys.js`** | Paystack **public** key (`pk_test_...`) | Yes, for real Paystack popup |
-| **`firebase-keys.js`** | Firebase web config + admin email | Later (login/admin/database) |
+| **`paystack-keys.js`** | Paystack **public** key (`pk_test_...`) only | Yes, for real Paystack popup |
+| **`firebase-keys.js`** | Firebase web config + `ADMIN_EMAILS` | Yes for login/admin |
+| **`admin-access.local.js`** | Optional local admin password | **Never commit** (gitignored) |
+| **`*.example.js`** | Safe templates | Yes |
 
 ## Paystack (do this for payments)
 

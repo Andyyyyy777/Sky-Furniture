@@ -309,59 +309,95 @@ async function initLiveData() {
   });
 }
 
+function getLocalAdminPassword() {
+  return String(window.SKY_ADMIN_ACCESS?.localPassword || "").trim();
+}
+
 function checkAccess() {
   if (sessionStorage.getItem(SESSION_KEY) === "1") {
-    unlockAdmin(ADMIN_EMAIL);
+    unlockAdmin(sessionStorage.getItem("sky_admin_email") || ADMIN_EMAIL);
     return;
   }
   import("../assets/js/firebase.js")
     .then((mod) => {
       if (!mod.firebaseReady) {
-        showLocalUnlock();
+        showLocalUnlock(
+          "Firebase not connected. Use a local admin password (config/admin-access.local.js) or set up Firebase keys."
+        );
         return;
       }
       mod.onUserChanged((user) => {
-        if (user && mod.isAdminUser(user)) unlockAdmin(user.email);
-        else {
-          showLocalUnlock();
-          if (user) {
-            showGate(
-              `Signed in as ${user.email}. Not admin — use password unlock or add email to ADMIN_EMAILS.`
-            );
-          }
+        if (user && mod.isAdminUser(user)) {
+          sessionStorage.setItem("sky_admin_email", user.email || ADMIN_EMAIL);
+          unlockAdmin(user.email);
+          return;
+        }
+        if (user) {
+          showLocalUnlock(
+            `Signed in as ${user.email}. This email is not in ADMIN_EMAILS. Sign out and use an admin account, or configure a local password file.`
+          );
+        } else {
+          showLocalUnlock(
+            "Sign in on the store with an admin email, then return here — or use a local password if configured on this machine."
+          );
         }
       });
     })
-    .catch(showLocalUnlock);
+    .catch(() =>
+      showLocalUnlock("Could not load Firebase. Configure a local password or fix Firebase keys.")
+    );
 }
 
-function showLocalUnlock() {
+function showLocalUnlock(message) {
   const box =
     document.querySelector("#gate .admin-gate-card") ||
     document.querySelector("#gate .admin-card") ||
     document.getElementById("gate");
-  showGate("Enter admin password for local store control center.");
+  showGate(
+    message ||
+      "Admin access requires an authorized account or a local password configured on this machine."
+  );
   if (document.getElementById("local-admin-form")) return;
+
+  const hasLocalPass = Boolean(getLocalAdminPassword());
   const form = document.createElement("div");
   form.id = "local-admin-form";
   form.className = "mt-6 space-y-3 text-left";
-  form.innerHTML = `
-    <label class="admin-label" for="admin-pass">Password</label>
-    <input type="password" id="admin-pass" class="admin-input w-full" placeholder="admin" autocomplete="current-password" />
-    <button type="button" id="admin-unlock" class="admin-btn-primary w-full mt-1">Enter admin</button>
-    <p class="text-[11px] text-stone-400 text-center pt-1">Default password: <strong>admin</strong></p>
-  `;
-  box.appendChild(form);
-  const go = () => {
-    const pass = document.getElementById("admin-pass")?.value || "";
-    if (pass === "admin" || pass.toLowerCase() === ADMIN_EMAIL.toLowerCase()) unlockAdmin(ADMIN_EMAIL);
-    else alert("Wrong password. Use: admin");
-  };
-  document.getElementById("admin-unlock")?.addEventListener("click", go);
-  document.getElementById("admin-pass")?.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") go();
-  });
-  setTimeout(() => document.getElementById("admin-pass")?.focus(), 50);
+
+  if (hasLocalPass) {
+    form.innerHTML = `
+      <label class="admin-label" for="admin-pass">Local admin password</label>
+      <input type="password" id="admin-pass" class="admin-input w-full" placeholder="Password" autocomplete="current-password" />
+      <button type="button" id="admin-unlock" class="admin-btn-primary w-full mt-1">Enter admin</button>
+      <p class="text-[11px] text-stone-400 text-center pt-1">Local unlock only — password is not stored in the public repo.</p>
+      <p class="text-center text-xs mt-2"><a href="../login.html?next=admin/index.html" class="text-clay hover:underline">Sign in with admin email instead</a></p>
+    `;
+    box.appendChild(form);
+    const go = () => {
+      const pass = document.getElementById("admin-pass")?.value || "";
+      const expected = getLocalAdminPassword();
+      if (expected && pass === expected) {
+        sessionStorage.setItem("sky_admin_email", ADMIN_EMAIL);
+        unlockAdmin(ADMIN_EMAIL);
+      } else {
+        alert("Wrong password.");
+      }
+    };
+    document.getElementById("admin-unlock")?.addEventListener("click", go);
+    document.getElementById("admin-pass")?.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") go();
+    });
+    setTimeout(() => document.getElementById("admin-pass")?.focus(), 50);
+  } else {
+    form.innerHTML = `
+      <a href="../login.html?next=admin/index.html" class="admin-btn-primary w-full block text-center">Sign in as admin</a>
+      <p class="text-[11px] text-stone-400 text-center pt-2 leading-relaxed">
+        No shared password is published with this site.<br/>
+        Use a Firebase account listed in <code class="admin-code">ADMIN_EMAILS</code>.
+      </p>
+    `;
+    box.appendChild(form);
+  }
 }
 
 document.getElementById("admin-logout")?.addEventListener("click", () => {

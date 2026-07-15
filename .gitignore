@@ -7,7 +7,10 @@ functions/node_modules/
 .env.*
 functions/.env
 config/*-keys.local.js
+config/admin-access.local.js
 **/serviceAccount*.json
+**/*secret*
+**/*.pem
 
 # OS / editor
 .DS_Store
@@ -23,3 +26,4 @@ dist/
 .cache/
 
 desktop.ini
+.vercel

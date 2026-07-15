@@ -10,9 +10,9 @@
     return;
   }
 
-  // Fallback placeholder (same as config/paystack-keys.js)
+  // Fallback only if config/paystack-keys.js was not loaded — no real keys here
   window.SKY_PAYSTACK = {
-    publicKey: "pk_test_c91670f5b03f817a9696594615ad27eb4eca06a8",
+    publicKey: "",
     verifyUrl: "",
     currency: "NGN",
     allowDemoFallback: true

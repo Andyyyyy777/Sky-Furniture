@@ -34,11 +34,11 @@ npx firebase use sky-furniture
 npx firebase deploy --only firestore:rules,firestore:indexes
 ```
 
-This uploads `firestore.rules` (admin = emekaanderson29@gmail.com).
+This uploads `firestore.rules` (admin emails must match `ADMIN_EMAILS` in config).
 
 ## Step 3 — Seed products
 
-1. http://localhost:5500/login.html → sign in as **emekaanderson29@gmail.com**  
+1. http://localhost:5500/login.html → sign in with an **admin** email from `ADMIN_EMAILS`  
 2. http://localhost:5500/admin/  
 3. Open **Seed data** tab → **Seed products to Firestore**  
 4. Check Firebase Console → Firestore → `products` collection  
