@@ -23,10 +23,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 2890000,
     rating: 4.9,
     reviews: 86,
-    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80",
+    image: "/assets/images/products/101.svg",
     images: [
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80",
-      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80"
+      "/assets/images/products/101.svg"
     ],
     description:
       "Cream L-shaped sectional with chaise, layered pillows, and a soft modern silhouette—built for spacious Lagos living rooms.",
@@ -42,10 +41,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.8,
     reviews: 54,
-    image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80",
+    image: "/assets/images/products/102.svg",
     images: [
-      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80",
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80"
+      "/assets/images/products/102.svg"
     ],
     description:
       "Button-tufted cream velvet armchair with curved arms and classic turned legs—an elegant reading chair.",
@@ -61,10 +59,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 1050000,
     rating: 4.7,
     reviews: 41,
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80",
+    image: "/assets/images/products/103.svg",
     images: [
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80",
-      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80"
+      "/assets/images/products/103.svg"
     ],
     description:
       "Statement mustard-yellow velvet armchair with slim black legs. Pairs beautifully with a media console and brass floor lamp.",
@@ -80,10 +77,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.6,
     reviews: 38,
-    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
+    image: "/assets/images/products/104.svg",
     images: [
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
-      "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80"
+      "/assets/images/products/104.svg"
     ],
     description:
       "Gold-framed sideboard with cane doors, styled as a living-room media and bar console under a round mirror.",
@@ -99,10 +95,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.8,
     reviews: 29,
-    image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80",
+    image: "/assets/images/products/105.svg",
     images: [
-      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80",
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80"
+      "/assets/images/products/105.svg"
     ],
     description:
       "Button-tufted grey three-seater sofa with throw pillows—cosy everyday luxury for family lounges.",
@@ -118,10 +113,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 495000,
     rating: 4.5,
     reviews: 47,
-    image: "https://images.unsplash.com/photo-1532372320572-cda25653a26d?w=900&q=80",
+    image: "/assets/images/products/106.svg",
     images: [
-      "https://images.unsplash.com/photo-1532372320572-cda25653a26d?w=900&q=80",
-      "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80"
+      "/assets/images/products/106.svg"
     ],
     description:
       "Sculptural solid-wood side table with open shelves for books and décor—perfect beside a sofa or bed.",
@@ -139,10 +133,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.9,
     reviews: 62,
-    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80",
+    image: "/assets/images/products/201.svg",
     images: [
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80",
-      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=80"
+      "/assets/images/products/201.svg"
     ],
     description:
       "King bed with tall tufted headboard, paired nightstands, and bench—hotel-suite polish for master bedrooms.",
@@ -158,10 +151,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 1890000,
     rating: 4.8,
     reviews: 71,
-    image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=80",
+    image: "/assets/images/products/202.svg",
     images: [
-      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=80",
-      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=80"
+      "/assets/images/products/202.svg"
     ],
     description:
       "Plush light-grey channel-upholstered bed on gold feet, shown with matching nightstands and modern brass chandelier.",
@@ -177,10 +169,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.6,
     reviews: 34,
-    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=80",
+    image: "/assets/images/products/203.svg",
     images: [
-      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=80",
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80"
+      "/assets/images/products/203.svg"
     ],
     description:
       "Comfortable hotel-style guest bed with padded headboard and wood nightstand—ideal for guest rooms and apartments.",
@@ -196,10 +187,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.7,
     reviews: 48,
-    image: "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80",
+    image: "/assets/images/products/204.svg",
     images: [
-      "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80",
-      "https://images.unsplash.com/photo-1532372320572-cda25653a26d?w=900&q=80"
+      "/assets/images/products/204.svg"
     ],
     description:
       "Minimal round white bedside table with tapered wood legs—clean Scandinavian styling for any bedroom.",
@@ -215,10 +205,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 2250000,
     rating: 4.8,
     reviews: 27,
-    image: "https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=900&q=80",
+    image: "/assets/images/products/205.svg",
     images: [
-      "https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=900&q=80",
-      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=900&q=80"
+      "/assets/images/products/205.svg"
     ],
     description:
       "Full-height mid-century oak wardrobe with double doors and lower drawers—true closet storage without built-ins.",
@@ -234,10 +223,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.7,
     reviews: 22,
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80",
+    image: "/assets/images/products/206.svg",
     images: [
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80",
-      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80"
+      "/assets/images/products/206.svg"
     ],
     description:
       "Soft accent lounge chair for the foot of the bed or a dressing corner—shown here in rich mustard velvet.",
@@ -255,10 +243,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 560000,
     rating: 4.7,
     reviews: 93,
-    image: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=900&q=80",
+    image: "/assets/images/products/301.svg",
     images: [
-      "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=900&q=80",
-      "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=900&q=80"
+      "/assets/images/products/301.svg"
     ],
     description:
       "Full gaming station with dual monitors, RGB PC, and performance chair—ready for marathon sessions.",
@@ -274,10 +261,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.8,
     reviews: 51,
-    image: "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=900&q=80",
+    image: "/assets/images/products/302.svg",
     images: [
-      "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=900&q=80",
-      "https://images.unsplash.com/photo-1519947486511-46149fa0a254?w=900&q=80"
+      "/assets/images/products/302.svg"
     ],
     description:
       "Fabric swivel lounge chair on a wood star base—boardroom waiting corners and private offices.",
@@ -293,10 +279,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 520000,
     rating: 4.6,
     reviews: 44,
-    image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=900&q=80",
+    image: "/assets/images/products/303.svg",
     images: [
-      "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=900&q=80",
-      "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=900&q=80"
+      "/assets/images/products/303.svg"
     ],
     description:
       "Clean white study desk with monitor setup and grey task chair—focused work from home.",
@@ -312,10 +297,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.5,
     reviews: 67,
-    image: "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=900&q=80",
+    image: "/assets/images/products/304.svg",
     images: [
-      "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=900&q=80",
-      "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=900&q=80"
+      "/assets/images/products/304.svg"
     ],
     description:
       "Warm wood work desk styled for evening productivity—laptop-ready surface with soft lamp light.",
@@ -331,10 +315,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 340000,
     rating: 4.7,
     reviews: 118,
-    image: "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=900&q=80",
+    image: "/assets/images/products/305.svg",
     images: [
-      "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=900&q=80",
-      "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=900&q=80"
+      "/assets/images/products/305.svg"
     ],
     description:
       "Lightweight modern office chair with full swivel—all-day seating for hot climates and long workdays.",
@@ -350,10 +333,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.8,
     reviews: 31,
-    image: "https://images.unsplash.com/photo-1519947486511-46149fa0a254?w=900&q=80",
+    image: "/assets/images/products/306.svg",
     images: [
-      "https://images.unsplash.com/photo-1519947486511-46149fa0a254?w=900&q=80",
-      "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=900&q=80"
+      "/assets/images/products/306.svg"
     ],
     description:
       "Sculptural white lounge chair with bentwood frame—mid-century calm for offices and reading corners.",
@@ -371,10 +353,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 3650000,
     rating: 4.9,
     reviews: 39,
-    image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80",
+    image: "/assets/images/products/401.svg",
     images: [
-      "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80",
-      "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=900&q=80"
+      "/assets/images/products/401.svg"
     ],
     description:
       "White dining table with six emerald velvet chairs and gold legs—formal dinners for six to eight.",
@@ -390,10 +371,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.8,
     reviews: 58,
-    image: "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=900&q=80",
+    image: "/assets/images/products/402.svg",
     images: [
-      "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=900&q=80",
-      "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80"
+      "/assets/images/products/402.svg"
     ],
     description:
       "Solid walnut dining table with grey upholstered chairs under a crystal bar chandelier—everyday family luxury.",
@@ -409,10 +389,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 1680000,
     rating: 4.7,
     reviews: 45,
-    image: "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=900&q=80",
+    image: "/assets/images/products/403.svg",
     images: [
-      "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=900&q=80",
-      "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80"
+      "/assets/images/products/403.svg"
     ],
     description:
       "Round white dining table with two modern chairs—perfect for apartments and intimate meals for two to four.",
@@ -428,10 +407,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.8,
     reviews: 33,
-    image: "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=900&q=80",
+    image: "/assets/images/products/404.svg",
     images: [
-      "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=900&q=80",
-      "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=900&q=80"
+      "/assets/images/products/404.svg"
     ],
     description:
       "Statement solid-wood dining table that seats a crowd—pair with your preferred chair style.",
@@ -447,10 +425,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 380000,
     rating: 4.6,
     reviews: 72,
-    image: "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=900&q=80",
+    image: "/assets/images/products/405.svg",
     images: [
-      "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=900&q=80",
-      "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=900&q=80"
+      "/assets/images/products/405.svg"
     ],
     description:
       "Classic carved wood dining armchair with warm honey finish—order pairs to complete a traditional suite.",
@@ -466,10 +443,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.7,
     reviews: 28,
-    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
+    image: "/assets/images/products/406.svg",
     images: [
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
-      "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80"
+      "/assets/images/products/406.svg"
     ],
     description:
       "Gold cane-front sideboard with round wall mirror styling—dining storage that doubles as a bar console.",
@@ -487,10 +463,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 1480000,
     rating: 4.9,
     reviews: 41,
-    image: "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
+    image: "/assets/images/products/501.svg",
     images: [
-      "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80"
+      "/assets/images/products/501.svg"
     ],
     description:
       "Ornate Persian-style rug in ivory and gold with hand-finished fringe—anchors formal living rooms.",
@@ -506,10 +481,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.7,
     reviews: 56,
-    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80",
+    image: "/assets/images/products/502.svg",
     images: [
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80",
-      "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80"
+      "/assets/images/products/502.svg"
     ],
     description:
       "Soft light-toned area rug under a modern sectional—clean Scandinavian layering for open living spaces.",
@@ -525,10 +499,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 350000,
     rating: 4.6,
     reviews: 63,
-    image: "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
+    image: "/assets/images/products/503.svg",
     images: [
-      "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80"
+      "/assets/images/products/503.svg"
     ],
     description:
       "Traditional patterned rug with heirloom character—use as a runner look in halls or full-size in living rooms.",
@@ -544,10 +517,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.8,
     reviews: 77,
-    image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80",
+    image: "/assets/images/products/504.svg",
     images: [
-      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80",
-      "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80"
+      "/assets/images/products/504.svg"
     ],
     description:
       "Soft light area rug styled under a contemporary sofa—barefoot comfort for lounges and bedrooms.",
@@ -563,10 +535,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 310000,
     rating: 4.5,
     reviews: 39,
-    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80",
+    image: "/assets/images/products/505.svg",
     images: [
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80",
-      "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80"
+      "/assets/images/products/505.svg"
     ],
     description:
       "Neutral textured rug that works from living rooms to covered terraces—durable everyday style.",
@@ -582,10 +553,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.9,
     reviews: 18,
-    image: "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
+    image: "/assets/images/products/506.svg",
     images: [
-      "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80"
+      "/assets/images/products/506.svg"
     ],
     description:
       "Fine gallery rug with jewel-tone heritage patterning—collector finish for statement furniture.",
@@ -603,10 +573,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 1680000,
     rating: 4.9,
     reviews: 36,
-    image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80",
+    image: "/assets/images/products/601.svg",
     images: [
-      "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80",
-      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80"
+      "/assets/images/products/601.svg"
     ],
     description:
       "Modern multi-globe chandelier in brass and white glass—shown over a formal dining table.",
@@ -622,10 +591,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 450000,
     rating: 4.7,
     reviews: 84,
-    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=900&q=80",
+    image: "/assets/images/products/602.svg",
     images: [
-      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=900&q=80",
-      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80"
+      "/assets/images/products/602.svg"
     ],
     description:
       "Matte grey industrial floor lamp with adjustable head—reading light for sofas and desks.",
@@ -641,10 +609,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.8,
     reviews: 61,
-    image: "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80",
+    image: "/assets/images/products/603.svg",
     images: [
-      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80",
-      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=900&q=80"
+      "/assets/images/products/603.svg"
     ],
     description:
       "Clean white dome pendant over dining tables and kitchen islands—simple modern ambient light.",
@@ -660,10 +627,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 290000,
     rating: 4.6,
     reviews: 52,
-    image: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=900&q=80",
+    image: "/assets/images/products/604.svg",
     images: [
-      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=900&q=80",
-      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80"
+      "/assets/images/products/604.svg"
     ],
     description:
       "Woven rattan-style pendant that casts warm patterned light—shown in a plant-filled bedroom setting.",
@@ -679,10 +645,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.7,
     reviews: 40,
-    image: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=900&q=80",
+    image: "/assets/images/products/605.svg",
     images: [
-      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=900&q=80",
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80"
+      "/assets/images/products/605.svg"
     ],
     description:
       "Brass wall lights flanking a headboard—gallery-level ambient light for bedrooms and hallways.",
@@ -698,10 +663,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.8,
     reviews: 25,
-    image: "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80",
+    image: "/assets/images/products/606.svg",
     images: [
-      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80",
-      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=900&q=80"
+      "/assets/images/products/606.svg"
     ],
     description:
       "Industrial grey pendant with open bulb glow—minimal lighting for dining nooks and work tables.",
@@ -719,10 +683,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.8,
     reviews: 44,
-    image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900&q=80",
+    image: "/assets/images/products/701.svg",
     images: [
-      "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900&q=80",
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80"
+      "/assets/images/products/701.svg"
     ],
     description:
       "Museum-quality floral still-life print—instant classic art for lounges, stairs, and formal halls.",
@@ -738,10 +701,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 175000,
     rating: 4.7,
     reviews: 69,
-    image: "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=900&q=80",
+    image: "/assets/images/products/702.svg",
     images: [
-      "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=900&q=80",
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80"
+      "/assets/images/products/702.svg"
     ],
     description:
       "Clean round wall clock with silent sweep hands—quiet luxury for living rooms and offices.",
@@ -757,10 +719,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.6,
     reviews: 88,
-    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
+    image: "/assets/images/products/703.svg",
     images: [
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
-      "https://images.unsplash.com/photo-1616627561950-9f746e330187?w=900&q=80"
+      "/assets/images/products/703.svg"
     ],
     description:
       "Tall glass floor vase styled with dried pampas beside a modular sofa—sculptural floral décor.",
@@ -776,10 +737,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.9,
     reviews: 21,
-    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
+    image: "/assets/images/products/704.svg",
     images: [
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
-      "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900&q=80"
+      "/assets/images/products/704.svg"
     ],
     description:
       "Designer console vignette with sculptural objects, plants, and accents—ready-made styling for a living room wall.",
@@ -795,10 +755,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 560000,
     rating: 4.8,
     reviews: 37,
-    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
+    image: "/assets/images/products/705.svg",
     images: [
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
-      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=80"
+      "/assets/images/products/705.svg"
     ],
     description:
       "Large round wall mirror above a designer sideboard—expands light and space in entryways and living rooms.",
@@ -814,10 +773,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.7,
     reviews: 95,
-    image: "https://images.unsplash.com/photo-1616627561950-9f746e330187?w=900&q=80",
+    image: "/assets/images/products/706.svg",
     images: [
-      "https://images.unsplash.com/photo-1616627561950-9f746e330187?w=900&q=80",
-      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=80"
+      "/assets/images/products/706.svg"
     ],
     description:
       "Layered luxury pillows in linen and solid tones on a timber headboard—instant bed styling set.",
@@ -833,10 +791,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 95000,
     rating: 4.5,
     reviews: 58,
-    image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=900&q=80",
+    image: "/assets/images/products/707.svg",
     images: [
-      "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=900&q=80",
-      "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80"
+      "/assets/images/products/707.svg"
     ],
     description:
       "Lit glass candle vessel on soft fur—evening ambience for consoles, nightstands, and bathtubs.",
@@ -852,10 +809,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.9,
     reviews: 26,
-    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
+    image: "/assets/images/products/708.svg",
     images: [
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80"
+      "/assets/images/products/708.svg"
     ],
     description:
       "Warm orange accent chair styling within a full living-room vignette—inspiration piece for bold seating moments.",
@@ -871,10 +827,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.6,
     reviews: 49,
-    image: "https://images.unsplash.com/photo-1616627561950-9f746e330187?w=900&q=80",
+    image: "/assets/images/products/709.svg",
     images: [
-      "https://images.unsplash.com/photo-1616627561950-9f746e330187?w=900&q=80",
-      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80"
+      "/assets/images/products/709.svg"
     ],
     description:
       "Decorative pillow set for sofas and beds—mix stripes and solids for playful luxury corners.",
@@ -890,10 +845,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.7,
     reviews: 71,
-    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
+    image: "/assets/images/products/710.svg",
     images: [
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
-      "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=900&q=80"
+      "/assets/images/products/710.svg"
     ],
     description:
       "Amber-tinted glass vase that glows in afternoon light—long stems, branches, or standing alone as sculpture.",

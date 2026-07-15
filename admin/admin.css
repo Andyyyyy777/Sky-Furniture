@@ -5,6 +5,37 @@
   background-color: #f7f3ee;
   color: #2c2926;
   transition: background-color 0.25s ease, color 0.25s ease;
+  min-height: 100vh;
+}
+
+/* Product thumbs in tables */
+.admin-thumb {
+  width: 2.75rem;
+  height: 2.75rem;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #f5f5f4;
+  border: 1px solid #e7e5e4;
+}
+
+html.dark .admin-thumb {
+  background: #1c1917;
+  border-color: #3f3a36;
+}
+
+/* Clear empty states */
+#products-tbody td,
+#inventory-tbody td {
+  vertical-align: middle;
+}
+
+#orders-admin:empty::before,
+#customers-list:empty::before {
+  content: "Nothing here yet.";
+  display: block;
+  padding: 1.5rem;
+  color: #a8a29e;
+  font-size: 0.875rem;
 }
 
 html.dark .admin-body {

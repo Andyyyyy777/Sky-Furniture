@@ -1,18 +1,55 @@
 /**
  * Sky Furniture Admin — store control center
- * Products: localStorage (sky_admin_products)
- * Orders & customers: Firestore cloud sync + local fallback
+ * Products: localStorage (sky_admin_products) + data.js seed
+ * Orders & customers: local first; cloud optional
  */
-import {
-  isCloudReady,
-  fetchCloudOrders,
-  fetchCloudCustomers,
-  subscribeOrders,
-  subscribeCustomers,
-  updateOrderStatusCloud,
-  getLocalOrders,
-  saveLocalOrders
-} from "../assets/js/cloud-store.js";
+
+// Cloud helpers are optional — admin must still work if Firebase fails
+let isCloudReady = () => false;
+let fetchCloudOrders = async () => getOrders();
+let fetchCloudCustomers = async () => [];
+let subscribeOrders = (cb) => {
+  cb(getOrders());
+  return () => {};
+};
+let subscribeCustomers = (cb) => {
+  cb([]);
+  return () => {};
+};
+let updateOrderStatusCloud = async (id, status) => {
+  const next = getOrders().map((o) => {
+    const oid = String(o.orderNumber || o.paymentRef || o.id || "");
+    if (oid === String(id)) return { ...o, status, updatedAt: new Date().toISOString() };
+    return o;
+  });
+  saveOrders(next);
+  return next;
+};
+let getLocalOrders = () => {
+  try {
+    return JSON.parse(localStorage.getItem("sky_furniture_paid_orders") || "[]");
+  } catch {
+    return [];
+  }
+};
+let saveLocalOrders = (list) => {
+  localStorage.setItem("sky_furniture_paid_orders", JSON.stringify(list || []));
+};
+
+import("../assets/js/cloud-store.js")
+  .then((mod) => {
+    isCloudReady = mod.isCloudReady;
+    fetchCloudOrders = mod.fetchCloudOrders;
+    fetchCloudCustomers = mod.fetchCloudCustomers;
+    subscribeOrders = mod.subscribeOrders;
+    subscribeCustomers = mod.subscribeCustomers;
+    updateOrderStatusCloud = mod.updateOrderStatusCloud;
+    getLocalOrders = mod.getLocalOrders;
+    saveLocalOrders = mod.saveLocalOrders;
+  })
+  .catch((err) => {
+    console.warn("[Admin] Cloud store unavailable — local mode only", err?.message || err);
+  });
 
 const STORAGE_KEY = "sky_admin_products";
 const ORDERS_KEY = "sky_furniture_paid_orders";
@@ -22,6 +59,8 @@ const ADMIN_EMAIL = "emekaanderson29@gmail.com";
 const SESSION_KEY = "sky_admin_ok";
 const FROM_ADMIN_KEY = "sky_from_admin";
 const THEME_KEY = "sky_furniture_theme";
+/** Always works for store owner (also override via admin-access.local.js) */
+const DEFAULT_ADMIN_PASS = "SkyAdmin2026";
 
 /** Live caches refreshed from cloud */
 let LIVE_ORDERS = [];
@@ -246,15 +285,34 @@ function markAdminShopPreview() {
   } catch (_) {}
 }
 
+function ensureCatalogSeeded() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    const list = raw ? JSON.parse(raw) : null;
+    if (Array.isArray(list) && list.length) return list;
+  } catch (_) {}
+  const seed = catalogFromDataJs();
+  if (seed.length) {
+    saveProducts(seed, false);
+    logActivity(`Auto-loaded ${seed.length} products from catalog`);
+  }
+  return seed;
+}
+
 function unlockAdmin(email) {
   sessionStorage.setItem(SESSION_KEY, "1");
+  if (email) sessionStorage.setItem("sky_admin_email", email);
   showApp(email || ADMIN_EMAIL);
+  ensureCatalogSeeded();
   fillCategorySelects();
   loadProducts();
   loadInventory();
   loadCoupons();
   renderActivity();
-  initLiveData();
+  renderDashboard();
+  loadOrders();
+  loadCustomers();
+  initLiveData().catch(() => {});
 }
 
 async function initLiveData() {
@@ -310,7 +368,8 @@ async function initLiveData() {
 }
 
 function getLocalAdminPassword() {
-  return String(window.SKY_ADMIN_ACCESS?.localPassword || "").trim();
+  const fromConfig = String(window.SKY_ADMIN_ACCESS?.localPassword || "").trim();
+  return fromConfig || DEFAULT_ADMIN_PASS;
 }
 
 function checkAccess() {
@@ -318,34 +377,21 @@ function checkAccess() {
     unlockAdmin(sessionStorage.getItem("sky_admin_email") || ADMIN_EMAIL);
     return;
   }
+
+  // Always show password unlock immediately so admin never looks "stuck"
+  showLocalUnlock("Enter your admin password to open the store control center.");
+
+  // Optional: auto-unlock when signed in as Firebase admin
   import("../assets/js/firebase.js")
     .then((mod) => {
-      if (!mod.firebaseReady) {
-        showLocalUnlock(
-          "Firebase not connected. Use a local admin password (config/admin-access.local.js) or set up Firebase keys."
-        );
-        return;
-      }
+      if (!mod.firebaseReady) return;
       mod.onUserChanged((user) => {
         if (user && mod.isAdminUser(user)) {
-          sessionStorage.setItem("sky_admin_email", user.email || ADMIN_EMAIL);
           unlockAdmin(user.email);
-          return;
-        }
-        if (user) {
-          showLocalUnlock(
-            `Signed in as ${user.email}. This email is not in ADMIN_EMAILS. Sign out and use an admin account, or configure a local password file.`
-          );
-        } else {
-          showLocalUnlock(
-            "Sign in on the store with an admin email, then return here — or use a local password if configured on this machine."
-          );
         }
       });
     })
-    .catch(() =>
-      showLocalUnlock("Could not load Firebase. Configure a local password or fix Firebase keys.")
-    );
+    .catch(() => {});
 }
 
 function showLocalUnlock(message) {
@@ -353,51 +399,41 @@ function showLocalUnlock(message) {
     document.querySelector("#gate .admin-gate-card") ||
     document.querySelector("#gate .admin-card") ||
     document.getElementById("gate");
-  showGate(
-    message ||
-      "Admin access requires an authorized account or a local password configured on this machine."
-  );
+  showGate(message || "Enter admin password.");
+  document.getElementById("gate-loading")?.classList.add("hidden");
   if (document.getElementById("local-admin-form")) return;
 
-  const hasLocalPass = Boolean(getLocalAdminPassword());
   const form = document.createElement("div");
   form.id = "local-admin-form";
   form.className = "mt-6 space-y-3 text-left";
-
-  if (hasLocalPass) {
-    form.innerHTML = `
-      <label class="admin-label" for="admin-pass">Local admin password</label>
-      <input type="password" id="admin-pass" class="admin-input w-full" placeholder="Password" autocomplete="current-password" />
-      <button type="button" id="admin-unlock" class="admin-btn-primary w-full mt-1">Enter admin</button>
-      <p class="text-[11px] text-stone-400 text-center pt-1">Local unlock only — password is not stored in the public repo.</p>
-      <p class="text-center text-xs mt-2"><a href="../login.html?next=admin/index.html" class="text-clay hover:underline">Sign in with admin email instead</a></p>
-    `;
-    box.appendChild(form);
-    const go = () => {
-      const pass = document.getElementById("admin-pass")?.value || "";
-      const expected = getLocalAdminPassword();
-      if (expected && pass === expected) {
-        sessionStorage.setItem("sky_admin_email", ADMIN_EMAIL);
-        unlockAdmin(ADMIN_EMAIL);
-      } else {
-        alert("Wrong password.");
-      }
-    };
-    document.getElementById("admin-unlock")?.addEventListener("click", go);
-    document.getElementById("admin-pass")?.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") go();
-    });
-    setTimeout(() => document.getElementById("admin-pass")?.focus(), 50);
-  } else {
-    form.innerHTML = `
-      <a href="../login.html?next=admin/index.html" class="admin-btn-primary w-full block text-center">Sign in as admin</a>
-      <p class="text-[11px] text-stone-400 text-center pt-2 leading-relaxed">
-        No shared password is published with this site.<br/>
-        Use a Firebase account listed in <code class="admin-code">ADMIN_EMAILS</code>.
-      </p>
-    `;
-    box.appendChild(form);
-  }
+  form.innerHTML = `
+    <label class="admin-label" for="admin-pass">Admin password</label>
+    <input type="password" id="admin-pass" class="admin-input w-full" placeholder="Enter password" autocomplete="current-password" />
+    <button type="button" id="admin-unlock" class="admin-btn-primary w-full mt-1">Enter admin</button>
+    <p class="text-[11px] text-stone-400 text-center pt-1 leading-relaxed">
+      Default password: <strong class="text-ink dark:text-[#f3efe9]">SkyAdmin2026</strong><br/>
+      Or sign in with your admin email on the store first.
+    </p>
+    <p class="text-center text-xs mt-1">
+      <a href="../login.html?next=admin/index.html" class="text-clay hover:underline">Sign in with email</a>
+      · <a href="../shop.html" class="text-clay hover:underline">View shop</a>
+    </p>
+  `;
+  box.appendChild(form);
+  const go = () => {
+    const pass = document.getElementById("admin-pass")?.value || "";
+    const expected = getLocalAdminPassword();
+    if (pass && pass === expected) {
+      unlockAdmin(ADMIN_EMAIL);
+    } else {
+      alert("Wrong password. Use: SkyAdmin2026");
+    }
+  };
+  document.getElementById("admin-unlock")?.addEventListener("click", go);
+  document.getElementById("admin-pass")?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") go();
+  });
+  setTimeout(() => document.getElementById("admin-pass")?.focus(), 50);
 }
 
 document.getElementById("admin-logout")?.addEventListener("click", () => {

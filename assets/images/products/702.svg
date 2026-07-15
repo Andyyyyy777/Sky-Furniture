@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 400 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F7F3EE"/>
+      <stop offset="100%" stop-color="#E8E0D5"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="500" fill="url(#bg)"/>
+  <rect x="24" y="24" width="352" height="452" rx="18" fill="#FFFEFC" stroke="#E8E0D5" stroke-width="2"/>
+  <text x="200" y="58" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="11" letter-spacing="3" fill="#8B7355">DECOR</text>
+  <g transform="translate(40, 90)"><circle cx="160" cy="100" r="55" fill="none" stroke="#C4A77D" stroke-width="6"/><path d="M130 100h60M160 70v60" stroke="#C4A77D" stroke-width="5" stroke-linecap="round"/></g>
+  <text x="200" y="232" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="600" fill="#2C2926">Horizon Minimal Wall</text>
+  <text x="200" y="260" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="600" fill="#2C2926">Clock</text>
+  <text x="200" y="320" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" fill="#8B7355">Sky Furniture</text>
+  <line x1="140" y1="340" x2="260" y2="340" stroke="#C4A77D" stroke-width="2"/>
+  <text x="200" y="375" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" fill="#78716C">Product ID 702</text>
+  <text x="200" y="430" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="11" fill="#A8A29E">Luxury furniture · Made for Nigerian homes</text>
+</svg>
