@@ -27,3 +27,6 @@ dist/
 
 desktop.ini
 .vercel
+
+scripts/_candidates/
+scripts/_imgcheck/
