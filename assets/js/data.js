@@ -26,8 +26,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
-      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80",
-      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80"
+      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80"
     ],
     description:
       "A grand L-shaped sectional in performance linen, deep feather-blend cushions, and solid oak feet. The centerpiece of a refined Lagos living room.",
@@ -43,10 +42,10 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.8,
     reviews: 54,
-    image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80",
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80"
+      "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=900&q=80",
+      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80"
     ],
     description:
       "Sculptural armchair in deep emerald velvet with channel-tufted back and polished brass sabots. A quiet statement for reading corners.",
@@ -62,10 +61,10 @@ window.SKY_PRODUCTS = [
     originalPrice: 1050000,
     rating: 4.7,
     reviews: 41,
-    image: "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80",
-      "https://images.unsplash.com/photo-1532372320572-cda25653a26d?w=900&q=80"
+      "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=900&q=80",
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80"
     ],
     description:
       "Italian-inspired coffee table with a thick Calacatta-veined marble top and brushed bronze base. Designed for layered trays and art books.",
@@ -81,10 +80,10 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.6,
     reviews: 38,
-    image: "https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?w=900&q=80",
-      "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=900&q=80"
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=900&q=80",
+      "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80"
     ],
     description:
       "Low-profile media console in matte black oak with fluted doors and soft-close drawers. Cable management for a seamless wall.",
@@ -103,7 +102,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80",
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80"
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80"
     ],
     description:
       "Two-piece modular sofa in warm sand bouclé. Reconfigure as a chaise lounge or classic three-seater for flexible entertaining.",
@@ -122,7 +121,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1532372320572-cda25653a26d?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1532372320572-cda25653a26d?w=900&q=80",
-      "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80"
+      "https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?w=900&q=80"
     ],
     description:
       "Set of two nesting tables in smoked glass and champagne gold frames. Slide apart for entertaining or nest for a clean silhouette.",
@@ -140,11 +139,10 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.9,
     reviews: 62,
-    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80",
-      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=80",
-      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=80"
+      "https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?w=900&q=80",
+      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=80"
     ],
     description:
       "King canopy bed in solid ash with linen-wrapped headboard posts. A hotel-suite presence for master bedrooms.",
@@ -163,7 +161,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=80",
-      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=80"
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80"
     ],
     description:
       "Queen bed fully upholstered in charcoal bouclé with tall winged headboard and discreet under-bed storage drawers.",
@@ -201,7 +199,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=900&q=80",
-      "https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?w=900&q=80"
+      "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=900&q=80"
     ],
     description:
       "Matched pair of nightstands in walnut with soft-close drawers and brass pulls. Designed to flank king or queen beds.",
@@ -239,7 +237,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=900&q=80",
-      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80"
+      "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=900&q=80"
     ],
     description:
       "Curved vanity dresser with six drawers and a matching blush velvet bedroom chair. Dressing ritual, elevated.",
@@ -260,7 +258,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=900&q=80",
-      "https://images.unsplash.com/photo-1616628182501-df42145cf16d?w=900&q=80"
+      "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=900&q=80"
     ],
     description:
       "High-back gaming chair in black and graphite PU leather with 4D armrests, lumbar support, and recline to 165°. Built for marathon sessions.",
@@ -279,7 +277,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=900&q=80",
-      "https://images.unsplash.com/photo-1505843490701-5be5d1b1876a?w=900&q=80"
+      "https://images.unsplash.com/photo-1519947486511-46149fa0a254?w=900&q=80"
     ],
     description:
       "Boardroom-grade executive chair in full-grain black leather with polished aluminium base. Presence that matches ambition.",
@@ -317,7 +315,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=900&q=80",
-      "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=900&q=80"
+      "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=900&q=80"
     ],
     description:
       "Carbon-look gaming desk with full-width RGB edge lighting, cup holder, headphone hook, and mouse pad surface inlay.",
@@ -333,9 +331,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 340000,
     rating: 4.7,
     reviews: 118,
-    image: "https://images.unsplash.com/photo-1505843490701-5be5d1b1876a?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1505843490701-5be5d1b1876a?w=900&q=80",
+      "https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=900&q=80",
       "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=900&q=80"
     ],
     description:
@@ -430,9 +428,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.8,
     reviews: 33,
-    image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80",
+      "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=900&q=80",
       "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=900&q=80"
     ],
     description:
@@ -471,7 +469,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=900&q=80",
-      "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=900&q=80"
+      "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80"
     ],
     description:
       "Long sideboard for dining rooms—china, linens, and barware behind fluted doors with soft ambient top surface for lamps and art.",
@@ -492,7 +490,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
-      "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=900&q=80"
+      "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=900&q=80"
     ],
     description:
       "Luxury Persian-style rug in deep ruby and gold medallion patterns. Hand-inspired design that anchors formal living rooms.",
@@ -508,9 +506,9 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.7,
     reviews: 56,
-    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
+      "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=900&q=80",
       "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80"
     ],
     description:
@@ -530,7 +528,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=900&q=80",
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80"
+      "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80"
     ],
     description:
       "Flat-weave Turkish-inspired runner with tribal motifs—hallways, entrances, and beside beds with artisan character.",
@@ -546,10 +544,10 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.8,
     reviews: 77,
-    image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1615876234886-fd9a39fda97f?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=900&q=80",
-      "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80"
+      "https://images.unsplash.com/photo-1615876234886-fd9a39fda97f?w=900&q=80",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900&q=80"
     ],
     description:
       "Ultra-plush high-pile shag in pure ivory. Barefoot luxury for bedrooms and lounge corners.",
@@ -565,9 +563,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 310000,
     rating: 4.5,
     reviews: 39,
-    image: "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80",
       "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=900&q=80"
     ],
     description:
@@ -584,10 +582,10 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.9,
     reviews: 18,
-    image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=900&q=80",
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80"
+      "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
+      "https://images.unsplash.com/photo-1615876234886-fd9a39fda97f?w=900&q=80"
     ],
     description:
       "Ultra-fine gallery rug with silk-touch sheen and muted jewel tones. A collector piece for under statement furniture.",
@@ -608,7 +606,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=900&q=80",
-      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80"
+      "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=900&q=80"
     ],
     description:
       "Multi-tier crystal chandelier with warm LED compatibility. Hotel glamour for double-volume foyers and formal dining rooms.",
@@ -700,10 +698,10 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.8,
     reviews: 25,
-    image: "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=900&q=80",
-      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80"
+      "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=900&q=80",
+      "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=900&q=80"
     ],
     description:
       "Modern chandelier of staggered frosted glass globes on a matte black frame. Contemporary luxury for open-plan living.",
@@ -797,9 +795,9 @@ window.SKY_PRODUCTS = [
     originalPrice: 560000,
     rating: 4.8,
     reviews: 37,
-    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1618220252344-8ec99ec624b1?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
+      "https://images.unsplash.com/photo-1618220252344-8ec99ec624b1?w=900&q=80",
       "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=900&q=80"
     ],
     description:
@@ -819,7 +817,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=900&q=80",
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80"
+      "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=900&q=80"
     ],
     description:
       "Set of four luxury throw pillows in silk-touch and bouclé mixes—champagne, ivory, and soft gold. Instant sofa styling.",
@@ -875,8 +873,8 @@ window.SKY_PRODUCTS = [
     reviews: 49,
     image: "https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=800&q=80",
-      "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&q=80"
+      "https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=900&q=80",
+      "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=900&q=80"
     ],
     description:
       "Wooden animal figures and stacked ornaments for styled shelves, nurseries, and playful luxury corners—display-first, joy always.",
