@@ -309,7 +309,7 @@ function showApp(email) {
   const note = document.getElementById("admin-mode-note");
   if (note && !note.dataset.liveSet) {
     note.textContent =
-      "Store control center — loading live orders & customers… Theme preference is shared with the shop.";
+      "Welcome to the Sky Furniture control center — Dashboard, Products, Inventory, Orders, Customers, Coupons & Tools. Theme is shared with the shop.";
   }
 }
 
@@ -344,7 +344,9 @@ function unlockAdmin(email) {
   sessionStorage.setItem(SESSION_KEY, "1");
   if (email) sessionStorage.setItem("sky_admin_email", email);
   showApp(email || ADMIN_EMAIL);
+  // Always ensure latest catalog + product photos are available
   ensureCatalogSeeded();
+  refreshCatalogImagesFromDataJs();
   fillCategorySelects();
   loadProducts();
   loadInventory();
@@ -354,6 +356,39 @@ function unlockAdmin(email) {
   loadOrders();
   loadCustomers();
   initLiveData().catch(() => {});
+  logActivity("Admin unlocked — full control center ready");
+}
+
+/** Merge fresh image paths from data.js onto cached admin products */
+function refreshCatalogImagesFromDataJs() {
+  try {
+    const seed = catalogFromDataJs();
+    if (!seed.length) return;
+    const byId = new Map(seed.map((p) => [String(p.id), p]));
+    const list = getProducts();
+    let changed = false;
+    const next = list.map((p) => {
+      const fresh = byId.get(String(p.id));
+      if (!fresh?.image) return p;
+      const stale = !p.image || /unsplash|placehold|\.svg/i.test(p.image);
+      if (stale || p.image !== fresh.image) {
+        changed = true;
+        return {
+          ...p,
+          image: fresh.image,
+          images: fresh.images?.length ? fresh.images : [fresh.image],
+          name: p.name || fresh.name
+        };
+      }
+      return p;
+    });
+    // If catalog is empty of products that exist in data.js, re-seed fully
+    if (!list.length) {
+      saveProducts(seed, false);
+      return;
+    }
+    if (changed) saveProducts(next, false);
+  } catch (_) {}
 }
 
 async function initLiveData() {
@@ -435,45 +470,36 @@ function checkAccess() {
     .catch(() => {});
 }
 
-function showLocalUnlock(message) {
-  const box =
-    document.querySelector("#gate .admin-gate-card") ||
-    document.querySelector("#gate .admin-card") ||
-    document.getElementById("gate");
-  showGate(message || "Enter admin password.");
-  document.getElementById("gate-loading")?.classList.add("hidden");
-  if (document.getElementById("local-admin-form")) return;
-
-  const form = document.createElement("div");
-  form.id = "local-admin-form";
-  form.className = "mt-6 space-y-3 text-left";
-  form.innerHTML = `
-    <label class="admin-label" for="admin-pass">Admin password</label>
-    <input type="password" id="admin-pass" class="admin-input w-full" placeholder="Enter password" autocomplete="current-password" />
-    <button type="button" id="admin-unlock" class="admin-btn-primary w-full mt-1">Enter admin</button>
-    <p class="text-[11px] text-stone-400 text-center pt-1 leading-relaxed">
-      Default password: <strong class="text-ink dark:text-[#f3efe9]">SkyAdmin2026</strong><br/>
-      Or sign in with your admin email on the store first.
-    </p>
-    <p class="text-center text-xs mt-1">
-      <a href="../login.html?next=admin/index.html" class="text-clay hover:underline">Sign in with email</a>
-      · <a href="../shop.html" class="text-clay hover:underline">View shop</a>
-    </p>
-  `;
-  box.appendChild(form);
+function wirePasswordUnlock() {
+  if (wirePasswordUnlock._done) return;
+  wirePasswordUnlock._done = true;
+  // Show the real password hint (config may override DEFAULT)
+  const expected = getLocalAdminPassword();
+  document.querySelectorAll("[data-admin-pass-hint]").forEach((el) => {
+    el.textContent = expected;
+  });
   const go = () => {
     const pass = document.getElementById("admin-pass")?.value || "";
-    const expected = getLocalAdminPassword();
-    if (pass && pass === expected) {
+    if (pass && pass === getLocalAdminPassword()) {
       unlockAdmin(ADMIN_EMAIL);
     } else {
-      alert("Wrong password. Use: SkyAdmin2026");
+      alert("Wrong password. Use: " + getLocalAdminPassword());
     }
   };
   document.getElementById("admin-unlock")?.addEventListener("click", go);
   document.getElementById("admin-pass")?.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") go();
+    if (e.key === "Enter") {
+      e.preventDefault();
+      go();
+    }
   });
+}
+
+function showLocalUnlock(message) {
+  showGate(message || "Enter admin password.");
+  document.getElementById("gate-loading")?.classList.add("hidden");
+  // Form lives in HTML permanently — only wire handlers
+  wirePasswordUnlock();
   setTimeout(() => document.getElementById("admin-pass")?.focus(), 50);
 }
 
@@ -602,17 +628,34 @@ function fillCategorySelects() {
 // ---------------------------------------------------------------------------
 // Dashboard
 // ---------------------------------------------------------------------------
+function countLocalCustomers() {
+  try {
+    const users = JSON.parse(localStorage.getItem("sky_users") || "[]");
+    return Array.isArray(users) ? users.length : 0;
+  } catch {
+    return 0;
+  }
+}
+
 function renderDashboard() {
   const products = getProducts();
   const orders = getOrders();
-  const customers = LIVE_CUSTOMERS.length
-    ? LIVE_CUSTOMERS
-    : [];
+  const orderEmails = new Set(
+    orders.map((o) => (o.customer?.email || o.userEmail || "").toLowerCase()).filter(Boolean)
+  );
+  const customerCount =
+    LIVE_CUSTOMERS.length ||
+    Math.max(orderEmails.size, countLocalCustomers());
   const active = products.filter((p) => p.active !== false).length;
+  const featured = products.filter((p) => p.featured).length;
   const oos = products.filter((p) => !p.inStock || p.stockQty <= 0).length;
   const low = products.filter(
     (p) => p.stockQty > 0 && p.stockQty <= (p.lowStockAt ?? 5)
   ).length;
+  const withPhoto = products.filter(
+    (p) => p.image && !/\.svg$/i.test(p.image) && !/placehold/i.test(p.image)
+  ).length;
+  const coupons = getCoupons().filter((c) => c.active !== false).length;
 
   const paidOrders = orders.filter(isCountableRevenue);
   const revenue = paidOrders.reduce((s, o) => s + (Number(o.totals?.total) || 0), 0);
@@ -627,9 +670,12 @@ function renderDashboard() {
     { label: "Daily income", value: fmt(dailyIncome), sub: `${todayOrders} paid today`, tone: "is-accent" },
     { label: "Weekly income", value: fmt(weeklyIncome), sub: `${weekOrders} paid this week`, tone: "is-accent" },
     { label: "All-time revenue", value: fmt(revenue), sub: `${orders.length} total orders`, tone: "" },
-    { label: "Customers", value: String(customers.length || new Set(orders.map((o) => (o.customer?.email || "").toLowerCase()).filter(Boolean)).size), sub: "Site users & buyers", tone: "" },
-    { label: "Products", value: String(products.length), sub: `${active} active`, tone: "" },
-    { label: "Low stock", value: String(low), sub: oos ? `${oos} out of stock` : "Need restock", tone: low || oos ? "is-warn" : "" }
+    { label: "Customers", value: String(customerCount), sub: "Sign-ups & buyers", tone: "" },
+    { label: "Products", value: String(products.length), sub: `${active} active · ${featured} featured`, tone: "" },
+    { label: "Low stock", value: String(low), sub: oos ? `${oos} out of stock` : "Levels look healthy", tone: low || oos ? "is-warn" : "" },
+    { label: "Product photos", value: `${withPhoto}/${products.length}`, sub: withPhoto === products.length ? "All have images" : "Some need photos", tone: withPhoto < products.length ? "is-warn" : "" },
+    { label: "Active coupons", value: String(coupons), sub: "Discount codes live", tone: "" },
+    { label: "Data mode", value: isCloudReady() ? "Live" : "Local", sub: isCloudReady() ? "Firestore connected" : "This browser only", tone: isCloudReady() ? "is-ok" : "" }
   ];
 
   const cardsEl = document.getElementById("dash-cards");
@@ -637,11 +683,37 @@ function renderDashboard() {
     cardsEl.innerHTML = cards
       .map(
         (c) => `
-    <div class="admin-stat-card ${c.tone}">
+    <div class="admin-stat-card ${c.tone || ""}">
       <p class="admin-stat-label">${escapeHtml(c.label)}</p>
       <p class="admin-stat-value">${escapeHtml(c.value)}</p>
       <p class="admin-stat-sub">${escapeHtml(c.sub)}</p>
     </div>`
+      )
+      .join("");
+  }
+
+  // Feature cards — every capability of the admin
+  const featuresEl = document.getElementById("dash-features");
+  if (featuresEl) {
+    const features = [
+      { tab: "products", title: "Products", desc: "Add, edit, duplicate, bulk actions, featured flags, badges, image upload/URL.", meta: `${products.length} items` },
+      { tab: "inventory", title: "Inventory", desc: "Quick ± stock adjust, low-stock alerts, OOS tracking.", meta: `${low} low · ${oos} OOS` },
+      { tab: "orders", title: "Orders", desc: "Paid checkouts, status updates, print summary, live refresh.", meta: `${orders.length} orders` },
+      { tab: "customers", title: "Customers", desc: "Everyone who signed up, signed in, or checked out.", meta: `${customerCount} people` },
+      { tab: "coupons", title: "Coupons", desc: "Percent or fixed NGN discounts stored locally.", meta: `${coupons} active` },
+      { tab: "seed", title: "Tools", desc: "Reload catalog + photos, import/export JSON, activity log, theme.", meta: "Backup & sync" }
+    ];
+    featuresEl.innerHTML = features
+      .map(
+        (f) => `
+      <button type="button" data-tab="${f.tab}" class="tab-btn admin-feature-card text-left">
+        <div class="flex items-start justify-between gap-2">
+          <p class="font-medium text-sm">${escapeHtml(f.title)}</p>
+          <span class="text-[10px] uppercase tracking-wider text-clay shrink-0">${escapeHtml(f.meta)}</span>
+        </div>
+        <p class="text-xs text-stone-500 mt-2 leading-relaxed">${escapeHtml(f.desc)}</p>
+        <p class="text-xs text-clay mt-3 font-medium">Open →</p>
+      </button>`
       )
       .join("");
   }
@@ -661,7 +733,7 @@ function renderDashboard() {
       : `<p class="text-stone-400 text-sm">All stock levels look healthy.</p>`;
   }
 
-  const recent = orders.slice(0, 6);
+  const recent = [...orders].sort((a, b) => orderTime(b) - orderTime(a)).slice(0, 6);
   const recentEl = document.getElementById("dash-recent-orders");
   if (recentEl) {
     recentEl.innerHTML = recent.length
@@ -671,7 +743,7 @@ function renderDashboard() {
               `<div class="admin-list-row"><span class="truncate text-xs"><span class="tabular-nums">${escapeHtml(o.orderNumber || o.paymentRef || o.id || "Order")}</span><span class="text-stone-400"> · ${escapeHtml(o.customer?.fullName || o.customer?.email || "")}</span></span><span class="shrink-0 font-medium">${fmt(o.totals?.total)}</span></div>`
           )
           .join("")
-      : `<p class="text-stone-400 text-sm">No orders yet.</p>`;
+      : `<p class="text-stone-400 text-sm">No orders yet — paid checkouts appear here automatically.</p>`;
   }
 
   const counts = {};
@@ -684,6 +756,37 @@ function renderDashboard() {
       (c) =>
         `<span class="admin-cat-chip">${escapeHtml(c.label)} <strong class="tabular-nums">${counts[c.id] || 0}</strong></span>`
     ).join("");
+  }
+
+  const imgHealth = document.getElementById("dash-image-health");
+  if (imgHealth) {
+    const missing = products.filter(
+      (p) => !p.image || /\.svg$/i.test(p.image) || /placehold|unsplash/i.test(p.image)
+    );
+    imgHealth.innerHTML = missing.length
+      ? `<p class="text-amber-700 dark:text-amber-400 text-sm mb-2">${missing.length} product(s) need a proper photo.</p>` +
+        missing
+          .slice(0, 6)
+          .map((p) => `<div class="admin-list-row"><span class="truncate">${escapeHtml(p.name)}</span></div>`)
+          .join("") +
+        `<p class="text-xs text-stone-400 mt-2">Use Tools → Load catalog + photos to refresh from data.js.</p>`
+      : `<p class="text-sm text-stone-500">All ${products.length} products have local photos attached (JPG).</p>
+         <p class="text-xs text-stone-400 mt-2">Catalog version: ${escapeHtml(window.SKY_CATALOG_VERSION || "—")}</p>`;
+  }
+
+  const dashAct = document.getElementById("dash-activity");
+  if (dashAct) {
+    try {
+      const list = JSON.parse(localStorage.getItem(ACTIVITY_KEY) || "[]");
+      dashAct.innerHTML = list.length
+        ? list
+            .slice(0, 8)
+            .map((a) => `<div>${escapeHtml(a.t.slice(0, 19).replace("T", " "))} — ${escapeHtml(a.msg)}</div>`)
+            .join("")
+        : "<div>No activity yet — actions you take will appear here.</div>";
+    } catch {
+      dashAct.innerHTML = "<div>No activity yet.</div>";
+    }
   }
 }
 
@@ -768,7 +871,7 @@ function loadProducts() {
       <td class="p-3"><input type="checkbox" class="row-check accent-ink" value="${p.id}" /></td>
       <td class="p-3">
         <div class="flex items-center gap-3 min-w-0">
-          <img src="${escapeHtml(resolveAdminAssetUrl(p.image))}" alt="" class="admin-thumb" />
+          <img src="${escapeHtml(resolveAdminAssetUrl(p.image))}" alt="" class="admin-thumb" loading="lazy" onerror="this.style.opacity='0.35'" />
           <div class="min-w-0">
             <p class="font-medium truncate max-w-[200px]">${escapeHtml(p.name)}</p>
             <div class="flex flex-wrap gap-1.5 mt-0.5">
@@ -1096,7 +1199,12 @@ function loadInventory() {
             : "admin-badge is-ok";
       return `
     <tr class="${low ? "is-low-stock" : ""}">
-      <td class="p-3 font-medium text-sm">${escapeHtml(p.name)}</td>
+      <td class="p-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <img src="${escapeHtml(resolveAdminAssetUrl(p.image))}" alt="" class="admin-thumb" loading="lazy" onerror="this.style.opacity='0.35'" />
+          <span class="font-medium text-sm truncate">${escapeHtml(p.name)}</span>
+        </div>
+      </td>
       <td class="p-3 text-xs font-mono text-stone-500">${escapeHtml(p.sku || "—")}</td>
       <td class="p-3 tabular-nums font-medium ${p.stockQty <= 0 ? "text-red-700 dark:text-red-400" : ""}">${p.stockQty}</td>
       <td class="p-3 tabular-nums text-stone-500">${p.lowStockAt}</td>
@@ -1257,8 +1365,26 @@ function loadCustomers() {
 
   let list = LIVE_CUSTOMERS.slice();
   if (!list.length) {
-    // Fallback: build from orders
+    // Merge local sign-ups + checkout buyers
     const map = new Map();
+    try {
+      const users = JSON.parse(localStorage.getItem("sky_users") || "[]");
+      if (Array.isArray(users)) {
+        users.forEach((u) => {
+          const email = String(u.email || "").toLowerCase();
+          if (!email) return;
+          map.set(email, {
+            email,
+            name: u.displayName || u.name || "",
+            phone: u.phone || "",
+            orderCount: 0,
+            totalSpent: 0,
+            source: "signup",
+            lastSeenAt: u.createdAt || null
+          });
+        });
+      }
+    } catch (_) {}
     getOrders().forEach((o) => {
       const email = (o.customer?.email || o.userEmail || "").toLowerCase();
       if (!email) return;
@@ -1274,6 +1400,7 @@ function loadCustomers() {
       if (isCountableRevenue(o)) prev.totalSpent += Number(o.totals?.total) || 0;
       if (o.customer?.fullName) prev.name = o.customer.fullName;
       if (o.customer?.phone) prev.phone = o.customer.phone;
+      if (prev.source === "signup") prev.source = "signup + checkout";
       map.set(email, prev);
     });
     list = [...map.values()];
@@ -1468,9 +1595,21 @@ function bootAdmin() {
     initMobileDrawer();
     initImageFields();
     initViewShopLinks();
-    document.querySelectorAll(".tab-btn").forEach((btn) => {
-      btn.addEventListener("click", () => setTab(btn.dataset.tab));
+    wirePasswordUnlock();
+
+    // Event delegation so dashboard feature cards & any new tab buttons work
+    document.addEventListener("click", (e) => {
+      const tabBtn = e.target.closest("[data-tab]");
+      if (!tabBtn || !tabBtn.dataset.tab) return;
+      // Don't treat non-button links that happen to have data-tab incorrectly
+      if (tabBtn.tagName === "A" && tabBtn.getAttribute("href")) return;
+      e.preventDefault();
+      setTab(tabBtn.dataset.tab);
     });
+
+    document.getElementById("btn-theme-light")?.addEventListener("click", () => applyTheme("light"));
+    document.getElementById("btn-theme-dark")?.addEventListener("click", () => applyTheme("dark"));
+
     checkAccess();
   } catch (err) {
     console.error("[Admin] boot failed", err);

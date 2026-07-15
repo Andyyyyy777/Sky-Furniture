@@ -507,6 +507,41 @@ html.dark .admin-code {
   background: #2c2926;
 }
 
+.admin-stat-card.is-ok::before {
+  background: #16a34a;
+}
+
+/* Feature shortcut cards on dashboard */
+.admin-feature-card {
+  display: block;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e7e5e4;
+  border-radius: 14px;
+  padding: 1.1rem 1.15rem;
+  box-shadow: 0 4px 20px -6px rgba(44, 41, 38, 0.06);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  color: inherit;
+  font: inherit;
+}
+
+.admin-feature-card:hover {
+  transform: translateY(-2px);
+  border-color: #c4a77d;
+  box-shadow: 0 12px 28px -12px rgba(44, 41, 38, 0.14);
+}
+
+html.dark .admin-feature-card {
+  background: #221f1c;
+  border-color: #3f3a36;
+}
+
+html.dark .admin-feature-card:hover {
+  border-color: #c4a77d;
+  box-shadow: 0 12px 28px -12px rgba(0, 0, 0, 0.45);
+}
+
 html.dark .admin-stat-card {
   background: #221f1c;
   border-color: #3f3a36;
