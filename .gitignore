@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+functions/node_modules/
+
+# Local env / secrets
+.env
+.env.*
+functions/.env
+config/*-keys.local.js
+**/serviceAccount*.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Build / deploy caches
+.vercel/
+.firebase/
+dist/
+.cache/
+
+desktop.ini

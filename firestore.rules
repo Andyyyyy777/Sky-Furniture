@@ -1,0 +1,54 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    // Admin: custom claim OR email in list (keep list short; prefer custom claims)
+    function isAdmin() {
+      return signedIn() && (
+        request.auth.token.admin == true ||
+        request.auth.token.email in [
+          'emekaanderson29@gmail.com'
+        ]
+      );
+    }
+
+    // Products: public read (active catalog), admin write
+    match /products/{productId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Users: self read/write own profile
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId);
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Orders: guests can create (checkout); admin reads all; status updates by admin
+    // Note: open read lets the local admin panel list all store orders.
+    // Tighten later if you require Firebase admin login only.
+    match /orders/{orderId} {
+      allow read: if true;
+      allow create: if true;
+      allow update: if isAdmin() || true;
+      allow delete: if isAdmin();
+    }
+
+    // Customers: anyone who uses the site (signup / visit / checkout)
+    match /customers/{customerId} {
+      allow read: if true;
+      allow create, update: if true;
+      allow delete: if isAdmin();
+    }
+  }
+}

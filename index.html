@@ -1,0 +1,423 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sky Furniture | Premium Furniture & Decor in Nigeria (NGN)</title>
+  <meta name="description" content="Shop timeless sofas, beds, rugs, lighting and decor at Sky Furniture. Nationwide delivery across Nigeria. Prices in NGN. Lagos showroom pickup available." />
+  <meta name="keywords" content="furniture Nigeria, sofa Lagos, home decor, rugs, beds, Sky Furniture, buy furniture online Nigeria" />
+  <meta name="author" content="Sky Furniture" />
+  <meta name="theme-color" content="#F7F3EE" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#161412" media="(prefers-color-scheme: dark)" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://sky-furniture.vercel.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Sky Furniture" />
+  <meta property="og:title" content="Sky Furniture | Timeless furniture for Nigerian homes" />
+  <meta property="og:description" content="Sofas, beds, rugs, lighting & artifacts. Crafted for calm living. Shop in NGN." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80" />
+  <meta property="og:locale" content="en_NG" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sky Furniture | Premium home furniture Nigeria" />
+  <meta name="twitter:description" content="Design your space with curated pieces. Free Lagos delivery over ₦500,000." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80" />
+
+  <!-- Prevent dark-mode flash -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("sky_furniture_theme");
+        if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            cream: "#F7F3EE",
+            sand: "#E8E0D5",
+            warm: "#C4A77D",
+            ink: "#2C2926",
+            clay: "#8B7355"
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', "Georgia", "serif"],
+            sans: ["Inter", "system-ui", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="dns-prefetch" href="https://images.unsplash.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FurnitureStore",
+    "name": "Sky Furniture",
+    "description": "Premium furniture and home decor for Nigerian homes.",
+    "url": "https://sky-furniture.vercel.app/",
+    "image": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Allen Avenue",
+      "addressLocality": "Ikeja",
+      "addressRegion": "Lagos",
+      "addressCountry": "NG"
+    },
+    "priceRange": "NGN",
+    "currenciesAccepted": "NGN"
+  }
+  </script>
+</head>
+<body class="bg-cream text-ink antialiased" data-page="home">
+
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-ink focus:text-cream focus:px-4 focus:py-2">Skip to content</a>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-cream/95 backdrop-blur border-b border-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 md:h-20">
+        <a href="index.html" class="font-display text-2xl md:text-3xl tracking-wide text-ink" aria-label="Sky Furniture home">Sky Furniture</a>
+
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-600" aria-label="Primary">
+          <a href="index.html" class="text-ink border-b border-ink pb-0.5" aria-current="page">Home</a>
+          <a href="shop.html" class="hover:text-ink transition">Shop</a>
+          <a href="shop.html?category=living-room" class="hover:text-ink transition">Living Room</a>
+          <a href="shop.html?category=bedroom" class="hover:text-ink transition">Bedroom</a>
+          <a href="shop.html?category=office" class="hover:text-ink transition">Office</a>
+          <a href="shop.html?category=dining" class="hover:text-ink transition">Dining</a>
+          <a href="#design-space" class="hover:text-ink transition">Design</a>
+        </nav>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <form action="shop.html" method="get" role="search" class="hidden sm:flex items-center bg-white border border-sand rounded-full px-3 py-1.5 w-44 lg:w-56 focus-within:border-clay transition">
+            <svg class="w-4 h-4 text-stone-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="search" name="q" placeholder="Search furniture..." class="ml-2 w-full bg-transparent text-sm outline-none placeholder:text-stone-400" aria-label="Search products" />
+          </form>
+
+          <button type="button" data-theme-toggle class="p-2 text-stone-600 hover:text-ink transition" aria-label="Toggle dark mode" aria-pressed="false">
+            <svg class="icon-sun w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="icon-moon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          </button>
+
+          <button type="button" id="mobile-search-btn" class="sm:hidden p-2 text-stone-600 hover:text-ink" aria-label="Open search">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </button>
+          <a href="cart.html" class="relative p-2 text-stone-600 hover:text-ink transition" aria-label="Shopping cart">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span data-cart-count class="hidden absolute -top-0.5 -right-0.5 bg-ink text-cream text-[10px] font-semibold w-4 h-4 rounded-full items-center justify-center">0</span>
+          </a>
+          <div class="flex items-center gap-2 sm:gap-3" data-auth-slot>
+            <a href="login.html" class="text-sm font-medium text-stone-600 hover:text-ink transition">Sign in</a>
+          </div>
+          <button type="button" id="mobile-menu-btn" class="md:hidden p-2 text-stone-600" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+      <div id="mobile-search" class="hidden sm:hidden pb-3">
+        <form action="shop.html" method="get" class="flex items-center bg-white border border-sand rounded-full px-3 py-2">
+          <input type="search" name="q" placeholder="Search furniture..." class="w-full bg-transparent text-sm outline-none" aria-label="Search products" />
+        </form>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-sand bg-cream">
+      <nav class="flex flex-col px-4 py-3 gap-1 text-sm font-medium" aria-label="Mobile">
+        <a href="index.html" class="py-2 text-ink">Home</a>
+        <a href="shop.html" class="py-2 text-stone-600">Shop</a>
+        <a href="#design-space" class="py-2 text-stone-600">Design Your Space</a>
+        <a href="shop.html?category=living-room" class="py-2 text-stone-600">Living Room</a>
+        <a href="shop.html?category=bedroom" class="py-2 text-stone-600">Bedroom</a>
+        <a href="shop.html?category=office" class="py-2 text-stone-600">Office & Gaming</a>
+        <a href="shop.html?category=dining" class="py-2 text-stone-600">Dining</a>
+        <a href="shop.html?category=rugs" class="py-2 text-stone-600">Rugs</a>
+        <a href="shop.html?category=lighting" class="py-2 text-stone-600">Lighting</a>
+        <a href="shop.html?category=decor" class="py-2 text-stone-600">Decor & Artifacts</a>
+        <div class="border-t border-sand mt-2 pt-2" data-auth-mobile>
+          <a href="login.html" class="py-2 text-stone-600 block">Sign in</a>
+          <a href="account.html" class="py-2 text-stone-600 block">My account</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="relative h-[70vh] min-h-[420px] max-h-[720px] overflow-hidden bg-stone-800" aria-label="Featured collections">
+      <div class="carousel-slide active absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=75" alt="Bright modern living room with linen sofa and natural light - Sky Furniture collection" width="1600" height="900" class="w-full h-full object-cover" fetchpriority="high" decoding="async" />
+        <div class="absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/40 to-transparent"></div>
+        <div class="absolute inset-0 flex items-center">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <p class="text-warm text-sm tracking-[0.2em] uppercase mb-3">New Collection</p>
+            <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl text-white max-w-xl leading-tight">Furniture that feels like home</h1>
+            <p class="mt-4 text-stone-200 max-w-md text-base sm:text-lg font-light">Thoughtfully crafted pieces for calm living across Nigeria.</p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="shop.html" class="inline-block bg-cream text-ink px-8 py-3 text-sm font-medium tracking-wide hover:bg-white transition shadow-lg">Shop Collection</a>
+              <a href="#design-space" class="inline-block border border-white/50 text-white px-8 py-3 text-sm font-medium tracking-wide hover:bg-white/10 transition">Design Your Space</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-slide absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1600&q=75" alt="Serene bedroom with upholstered bed and soft linen bedding" width="1600" height="900" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+        <div class="absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/40 to-transparent"></div>
+        <div class="absolute inset-0 flex items-center">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <p class="text-warm text-sm tracking-[0.2em] uppercase mb-3">Bedroom</p>
+            <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-white max-w-xl leading-tight">Rest in refined comfort</h2>
+            <p class="mt-4 text-stone-200 max-w-md text-base sm:text-lg font-light">Solid wood beds and soft textiles designed for better sleep.</p>
+            <a href="shop.html?category=bedroom" class="inline-block mt-8 bg-cream text-ink px-8 py-3 text-sm font-medium tracking-wide hover:bg-white transition">Explore Bedroom</a>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-slide absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=1600&q=75" alt="Walnut dining table set for a gathering with warm ambient lighting" width="1600" height="900" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+        <div class="absolute inset-0 bg-gradient-to-r from-ink/70 via-ink/40 to-transparent"></div>
+        <div class="absolute inset-0 flex items-center">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <p class="text-warm text-sm tracking-[0.2em] uppercase mb-3">Dining</p>
+            <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl text-white max-w-xl leading-tight">Gather around beauty</h2>
+            <p class="mt-4 text-stone-200 max-w-md text-base sm:text-lg font-light">Walnut tables and sculptural lighting for memorable meals.</p>
+            <a href="shop.html?category=dining" class="inline-block mt-8 bg-cream text-ink px-8 py-3 text-sm font-medium tracking-wide hover:bg-white transition">Shop Dining</a>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
+        <button type="button" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/90" data-index="0" aria-label="Show slide 1"></button>
+        <button type="button" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/40" data-index="1" aria-label="Show slide 2"></button>
+        <button type="button" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/40" data-index="2" aria-label="Show slide 3"></button>
+      </div>
+      <button type="button" id="carousel-prev" class="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur flex items-center justify-center transition" aria-label="Previous slide">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button type="button" id="carousel-next" class="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur flex items-center justify-center transition" aria-label="Next slide">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </section>
+
+    <!-- Categories -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24" aria-labelledby="shop-by-room">
+      <div class="text-center mb-12">
+        <h2 id="shop-by-room" class="font-display text-3xl md:text-4xl text-ink">Shop at Sky Furnitures</h2>
+        <p class="mt-2 text-stone-500 font-light">Curated collections for every corner of your home</p>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <a href="shop.html?category=living-room" class="group relative aspect-[3/4] overflow-hidden bg-sand">
+          <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=75" alt="Luxury living room sectional sofa" width="600" height="800" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" decoding="async" />
+          <div class="absolute inset-0 bg-ink/30 group-hover:bg-ink/45 transition duration-500"></div>
+          <span class="absolute bottom-4 left-4 font-display text-xl sm:text-2xl text-white">Living Room</span>
+        </a>
+        <a href="shop.html?category=bedroom" class="group relative aspect-[3/4] overflow-hidden bg-sand">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=75" alt="Luxury king canopy bed" width="600" height="800" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" decoding="async" />
+          <div class="absolute inset-0 bg-ink/30 group-hover:bg-ink/45 transition duration-500"></div>
+          <span class="absolute bottom-4 left-4 font-display text-2xl text-white">Bedroom</span>
+        </a>
+        <a href="shop.html?category=office" class="group relative aspect-[3/4] overflow-hidden bg-sand">
+          <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=600&q=75" alt="Gaming and office chairs" width="600" height="800" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" decoding="async" />
+          <div class="absolute inset-0 bg-ink/30 group-hover:bg-ink/45 transition duration-500"></div>
+          <span class="absolute bottom-4 left-4 font-display text-lg sm:text-xl text-white">Office &amp; Gaming</span>
+        </a>
+        <a href="shop.html?category=dining" class="group relative aspect-[3/4] overflow-hidden bg-sand">
+          <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=600&q=75" alt="Luxury dining set" width="600" height="800" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" decoding="async" />
+          <div class="absolute inset-0 bg-ink/30 group-hover:bg-ink/45 transition duration-500"></div>
+          <span class="absolute bottom-4 left-4 font-display text-2xl text-white">Dining</span>
+        </a>
+        <a href="shop.html?category=rugs" class="group relative aspect-[3/4] overflow-hidden bg-sand">
+          <img src="https://images.unsplash.com/photo-1600166898405-da9535204843?w=600&q=75" alt="Luxury Persian style area rug" width="600" height="800" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" decoding="async" />
+          <div class="absolute inset-0 bg-ink/30 group-hover:bg-ink/45 transition duration-500"></div>
+          <span class="absolute bottom-4 left-4 font-display text-2xl text-white">Rugs</span>
+        </a>
+        <a href="shop.html?category=lighting" class="group relative aspect-[3/4] overflow-hidden bg-sand">
+          <img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=600&q=75" alt="Crystal chandelier" width="600" height="800" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" decoding="async" />
+          <div class="absolute inset-0 bg-ink/30 group-hover:bg-ink/45 transition duration-500"></div>
+          <span class="absolute bottom-4 left-4 font-display text-2xl text-white">Lighting</span>
+        </a>
+        <a href="shop.html?category=decor" class="group relative aspect-[3/4] overflow-hidden bg-sand col-span-2">
+          <img src="https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=900&q=75" alt="Luxury decor and artifacts" width="900" height="600" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" decoding="async" />
+          <div class="absolute inset-0 bg-ink/30 group-hover:bg-ink/45 transition duration-500"></div>
+          <span class="absolute bottom-4 left-4 font-display text-2xl text-white">Decor &amp; Artifacts</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Featured -->
+    <section class="bg-white py-16 md:py-24" aria-labelledby="featured-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-end justify-between mb-10">
+          <div>
+            <h2 id="featured-heading" class="font-display text-3xl md:text-4xl text-ink">Featured Pieces</h2>
+            <p class="mt-2 text-stone-500 font-light">Quick view · prices in NGN</p>
+          </div>
+          <a href="shop.html" class="hidden sm:inline text-sm font-medium text-clay hover:text-ink transition border-b border-clay/40 hover:border-ink pb-0.5">View all</a>
+        </div>
+        <div id="featured-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"></div>
+      </div>
+    </section>
+
+    <!-- Design Your Space -->
+    <section id="design-space" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24" aria-labelledby="design-heading">
+      <div class="text-center mb-8">
+        <h2 id="design-heading" class="font-display text-3xl md:text-4xl text-ink">Design Your Space</h2>
+        <p class="mt-2 text-stone-500 font-light max-w-xl mx-auto">Pick a room we will suggest a simple formula and matching pieces from our collection.</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-2 mb-8" role="tablist" aria-label="Room type">
+        <button type="button" data-room="living" class="room-chip is-active px-4 py-2 text-sm border border-sand rounded-full bg-white" role="tab" aria-selected="true">Living Room</button>
+        <button type="button" data-room="bedroom" class="room-chip px-4 py-2 text-sm border border-sand rounded-full bg-white" role="tab">Bedroom</button>
+        <button type="button" data-room="dining" class="room-chip px-4 py-2 text-sm border border-sand rounded-full bg-white" role="tab">Dining</button>
+        <button type="button" data-room="office" class="room-chip px-4 py-2 text-sm border border-sand rounded-full bg-white" role="tab">Office & Gaming</button>
+        <button type="button" data-room="entry" class="room-chip px-4 py-2 text-sm border border-sand rounded-full bg-white" role="tab">Decor</button>
+      </div>
+      <div id="design-panel"></div>
+    </section>
+
+    <!-- Inspiration / Blog teaser -->
+    <section class="bg-white py-16 md:py-24 border-t border-sand" aria-labelledby="inspire-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-end justify-between mb-10">
+          <div>
+            <p class="text-xs tracking-[0.2em] uppercase text-clay mb-2">Journal</p>
+            <h2 id="inspire-heading" class="font-display text-3xl md:text-4xl text-ink">Inspiration gallery</h2>
+            <p class="mt-2 text-stone-500 font-light">Ideas to style your home - teaser posts for a future blog.</p>
+          </div>
+          <a href="shop.html" class="hidden sm:inline text-sm text-clay hover:text-ink border-b border-clay/40 pb-0.5">Shop the look</a>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+          <article class="group">
+            <a href="shop.html?category=living-room" class="block overflow-hidden bg-sand aspect-[4/3]">
+              <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=75" alt="Layered luxury living room" width="800" height="600" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" decoding="async" />
+            </a>
+            <p class="mt-4 text-[11px] uppercase tracking-wider text-stone-400">Living Room · 6 min read</p>
+            <h3 class="font-display text-xl md:text-2xl text-ink mt-1 group-hover:text-clay transition">
+              <a href="shop.html?category=living-room">How to layer a living room without clutter</a>
+            </h3>
+            <p class="mt-2 text-sm text-stone-500 font-light line-clamp-2">Start with one hero sofa, a grounded rug, and two light sources. Keep surfaces mostly clear.</p>
+          </article>
+          <article class="group">
+            <a href="shop.html?category=bedroom" class="block overflow-hidden bg-sand aspect-[4/3]">
+              <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=75" alt="Bedroom with linen bedding in soft morning light" width="800" height="600" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" decoding="async" />
+            </a>
+            <p class="mt-4 text-[11px] uppercase tracking-wider text-stone-400">Bedroom · 4 min read</p>
+            <h3 class="font-display text-xl md:text-2xl text-ink mt-1 group-hover:text-clay transition">
+              <a href="shop.html?category=bedroom">A calmer bedroom formula for hot climates</a>
+            </h3>
+            <p class="mt-2 text-sm text-stone-500 font-light line-clamp-2">Breathable linen, light wood, and soft lighting help Nigerian bedrooms stay restful year-round.</p>
+          </article>
+          <article class="group">
+            <a href="shop.html?category=decor" class="block overflow-hidden bg-sand aspect-[4/3]">
+              <img src="https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800&q=75" alt="Gallery wall with framed picture portraits" width="800" height="600" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy" decoding="async" />
+            </a>
+            <p class="mt-4 text-[11px] uppercase tracking-wider text-stone-400">Decor · 5 min read</p>
+            <h3 class="font-display text-xl md:text-2xl text-ink mt-1 group-hover:text-clay transition">
+              <a href="shop.html?category=decor">Styling shelves with vases, clocks & portraits</a>
+            </h3>
+            <p class="mt-2 text-sm text-stone-500 font-light line-clamp-2">Mix heights: vessels, a small clock, and one portrait. Leave breathing room between objects.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 md:py-24 border-t border-sand" aria-labelledby="love-heading" id="testimonials-root">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+          <h2 id="love-heading" class="font-display text-3xl md:text-4xl text-ink">Loved across Nigeria</h2>
+          <p class="mt-2 text-stone-500 font-light">Real homes. Real feedback. .</p>
+        </div>
+        <div class="relative min-h-[280px] sm:min-h-[240px]">
+          <div id="testimonials-track" class="relative"></div>
+        </div>
+        <div class="mt-8 flex items-center justify-center gap-4">
+          <button type="button" id="t-prev" class="w-10 h-10 rounded-full border border-sand hover:bg-white transition flex items-center justify-center" aria-label="Previous testimonial">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <div id="testimonials-dots" class="flex gap-2"></div>
+          <button type="button" id="t-next" class="w-10 h-10 rounded-full border border-sand hover:bg-white transition flex items-center justify-center" aria-label="Next testimonial">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Story -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="grid md:grid-cols-2 gap-0 overflow-hidden bg-sand">
+        <div class="aspect-[4/3] md:aspect-auto">
+          <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1000&q=75" alt="Craftsperson arranging furniture pieces in a bright workshop-inspired interior" width="1000" height="750" class="w-full h-full object-cover min-h-[280px]" loading="lazy" decoding="async" />
+        </div>
+        <div class="flex flex-col justify-center p-8 md:p-12 lg:p-16">
+          <p class="text-clay text-sm tracking-[0.15em] uppercase mb-3">Our Promise</p>
+          <h2 class="font-display text-3xl md:text-4xl text-ink leading-snug">Designed slowly. Built to last.</h2>
+          <p class="mt-4 text-stone-600 font-light leading-relaxed">Every Sky Furniture piece is crafted from natural materials with timeless proportions so your home feels calmer, warmer, and more you.</p>
+          <a href="shop.html" class="inline-block mt-8 self-start bg-ink text-cream px-7 py-3 text-sm font-medium tracking-wide hover:bg-stone-800 transition">Discover More</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-ink text-stone-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="col-span-2 md:col-span-1">
+          <a href="index.html" class="font-display text-2xl text-cream">Sky Furniture</a>
+          <p class="mt-3 text-sm font-light leading-relaxed max-w-xs">Timeless furniture and objects for thoughtful living in Nigeria.</p>
+        </div>
+        <div>
+          <h3 class="text-cream text-sm font-medium tracking-wide mb-3">Shop</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="shop.html" class="hover:text-cream transition">All Products</a></li>
+            <li><a href="shop.html?category=living-room" class="hover:text-cream transition">Living Room</a></li>
+            <li><a href="shop.html?category=office" class="hover:text-cream transition">Office & Gaming</a></li>
+            <li><a href="shop.html?category=rugs" class="hover:text-cream transition">Rugs</a></li>
+            <li><a href="shop.html?category=decor" class="hover:text-cream transition">Decor & Artifacts</a></li>
+            <li><a href="#design-space" class="hover:text-cream transition">Design Your Space</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-cream text-sm font-medium tracking-wide mb-3">Help</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="checkout.html" class="hover:text-cream transition">Checkout</a></li>
+            <li><a href="cart.html" class="hover:text-cream transition">Cart</a></li>
+            <li><a href="PRODUCTION.md" class="hover:text-cream transition">Production notes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-cream text-sm font-medium tracking-wide mb-3">Stay in touch</h3>
+          <form data-newsletter class="flex mt-1">
+            <label for="footer-email" class="sr-only">Email</label>
+            <input id="footer-email" type="email" required placeholder="Email" class="flex-1 bg-stone-800 border-0 text-sm text-cream placeholder:text-stone-500 px-3 py-2 outline-none focus:ring-1 focus:ring-warm" />
+            <button type="submit" class="bg-warm text-ink px-4 text-sm font-medium hover:bg-amber-200 transition">Join</button>
+          </form>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-stone-700 text-xs text-stone-500 flex flex-col sm:flex-row justify-between gap-2">
+        <p>&copy; 2026 Sky Furniture. Lagos, Nigeria.</p>
+        <p>Prices in Nigerian Naira (NGN)</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="js/main.js" defer></script>
+  <script type="module" src="assets/js/auth-header.js"></script>
+</body>
+</html>
+
+
