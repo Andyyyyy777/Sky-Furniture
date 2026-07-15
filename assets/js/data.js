@@ -23,77 +23,77 @@ window.SKY_PRODUCTS = [
     originalPrice: 2890000,
     rating: 4.9,
     reviews: 86,
-    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80",
       "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80"
     ],
     description:
-      "A grand L-shaped sectional in performance linen, deep feather-blend cushions, and solid oak feet. The centerpiece of a refined Lagos living room.",
+      "Cream L-shaped sectional with chaise, layered pillows, and a soft modern silhouette—built for spacious Lagos living rooms.",
     details: ["Linen blend upholstery", "L-shape sectional", "Feather-blend cushions", "Seats 5–6", "Custom slipcovers available"],
     inStock: true,
     badge: "Best Seller"
   },
   {
     id: 102,
-    name: "Aurelia Velvet Armchair",
+    name: "Aurelia Cream Tufted Armchair",
     category: "living-room",
     price: 685000,
     originalPrice: null,
     rating: 4.8,
     reviews: 54,
-    image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=900&q=80",
-      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80"
+      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80"
     ],
     description:
-      "Sculptural armchair in deep emerald velvet with channel-tufted back and polished brass sabots. A quiet statement for reading corners.",
+      "Button-tufted cream velvet armchair with curved arms and classic turned legs—an elegant reading chair.",
     details: ["Emerald performance velvet", "Solid beech frame", "Brass sabots", "High-density foam", "72 × 78 × 85 cm"],
     inStock: true,
     badge: "New"
   },
   {
     id: 103,
-    name: "Caldera Marble Centre Table",
+    name: "Solstice Mustard Velvet Armchair",
     category: "living-room",
     price: 890000,
     originalPrice: 1050000,
     rating: 4.7,
     reviews: 41,
-    image: "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=900&q=80",
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80"
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80",
+      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80"
     ],
     description:
-      "Italian-inspired coffee table with a thick Calacatta-veined marble top and brushed bronze base. Designed for layered trays and art books.",
+      "Statement mustard-yellow velvet armchair with slim black legs. Pairs beautifully with a media console and brass floor lamp.",
     details: ["Marble top", "Bronze-finished steel base", "Protective felt pads", "120 × 70 × 40 cm", "Indoor use"],
     inStock: true,
     badge: "Sale"
   },
   {
     id: 104,
-    name: "Noir Luxe TV Media Console",
+    name: "Noir Gallery Sideboard Credenza",
     category: "living-room",
     price: 750000,
     originalPrice: null,
     rating: 4.6,
     reviews: 38,
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=900&q=80",
+      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
       "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80"
     ],
     description:
-      "Low-profile media console in matte black oak with fluted doors and soft-close drawers. Cable management for a seamless wall.",
+      "Gold-framed sideboard with cane doors, styled as a living-room media and bar console under a round mirror.",
     details: ["Matte black oak veneer", "Fluted doors", "Soft-close hardware", "Fits TVs up to 75\"", "180 × 45 × 50 cm"],
     inStock: true,
     badge: null
   },
   {
     id: 105,
-    name: "Solstice Modular Sofa Duo",
+    name: "Harbour Grey Tufted Sofa",
     category: "living-room",
     price: 1890000,
     originalPrice: null,
@@ -102,17 +102,17 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80",
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80"
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80"
     ],
     description:
-      "Two-piece modular sofa in warm sand bouclé. Reconfigure as a chaise lounge or classic three-seater for flexible entertaining.",
+      "Button-tufted grey three-seater sofa with throw pillows—cosy everyday luxury for family lounges.",
     details: ["Sand bouclé fabric", "Modular connectors", "Removable covers", "Hardwood frame", "Deep 95 cm seat"],
     inStock: true,
     badge: "New"
   },
   {
     id: 106,
-    name: "Étoile Nesting Coffee Tables",
+    name: "Atelier Solid Wood Side Table",
     category: "living-room",
     price: 420000,
     originalPrice: 495000,
@@ -121,10 +121,10 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1532372320572-cda25653a26d?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1532372320572-cda25653a26d?w=900&q=80",
-      "https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?w=900&q=80"
+      "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80"
     ],
     description:
-      "Set of two nesting tables in smoked glass and champagne gold frames. Slide apart for entertaining or nest for a clean silhouette.",
+      "Sculptural solid-wood side table with open shelves for books and décor—perfect beside a sofa or bed.",
     details: ["Smoked tempered glass", "Champagne gold metal", "Set of 2", "Nesting design", "Easy clean surface"],
     inStock: true,
     badge: "Sale"
@@ -133,26 +133,26 @@ window.SKY_PRODUCTS = [
   // ─── Bedroom ───────────────────────────────────────────────────────────
   {
     id: 201,
-    name: "Sovereign King Canopy Bed",
+    name: "Sovereign King Bedroom Suite",
     category: "bedroom",
     price: 2850000,
     originalPrice: null,
     rating: 4.9,
     reviews: 62,
-    image: "https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?w=900&q=80",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80",
       "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=80"
     ],
     description:
-      "King canopy bed in solid ash with linen-wrapped headboard posts. A hotel-suite presence for master bedrooms.",
+      "King bed with tall tufted headboard, paired nightstands, and bench—hotel-suite polish for master bedrooms.",
     details: ["King size 180 × 200 cm", "Solid ash frame", "Linen headboard wrap", "Canopy rails", "Natural oil finish"],
     inStock: true,
     badge: "Best Seller"
   },
   {
     id: 202,
-    name: "Nocturne Queen Upholstered Bed",
+    name: "Nocturne Channel Upholstered Bed",
     category: "bedroom",
     price: 1650000,
     originalPrice: 1890000,
@@ -161,17 +161,17 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=80",
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80"
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=80"
     ],
     description:
-      "Queen bed fully upholstered in charcoal bouclé with tall winged headboard and discreet under-bed storage drawers.",
+      "Plush light-grey channel-upholstered bed on gold feet, shown with matching nightstands and modern brass chandelier.",
     details: ["Queen 160 × 200 cm", "Charcoal bouclé", "Winged headboard", "2 storage drawers", "Slatted base included"],
     inStock: true,
     badge: "Sale"
   },
   {
     id: 203,
-    name: "Luna Single Guest Bed",
+    name: "Luna City Guest Bed",
     category: "bedroom",
     price: 520000,
     originalPrice: null,
@@ -183,64 +183,64 @@ window.SKY_PRODUCTS = [
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=900&q=80"
     ],
     description:
-      "Elegant single bed with soft ivory linen headboard—perfect for guest rooms, children's suites, or compact apartments.",
+      "Comfortable hotel-style guest bed with padded headboard and wood nightstand—ideal for guest rooms and apartments.",
     details: ["Single 90 × 200 cm", "Ivory linen headboard", "Solid pine frame", "Low profile", "Easy assembly"],
     inStock: true,
     badge: null
   },
   {
     id: 204,
-    name: "Atelier Pair of Bedside Tables",
+    name: "Atelier Round Bedside Table",
     category: "bedroom",
     price: 385000,
     originalPrice: null,
     rating: 4.7,
     reviews: 48,
-    image: "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=900&q=80",
-      "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=900&q=80"
+      "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80",
+      "https://images.unsplash.com/photo-1532372320572-cda25653a26d?w=900&q=80"
     ],
     description:
-      "Matched pair of nightstands in walnut with soft-close drawers and brass pulls. Designed to flank king or queen beds.",
+      "Minimal round white bedside table with tapered wood legs—clean Scandinavian styling for any bedroom.",
     details: ["Set of 2", "Walnut finish", "Soft-close drawers", "Brass pulls", "50 × 40 × 55 cm each"],
     inStock: true,
     badge: "New"
   },
   {
     id: 205,
-    name: "Hermitage Wardrobe Armoire",
+    name: "Hermitage Oak Wardrobe Armoire",
     category: "bedroom",
     price: 1980000,
     originalPrice: 2250000,
     rating: 4.8,
     reviews: 27,
-    image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=900&q=80",
-      "https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=900&q=80"
+      "https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=900&q=80",
+      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=900&q=80"
     ],
     description:
-      "Floor-to-near-ceiling wardrobe in smoked oak with hanging rails, shelving, and a soft interior light. Closet-quality without built-ins.",
+      "Full-height mid-century oak wardrobe with double doors and lower drawers—true closet storage without built-ins.",
     details: ["Smoked oak", "Hanging + shelves", "Interior LED strip", "Soft-close doors", "120 × 60 × 220 cm"],
     inStock: true,
     badge: "Sale"
   },
   {
     id: 206,
-    name: "Velvet Belle Bedroom Chair & Dresser Set",
+    name: "Velvet Belle Bedroom Lounge Chair",
     category: "bedroom",
     price: 1120000,
     originalPrice: null,
     rating: 4.7,
     reviews: 22,
-    image: "https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=900&q=80",
-      "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=900&q=80"
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80",
+      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80"
     ],
     description:
-      "Curved vanity dresser with six drawers and a matching blush velvet bedroom chair. Dressing ritual, elevated.",
+      "Soft accent lounge chair for the foot of the bed or a dressing corner—shown here in rich mustard velvet.",
     details: ["Dresser + chair set", "Blush velvet seat", "Six soft-close drawers", "Mirror-ready top", "Champagne hardware"],
     inStock: true,
     badge: null
@@ -249,7 +249,7 @@ window.SKY_PRODUCTS = [
   // ─── Office & Gaming ───────────────────────────────────────────────────
   {
     id: 301,
-    name: "Apex Pro Gaming Throne",
+    name: "Apex Pro Gaming Desk Setup",
     category: "office",
     price: 485000,
     originalPrice: 560000,
@@ -261,14 +261,14 @@ window.SKY_PRODUCTS = [
       "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=900&q=80"
     ],
     description:
-      "High-back gaming chair in black and graphite PU leather with 4D armrests, lumbar support, and recline to 165°. Built for marathon sessions.",
+      "Full gaming station with dual monitors, RGB PC, and performance chair—ready for marathon sessions.",
     details: ["Class-4 gas lift", "4D armrests", "165° recline", "Lumbar & head pillow", "150 kg capacity"],
     inStock: true,
     badge: "Best Seller"
   },
   {
     id: 302,
-    name: "Executive Obsidian Desk Chair",
+    name: "Executive Swivel Lounge Chair",
     category: "office",
     price: 620000,
     originalPrice: null,
@@ -280,7 +280,7 @@ window.SKY_PRODUCTS = [
       "https://images.unsplash.com/photo-1519947486511-46149fa0a254?w=900&q=80"
     ],
     description:
-      "Boardroom-grade executive chair in full-grain black leather with polished aluminium base. Presence that matches ambition.",
+      "Fabric swivel lounge chair on a wood star base—boardroom waiting corners and private offices.",
     details: ["Full-grain leather", "Aluminium base", "Synchro-tilt", "Adjustable lumbar", "Silent castors"],
     inStock: true,
     badge: "New"
@@ -299,14 +299,14 @@ window.SKY_PRODUCTS = [
       "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=900&q=80"
     ],
     description:
-      "Minimal study desk in white oak with cable grommets, drawer for stationery, and a surface wide enough for dual monitors.",
+      "Clean white study desk with monitor setup and grey task chair—focused work from home.",
     details: ["White oak top", "Cable management", "Soft-close drawer", "140 × 70 × 75 cm", "Anti-scratch finish"],
     inStock: true,
     badge: "Sale"
   },
   {
     id: 304,
-    name: "Command RGB Gaming Desk",
+    name: "Command Warm Work Desk",
     category: "office",
     price: 395000,
     originalPrice: null,
@@ -315,36 +315,36 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=900&q=80",
-      "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=900&q=80"
+      "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=900&q=80"
     ],
     description:
-      "Carbon-look gaming desk with full-width RGB edge lighting, cup holder, headphone hook, and mouse pad surface inlay.",
+      "Warm wood work desk styled for evening productivity—laptop-ready surface with soft lamp light.",
     details: ["RGB edge light", "Z-shaped steel frame", "Mouse pad inlay", "Headphone hook", "140 × 60 cm"],
     inStock: true,
     badge: null
   },
   {
     id: 305,
-    name: "Mesh Air Office Task Chair",
+    name: "Aero Swivel Office Chair",
     category: "office",
     price: 285000,
     originalPrice: 340000,
     rating: 4.7,
     reviews: 118,
-    image: "https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=900&q=80",
-      "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=900&q=80"
+      "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=900&q=80",
+      "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=900&q=80"
     ],
     description:
-      "Breathable mesh task chair with adaptive lumbar and multi-tilt control—all-day comfort for hot climates and long workdays.",
+      "Lightweight modern office chair with full swivel—all-day seating for hot climates and long workdays.",
     details: ["Breathable mesh", "Adaptive lumbar", "Multi-tilt", "Height adjustable", "BIFMA-style testing"],
     inStock: true,
     badge: "Best Seller"
   },
   {
     id: 306,
-    name: "Director Leather Office Lounge",
+    name: "Director Shell Lounge Chair",
     category: "office",
     price: 780000,
     originalPrice: null,
@@ -356,7 +356,7 @@ window.SKY_PRODUCTS = [
       "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=900&q=80"
     ],
     description:
-      "Mid-century executive lounge chair in cognac leather—for private offices, client corners, and quiet thinking.",
+      "Sculptural white lounge chair with bentwood frame—mid-century calm for offices and reading corners.",
     details: ["Cognac top-grain leather", "Walnut legs", "Deep seat", "Guest & executive use", "Spot clean leather"],
     inStock: true,
     badge: "New"
@@ -365,7 +365,7 @@ window.SKY_PRODUCTS = [
   // ─── Dining ────────────────────────────────────────────────────────────
   {
     id: 401,
-    name: "Imperial 8-Seater Dining Set",
+    name: "Imperial Emerald Dining Set",
     category: "dining",
     price: 3200000,
     originalPrice: 3650000,
@@ -374,55 +374,55 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80",
-      "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?w=900&q=80"
+      "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=900&q=80"
     ],
     description:
-      "Formal dining set: extendable walnut table with eight upholstered chairs. Built for celebrations that last past midnight.",
+      "White dining table with six emerald velvet chairs and gold legs—formal dinners for six to eight.",
     details: ["Table + 8 chairs", "Extendable walnut top", "Performance fabric seats", "Seats 8–10 extended", "Felt floor protectors"],
     inStock: true,
     badge: "Best Seller"
   },
   {
     id: 402,
-    name: "Heritage 6-Seater Oak Dining Set",
+    name: "Heritage Oak Dining Set",
     category: "dining",
     price: 2150000,
     originalPrice: null,
     rating: 4.8,
     reviews: 58,
-    image: "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?w=900&q=80",
+      "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=900&q=80",
       "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80"
     ],
     description:
-      "Warm European oak dining set for six with sculpted spindle-back chairs. Everyday luxury for family meals.",
+      "Solid walnut dining table with grey upholstered chairs under a crystal bar chandelier—everyday family luxury.",
     details: ["Table + 6 chairs", "Solid oak", "Spindle-back chairs", "Natural oil finish", "200 × 95 cm table"],
     inStock: true,
     badge: null
   },
   {
     id: 403,
-    name: "Compact 4-Seater Marble Dining Set",
+    name: "Compact White Dining Table Set",
     category: "dining",
     price: 1450000,
     originalPrice: 1680000,
     rating: 4.7,
     reviews: 45,
-    image: "https://images.unsplash.com/photo-1617098900591-3f90928e8c54?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1617098900591-3f90928e8c54?w=900&q=80",
+      "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=900&q=80",
       "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80"
     ],
     description:
-      "Round sintered-stone dining table with four velvet chairs—perfect for apartments and intimate dinners for four.",
+      "Round white dining table with two modern chairs—perfect for apartments and intimate meals for two to four.",
     details: ["Table + 4 chairs", "Sintered stone top", "Velvet chairs", "Round Ø 110 cm", "Metal pedestal base"],
     inStock: true,
     badge: "Sale"
   },
   {
     id: 404,
-    name: "Palazzo Live-Edge Dining Table",
+    name: "Palazzo Solid Wood Dining Table",
     category: "dining",
     price: 1780000,
     originalPrice: null,
@@ -431,17 +431,17 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=900&q=80",
-      "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=900&q=80"
+      "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=900&q=80"
     ],
     description:
-      "Statement dining table only—live-edge inspired slab top on black sculptural base. Pair with your own chairs or ours.",
+      "Statement solid-wood dining table that seats a crowd—pair with your preferred chair style.",
     details: ["Table only", "Seats 6–8", "Live-edge aesthetic", "Matte protective coat", "220 × 100 cm"],
     inStock: true,
     badge: "New"
   },
   {
     id: 405,
-    name: "Couture Dining Chair Pair",
+    name: "Couture Heritage Dining Chair",
     category: "dining",
     price: 320000,
     originalPrice: 380000,
@@ -450,29 +450,29 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=900&q=80",
-      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=900&q=80"
+      "https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=900&q=80"
     ],
     description:
-      "Pair of upholstered dining chairs in oatmeal linen with tapered oak legs. Order multiple pairs for a full suite.",
+      "Classic carved wood dining armchair with warm honey finish—order pairs to complete a traditional suite.",
     details: ["Set of 2 chairs", "Oatmeal linen", "Oak legs", "Stackable lightly", "Sold as pair"],
     inStock: true,
     badge: "Sale"
   },
   {
     id: 406,
-    name: "Gallery Sideboard Credenza",
+    name: "Gallery Gold Sideboard Credenza",
     category: "dining",
     price: 980000,
     originalPrice: null,
     rating: 4.7,
     reviews: 28,
-    image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=900&q=80",
+      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
       "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80"
     ],
     description:
-      "Long sideboard for dining rooms—china, linens, and barware behind fluted doors with soft ambient top surface for lamps and art.",
+      "Gold cane-front sideboard with round wall mirror styling—dining storage that doubles as a bar console.",
     details: ["Fluted doors", "Adjustable shelves", "Soft-close", "180 × 45 × 80 cm", "Walnut stain"],
     inStock: true,
     badge: null
@@ -490,93 +490,93 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
-      "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=900&q=80"
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80"
     ],
     description:
-      "Luxury Persian-style rug in deep ruby and gold medallion patterns. Hand-inspired design that anchors formal living rooms.",
+      "Ornate Persian-style rug in ivory and gold with hand-finished fringe—anchors formal living rooms.",
     details: ["Persian-inspired pattern", "Dense pile", "Non-slip recommended", "200 × 300 cm", "Professional clean"],
     inStock: true,
     badge: "Best Seller"
   },
   {
     id: 502,
-    name: "Nordic Line Modern Wool Rug",
+    name: "Nordic Line Living Rug",
     category: "rugs",
     price: 685000,
     originalPrice: null,
     rating: 4.7,
     reviews: 56,
-    image: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=900&q=80",
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80",
       "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80"
     ],
     description:
-      "Contemporary geometric wool rug in ivory and charcoal. Clean Scandinavian luxury for minimalist interiors.",
+      "Soft light-toned area rug under a modern sectional—clean Scandinavian layering for open living spaces.",
     details: ["100% wool blend", "Modern geometric", "Low pile", "160 × 230 cm", "Spot clean"],
     inStock: true,
     badge: "New"
   },
   {
     id: 503,
-    name: "Anatolia Turkish Kilim Runner",
+    name: "Anatolia Pattern Runner Look",
     category: "rugs",
     price: 295000,
     originalPrice: 350000,
     rating: 4.6,
     reviews: 63,
-    image: "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=900&q=80",
-      "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80"
+      "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
+      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80"
     ],
     description:
-      "Flat-weave Turkish-inspired runner with tribal motifs—hallways, entrances, and beside beds with artisan character.",
+      "Traditional patterned rug with heirloom character—use as a runner look in halls or full-size in living rooms.",
     details: ["Kilim-style flat weave", "Reversible", "80 × 250 cm", "Cotton blend", "Shake clean"],
     inStock: true,
     badge: "Sale"
   },
   {
     id: 504,
-    name: "Cloud Nine Shaggy Luxe Rug",
+    name: "Cloud Soft Area Rug",
     category: "rugs",
     price: 545000,
     originalPrice: null,
     rating: 4.8,
     reviews: 77,
-    image: "https://images.unsplash.com/photo-1615876234886-fd9a39fda97f?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1615876234886-fd9a39fda97f?w=900&q=80",
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=900&q=80"
+      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80",
+      "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80"
     ],
     description:
-      "Ultra-plush high-pile shag in pure ivory. Barefoot luxury for bedrooms and lounge corners.",
+      "Soft light area rug styled under a contemporary sofa—barefoot comfort for lounges and bedrooms.",
     details: ["High pile shag", "Ivory", "Soft polyester blend", "160 × 230 cm", "Anti-shed finish"],
     inStock: true,
     badge: null
   },
   {
     id: 505,
-    name: "Terrace Weather Outdoor Rug",
+    name: "Terrace Indoor-Outdoor Look Rug",
     category: "rugs",
     price: 265000,
     originalPrice: 310000,
     rating: 4.5,
     reviews: 39,
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80",
-      "https://images.unsplash.com/photo-1615529328331-f8917597711f?w=900&q=80"
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80",
+      "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80"
     ],
     description:
-      "UV-resistant outdoor rug in stone and sage tones for balconies, terraces, and covered patios. Style that survives the elements.",
+      "Neutral textured rug that works from living rooms to covered terraces—durable everyday style.",
     details: ["Outdoor polypropylene", "UV resistant", "Hose clean", "150 × 210 cm", "Quick dry"],
     inStock: true,
     badge: "Sale"
   },
   {
     id: 506,
-    name: "Silk Route Hand-Feel Gallery Rug",
+    name: "Silk Route Gallery Rug",
     category: "rugs",
     price: 1890000,
     originalPrice: null,
@@ -585,10 +585,10 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1600166898405-da9535204843?w=900&q=80",
-      "https://images.unsplash.com/photo-1615876234886-fd9a39fda97f?w=900&q=80"
+      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80"
     ],
     description:
-      "Ultra-fine gallery rug with silk-touch sheen and muted jewel tones. A collector piece for under statement furniture.",
+      "Fine gallery rug with jewel-tone heritage patterning—collector finish for statement furniture.",
     details: ["Silk-touch fibres", "Fine density", "200 × 300 cm", "Professional clean only", "Limited edition feel"],
     inStock: true,
     badge: "New"
@@ -597,26 +597,26 @@ window.SKY_PRODUCTS = [
   // ─── Lighting ──────────────────────────────────────────────────────────
   {
     id: 601,
-    name: "Crystal Cascade Chandelier",
+    name: "Celeste Multi-Globe Chandelier",
     category: "lighting",
     price: 1450000,
     originalPrice: 1680000,
     rating: 4.9,
     reviews: 36,
-    image: "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=900&q=80",
-      "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=900&q=80"
+      "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=900&q=80",
+      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80"
     ],
     description:
-      "Multi-tier crystal chandelier with warm LED compatibility. Hotel glamour for double-volume foyers and formal dining rooms.",
+      "Modern multi-globe chandelier in brass and white glass—shown over a formal dining table.",
     details: ["Crystal glass drops", "E14 fittings × 12", "Dimmable compatible", "Ø 80 cm", "Professional install recommended"],
     inStock: true,
     badge: "Best Seller"
   },
   {
     id: 602,
-    name: "Arc Brass Floor Lamp",
+    name: "Arc Industrial Floor Lamp",
     category: "lighting",
     price: 385000,
     originalPrice: 450000,
@@ -625,48 +625,48 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=900&q=80",
-      "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=900&q=80"
+      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80"
     ],
     description:
-      "Iconic arched floor lamp in brushed brass with oversized linen shade—reads beautifully over sectionals and reading nooks.",
+      "Matte grey industrial floor lamp with adjustable head—reading light for sofas and desks.",
     details: ["Brushed brass", "Linen shade", "E27", "Height ~180 cm", "Marble weighted base"],
     inStock: true,
     badge: "Sale"
   },
   {
     id: 603,
-    name: "Alabaster Glow Table Lamp",
+    name: "Lumen White Pendant Light",
     category: "lighting",
     price: 185000,
     originalPrice: null,
     rating: 4.8,
     reviews: 61,
-    image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=900&q=80",
+      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80",
       "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=900&q=80"
     ],
     description:
-      "Sculptural table lamp with alabaster-effect base and cream silk shade. Soft bedside or console lighting.",
+      "Clean white dome pendant over dining tables and kitchen islands—simple modern ambient light.",
     details: ["Alabaster-effect ceramic", "Silk-look shade", "Inline dimmer", "E14", "Height 48 cm"],
     inStock: true,
     badge: "New"
   },
   {
     id: 604,
-    name: "Orbital Rattan Pendant",
+    name: "Orbital Rattan-Look Pendant",
     category: "lighting",
     price: 245000,
     originalPrice: 290000,
     rating: 4.6,
     reviews: 52,
-    image: "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80",
-      "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=900&q=80"
+      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=900&q=80",
+      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80"
     ],
     description:
-      "Handwoven rattan pendant that casts patterned light over dining tables and kitchen islands. Resort calm at home.",
+      "Woven rattan-style pendant that casts warm patterned light—shown in a plant-filled bedroom setting.",
     details: ["Natural rattan", "E27", "1.5 m cord", "Ø 45 cm", "Indoor use"],
     inStock: true,
     badge: "Sale"
@@ -679,32 +679,32 @@ window.SKY_PRODUCTS = [
     originalPrice: null,
     rating: 4.7,
     reviews: 40,
-    image: "https://images.unsplash.com/photo-1543198126-a8ad8e47fb22?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1543198126-a8ad8e47fb22?w=900&q=80",
-      "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=900&q=80"
+      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=900&q=80",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80"
     ],
     description:
-      "Pair of linear wall sconces in brushed brass—flank a bed, mirror, or artwork for gallery-level ambient light.",
+      "Brass wall lights flanking a headboard—gallery-level ambient light for bedrooms and hallways.",
     details: ["Set of 2", "Brushed brass", "G9 bulbs", "Hardwire", "Electrician install"],
     inStock: true,
     badge: null
   },
   {
     id: 606,
-    name: "Celeste Multi-Globe Chandelier",
+    name: "Studio Grey Pendant Lamp",
     category: "lighting",
     price: 980000,
     originalPrice: null,
     rating: 4.8,
     reviews: 25,
-    image: "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=900&q=80",
-      "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=900&q=80"
+      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=900&q=80",
+      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=900&q=80"
     ],
     description:
-      "Modern chandelier of staggered frosted glass globes on a matte black frame. Contemporary luxury for open-plan living.",
+      "Industrial grey pendant with open bulb glow—minimal lighting for dining nooks and work tables.",
     details: ["Frosted glass globes", "Matte black frame", "G9 LEDs compatible", "Adjustable drops", "Ø 90 cm"],
     inStock: true,
     badge: "New"
@@ -713,7 +713,7 @@ window.SKY_PRODUCTS = [
   // ─── Decor & Artifacts ─────────────────────────────────────────────────
   {
     id: 701,
-    name: "Heritage Oil Portrait Collection",
+    name: "Heritage Floral Oil Art Print",
     category: "decor",
     price: 385000,
     originalPrice: null,
@@ -722,17 +722,17 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900&q=80",
-      "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=900&q=80"
+      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80"
     ],
     description:
-      "Museum-quality portrait print set in gilded frames—instant gallery wall for staircases and formal lounges.",
+      "Museum-quality floral still-life print—instant classic art for lounges, stairs, and formal halls.",
     details: ["Set of 3 portraits", "Gilded frames", "Ready to hang", "Mixed sizes", "UV-resistant print"],
     inStock: true,
     badge: "Best Seller"
   },
   {
     id: 702,
-    name: "Horizon Brass Wall Clock",
+    name: "Horizon Minimal Wall Clock",
     category: "decor",
     price: 145000,
     originalPrice: 175000,
@@ -741,93 +741,93 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=900&q=80",
-      "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=900&q=80"
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=80"
     ],
     description:
-      "Minimal large wall clock with brushed brass bezel and silent sweep movement. Quiet luxury for living rooms and offices.",
+      "Clean round wall clock with silent sweep hands—quiet luxury for living rooms and offices.",
     details: ["Silent quartz", "Brushed brass", "Ø 50 cm", "Battery operated", "Easy hang"],
     inStock: true,
     badge: "Sale"
   },
   {
     id: 703,
-    name: "Bloom Ceramic Flower Vase Trio",
+    name: "Bloom Floor Vase with Pampas",
     category: "decor",
     price: 95000,
     originalPrice: null,
     rating: 4.6,
     reviews: 88,
-    image: "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=900&q=80",
-      "https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=900&q=80"
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
+      "https://images.unsplash.com/photo-1616627561950-9f746e330187?w=900&q=80"
     ],
     description:
-      "Hand-glazed ceramic flower vases in bone, sand, and clay tones. Style fresh blooms or dried pampas with sculptural grace.",
+      "Tall glass floor vase styled with dried pampas beside a modular sofa—sculptural floral décor.",
     details: ["Set of 3 vases", "Water-safe glaze", "Heights 15–32 cm", "Handcrafted look", "Unique glaze variation"],
     inStock: true,
     badge: null
   },
   {
     id: 704,
-    name: "Bronze Continuum Sculpture",
+    name: "Gallery Console Décor Styling Set",
     category: "decor",
     price: 275000,
     originalPrice: null,
     rating: 4.9,
     reviews: 21,
-    image: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=900&q=80",
-      "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=900&q=80"
+      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
+      "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900&q=80"
     ],
     description:
-      "Abstract bronze-finish sculpture on a marble plinth. A conversation piece for consoles, libraries, and boardrooms.",
+      "Designer console vignette with sculptural objects, plants, and accents—ready-made styling for a living room wall.",
     details: ["Bronze-finish metal", "Marble base", "Weighted", "Height 35 cm", "Indoor only"],
     inStock: true,
     badge: "New"
   },
   {
     id: 705,
-    name: "Venetian Arch Floor Mirror",
+    name: "Venetian Round Wall Mirror",
     category: "decor",
     price: 485000,
     originalPrice: 560000,
     rating: 4.8,
     reviews: 37,
-    image: "https://images.unsplash.com/photo-1618220252344-8ec99ec624b1?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1618220252344-8ec99ec624b1?w=900&q=80",
-      "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=900&q=80"
+      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
+      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=80"
     ],
     description:
-      "Full-length arched floor mirror with slim champagne metal frame. Expands light and space in bedrooms and dressing areas.",
+      "Large round wall mirror above a designer sideboard—expands light and space in entryways and living rooms.",
     details: ["Full length", "Arched top", "Champagne metal", "Lean or wall mount", "60 × 170 cm"],
     inStock: true,
     badge: "Sale"
   },
   {
     id: 706,
-    name: "Silk Luxe Throw Pillow Ensemble",
+    name: "Silk Luxe Pillow Ensemble",
     category: "decor",
     price: 125000,
     originalPrice: null,
     rating: 4.7,
     reviews: 95,
-    image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1616627561950-9f746e330187?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=900&q=80",
-      "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=900&q=80"
+      "https://images.unsplash.com/photo-1616627561950-9f746e330187?w=900&q=80",
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=80"
     ],
     description:
-      "Set of four luxury throw pillows in silk-touch and bouclé mixes—champagne, ivory, and soft gold. Instant sofa styling.",
+      "Layered luxury pillows in linen and solid tones on a timber headboard—instant bed styling set.",
     details: ["Set of 4", "Silk-touch + bouclé", "Hidden zips", "Inserts included", "Dry clean covers"],
     inStock: true,
     badge: "Best Seller"
   },
   {
     id: 707,
-    name: "Noir Candle Holder & Vessel Set",
+    name: "Noir Glass Candle Vessel",
     category: "decor",
     price: 78000,
     originalPrice: 95000,
@@ -836,67 +836,67 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=900&q=80",
-      "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=900&q=80"
+      "https://images.unsplash.com/photo-1499933374294-4584851497cc?w=900&q=80"
     ],
     description:
-      "Matte black candle holders with pillar candles and a matching vessel tray. Evening ambience, effortlessly elevated.",
+      "Lit glass candle vessel on soft fur—evening ambience for consoles, nightstands, and bathtubs.",
     details: ["Holders + tray + candles", "Matte black metal", "Pillar sizes mixed", "Heat-safe tray", "Gift ready"],
     inStock: true,
     badge: "Sale"
   },
   {
     id: 708,
-    name: "Sahel African Bronze Artifact Pair",
+    name: "Amber Accent Lounge Chair Look",
     category: "decor",
     price: 320000,
     originalPrice: null,
     rating: 4.9,
     reviews: 26,
-    image: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=900&q=80",
-      "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=900&q=80"
+      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80"
     ],
     description:
-      "African-inspired bronze-finish figures celebrating form and heritage. Soulful accents for shelves, consoles, and galleries.",
+      "Warm orange accent chair styling within a full living-room vignette—inspiration piece for bold seating moments.",
     details: ["Set of 2 figures", "Bronze finish", "Weighted bases", "Heights 22–28 cm", "Artisan aesthetic"],
     inStock: true,
     badge: "Artifact"
   },
   {
     id: 709,
-    name: "Heirloom Decorative Toy & Ornament Set",
+    name: "Heirloom Soft Accent Pillows",
     category: "decor",
     price: 65000,
     originalPrice: null,
     rating: 4.6,
     reviews: 49,
-    image: "https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1616627561950-9f746e330187?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=900&q=80",
-      "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=900&q=80"
+      "https://images.unsplash.com/photo-1616627561950-9f746e330187?w=900&q=80",
+      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=900&q=80"
     ],
     description:
-      "Wooden animal figures and stacked ornaments for styled shelves, nurseries, and playful luxury corners—display-first, joy always.",
+      "Decorative pillow set for sofas and beds—mix stripes and solids for playful luxury corners.",
     details: ["Wood ornaments set", "Decorative toys", "Non-toxic finish", "Shelf styling", "Gift boxed"],
     inStock: true,
     badge: null
   },
   {
     id: 710,
-    name: "Amber Statement Flower Vase",
+    name: "Amber Glass Statement Vase",
     category: "decor",
     price: 72000,
     originalPrice: null,
     rating: 4.7,
     reviews: 71,
-    image: "https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=900&q=80",
+    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
     images: [
-      "https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=900&q=80",
-      "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=900&q=80"
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80",
+      "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=900&q=80"
     ],
     description:
-      "Tall amber glass flower vase that glows in afternoon light. Long stems, branches, or standing alone as sculpture.",
+      "Amber-tinted glass vase that glows in afternoon light—long stems, branches, or standing alone as sculpture.",
     details: ["Tinted glass", "Weighted base", "Height 35 cm", "Hand-blown look", "Indoor vase"],
     inStock: true,
     badge: "New"
