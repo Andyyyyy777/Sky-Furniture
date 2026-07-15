@@ -38,7 +38,12 @@ function loadProductCatalog() {
       const fileById = new Map(fromFile.map((p) => [Number(p.id), p]));
       return admin.map((p) => {
         const fresh = fileById.get(Number(p.id));
-        if (fresh && fresh.image && String(p.image || "").includes("unsplash")) {
+        const staleImg = String(p.image || "");
+        if (
+          fresh &&
+          fresh.image &&
+          (/unsplash|placehold|\.svg/i.test(staleImg) || !staleImg)
+        ) {
           return normalizeShopProduct({ ...p, image: fresh.image, images: fresh.images || [fresh.image] });
         }
         return normalizeShopProduct(p);

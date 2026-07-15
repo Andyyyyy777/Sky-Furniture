@@ -204,7 +204,7 @@ function getProducts() {
         return list.map((p) => {
           const n = normalizeProduct(p);
           const fresh = byId.get(String(n.id));
-          if (fresh && (!n.image || /unsplash|placehold/i.test(n.image))) {
+          if (fresh && (!n.image || /unsplash|placehold|\.svg/i.test(n.image))) {
             return { ...n, image: fresh.image, images: fresh.images };
           }
           return n;
