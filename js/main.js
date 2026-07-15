@@ -1581,7 +1581,7 @@ const ROOM_DESIGNS = {
   entry: {
     title: "Decor and Finishing",
     blurb: "Portraits, clocks, mirrors, and African-inspired artifacts.",
-    image: "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=1000&q=80",
+    image: "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=1000&q=80",
     tips: ["Gallery wall with portraits", "Add a wall clock", "Layer vases and sculpture"],
     shop: "shop.html?category=decor",
     picks: [701, 702, 708]

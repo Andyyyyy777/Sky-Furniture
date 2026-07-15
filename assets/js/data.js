@@ -724,7 +724,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900&q=80",
-      "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=900&q=80"
+      "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=900&q=80"
     ],
     description:
       "Museum-quality portrait print set in gilded frames—instant gallery wall for staircases and formal lounges.",
@@ -800,7 +800,7 @@ window.SKY_PRODUCTS = [
     image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
     images: [
       "https://images.unsplash.com/photo-1618220179428-22790b461013?w=900&q=80",
-      "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=900&q=80"
+      "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=900&q=80"
     ],
     description:
       "Full-length arched floor mirror with slim champagne metal frame. Expands light and space in bedrooms and dressing areas.",

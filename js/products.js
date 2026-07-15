@@ -164,7 +164,7 @@ const products = [
     images: [
       "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=800&q=80",
       "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=800&q=80",
-      "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=800&q=80"
+      "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80"
     ],
     description: "Abstract brass sculpture with organic curves. A conversation piece for shelves, consoles, or desks.",
     details: ["Solid brass", "Hand-finished patina", "Weighted base", "One-of-a-kind casting", "Height: 28 cm"],
