@@ -299,8 +299,22 @@ function saveCoupons(list) {
 // Access control
 // ---------------------------------------------------------------------------
 function showApp(email) {
-  document.getElementById("gate")?.classList.add("hidden");
-  document.getElementById("admin-app")?.classList.remove("hidden");
+  // Body state drives visibility (login vs app) — never show both
+  document.body.classList.remove("is-locked");
+  document.body.classList.add("is-unlocked");
+
+  const gate = document.getElementById("gate");
+  const app = document.getElementById("admin-app");
+  if (gate) {
+    gate.classList.add("hidden");
+    gate.setAttribute("aria-hidden", "true");
+  }
+  if (app) {
+    app.classList.remove("hidden", "is-app-hidden");
+    app.removeAttribute("hidden");
+    app.setAttribute("aria-hidden", "false");
+  }
+
   const el = document.getElementById("admin-email");
   if (el) el.textContent = email || "Admin";
   const note = document.getElementById("admin-mode-note");
@@ -312,8 +326,23 @@ function showApp(email) {
 }
 
 function showGate(msg) {
-  document.getElementById("gate")?.classList.remove("hidden");
-  document.getElementById("admin-app")?.classList.add("hidden");
+  // Login only — hide entire admin shell so content never bleeds into login
+  document.body.classList.add("is-locked");
+  document.body.classList.remove("is-unlocked");
+
+  const gate = document.getElementById("gate");
+  const app = document.getElementById("admin-app");
+  if (gate) {
+    gate.classList.remove("hidden");
+    gate.setAttribute("aria-hidden", "false");
+  }
+  if (app) {
+    app.classList.add("hidden", "is-app-hidden");
+    app.setAttribute("hidden", "");
+    app.setAttribute("aria-hidden", "true");
+  }
+  document.getElementById("mobile-drawer")?.classList.add("hidden");
+
   const gateMsg = document.getElementById("gate-msg");
   if (gateMsg && msg) gateMsg.textContent = msg;
 }
@@ -1627,6 +1656,18 @@ document.getElementById("btn-clear-catalog")?.addEventListener("click", () => {
 // ---------------------------------------------------------------------------
 function bootAdmin() {
   try {
+    // Default: locked login screen — never flash admin content
+    if (!document.body.classList.contains("is-unlocked")) {
+      document.body.classList.add("is-locked");
+      document.body.classList.remove("is-unlocked");
+      const app = document.getElementById("admin-app");
+      if (app) {
+        app.classList.add("hidden", "is-app-hidden");
+        app.setAttribute("hidden", "");
+        app.setAttribute("aria-hidden", "true");
+      }
+    }
+
     initTheme();
     initMobileDrawer();
     initImageFields();
@@ -1639,6 +1680,8 @@ function bootAdmin() {
       if (!tabBtn || !tabBtn.dataset.tab) return;
       // Don't treat non-button links that happen to have data-tab incorrectly
       if (tabBtn.tagName === "A" && tabBtn.getAttribute("href")) return;
+      // Ignore tab clicks while still on login
+      if (document.body.classList.contains("is-locked")) return;
       e.preventDefault();
       setTab(tabBtn.dataset.tab);
     });

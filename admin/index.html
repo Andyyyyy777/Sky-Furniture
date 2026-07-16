@@ -18,9 +18,16 @@
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Self-contained admin styles only (no store CSS — avoids layout fights) -->
-  <link rel="stylesheet" href="admin.css?v=2026-07-16-clean" />
+  <link rel="stylesheet" href="admin.css?v=2026-07-16-gatefix" />
+  <!-- Before CSS/JS: only show login until unlocked -->
+  <style>
+    body.admin-body:not(.is-unlocked) #admin-app,
+    body.admin-body:not(.is-unlocked) #mobile-drawer { display: none !important; }
+    body.admin-body.is-unlocked #gate { display: none !important; }
+    body.admin-body.is-unlocked #admin-app.admin-shell { display: flex !important; }
+  </style>
 </head>
-<body class="admin-body">
+<body class="admin-body is-locked">
 
   <!-- ========== LOGIN ========== -->
   <div id="gate" class="admin-login" role="main">
@@ -70,8 +77,8 @@
     </div>
   </div>
 
-  <!-- ========== APP ========== -->
-  <div id="admin-app" class="admin-shell hidden">
+  <!-- ========== APP (hidden until unlock — do not show on login) ========== -->
+  <div id="admin-app" class="admin-shell is-app-hidden" hidden aria-hidden="true">
     <aside class="admin-sidebar" aria-label="Admin navigation">
       <div class="admin-sidebar-brand">
         <a href="../index.html" class="admin-brand-link">Sky Furniture</a>
@@ -505,6 +512,6 @@
       document.body.appendChild(s);
     })();
   </script>
-  <script type="module" src="admin.js?v=2026-07-16-clean"></script>
+  <script type="module" src="admin.js?v=2026-07-16-gatefix"></script>
 </body>
 </html>

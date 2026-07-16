@@ -22,7 +22,39 @@ a { color: #8b7355; text-decoration: none; }
 a:hover { text-decoration: underline; }
 img { max-width: 100%; display: block; }
 table { border-collapse: collapse; }
-.hidden { display: none !important; }
+.hidden,
+.is-app-hidden,
+#admin-app[hidden],
+#admin-app.is-app-hidden,
+body.is-locked #admin-app,
+body.is-locked #mobile-drawer {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Unlocked: show app shell, hide login completely */
+body.is-unlocked #gate {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+body.is-unlocked #admin-app.admin-shell,
+body.is-unlocked #admin-app {
+  display: flex !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+body.is-unlocked #admin-app[hidden] {
+  display: flex !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Tab panels: only one visible */
+.admin-panel.hidden {
+  display: none !important;
+}
 
 /* ---- Theme tokens ---- */
 :root {
@@ -247,11 +279,14 @@ html.dark .admin-login-logo {
 
 /* =========================================================
    APP SHELL — Shopify-style fixed sidebar + content
+   (display only when unlocked — never override login hide)
    ========================================================= */
 .admin-shell {
   min-height: 100vh;
-  display: flex;
   background: var(--canvas);
+}
+body.is-unlocked .admin-shell {
+  display: flex;
 }
 
 /* Sidebar */
