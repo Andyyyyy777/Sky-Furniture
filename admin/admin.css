@@ -1,7 +1,15 @@
 /* Sky Furniture Admin — works with Tailwind CDN */
 
-html.dark .icon-sun { display: none; }
-html:not(.dark) .icon-moon { display: none; }
+/* Theme toggle: show sun in dark mode (click → light), moon in light mode (click → dark) */
+.theme-btn .icon-sun,
+.theme-btn .icon-moon {
+  width: 1.15rem;
+  height: 1.15rem;
+  display: none;
+  flex-shrink: 0;
+}
+html:not(.dark) .theme-btn .icon-moon { display: block; }
+html.dark .theme-btn .icon-sun { display: block; }
 
 .theme-btn {
   display: inline-flex;
@@ -12,22 +20,71 @@ html:not(.dark) .icon-moon { display: none; }
   border-radius: 0.75rem;
   border: 1px solid #e8e0d5;
   background: #fff;
-  color: #78716c;
+  color: #57534e;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
+  box-shadow: 0 1px 2px rgba(22, 20, 18, 0.04);
 }
 html.dark .theme-btn {
   background: #1a1816;
   border-color: #44403c;
-  color: #a8a29e;
+  color: #e7e5e4;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 .theme-btn:hover {
   color: #161412;
   background: #faf7f2;
+  border-color: #c4a77d;
 }
 html.dark .theme-btn:hover {
-  color: #f3efe8;
+  color: #fafaf9;
   background: #292524;
+  border-color: #c4a77d;
+}
+.theme-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(154, 123, 82, 0.25);
+}
+
+/* Password show / hide */
+.pass-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.pass-input {
+  width: 100%;
+  padding-right: 2.85rem !important;
+}
+.pass-toggle {
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.15rem;
+  height: 2.15rem;
+  border: 0;
+  border-radius: 0.55rem;
+  background: transparent;
+  color: #78716c;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.pass-toggle:hover {
+  background: rgba(232, 224, 213, 0.55);
+  color: #161412;
+}
+html.dark .pass-toggle { color: #a8a29e; }
+html.dark .pass-toggle:hover {
+  background: rgba(68, 64, 60, 0.55);
+  color: #f3efe8;
+}
+.pass-toggle .pass-eye-off.hidden,
+.pass-toggle .pass-eye.hidden {
+  display: none !important;
 }
 
 /* Sidebar nav */
@@ -134,10 +191,17 @@ html.dark .btn-secondary:hover { background: #292524; }
   border: 1px solid #e8e0d5;
   background: #fff;
   border-radius: 0.75rem;
-  padding: 0.6rem 0.85rem;
+  padding: 0.7rem 0.85rem;
   font-size: 0.875rem;
   outline: none;
   color: inherit;
+  box-sizing: border-box;
+}
+.pass-input.field {
+  background: rgba(244, 240, 234, 0.55);
+}
+html.dark .pass-input.field {
+  background: #1c1917;
 }
 .field:focus {
   border-color: #9a7b52;

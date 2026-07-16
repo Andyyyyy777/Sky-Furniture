@@ -248,28 +248,62 @@
 
   // ── theme ──────────────────────────────────────────────
   function applyTheme(theme) {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    localStorage.setItem(KEYS.theme, theme);
+    const next = theme === "dark" ? "dark" : "light";
+    if (next === "dark") document.documentElement.classList.add("dark");
+    else document.documentElement.classList.remove("dark");
+    try {
+      localStorage.setItem(KEYS.theme, next);
+    } catch (_) {}
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = theme === "dark" ? "#0F0E0D" : "#F4F0EA";
+    if (meta) meta.content = next === "dark" ? "#0F0E0D" : "#F4F0EA";
+    $$("[data-theme-toggle]").forEach((btn) => {
+      btn.setAttribute("aria-pressed", next === "dark" ? "true" : "false");
+      btn.setAttribute(
+        "aria-label",
+        next === "dark" ? "Switch to light mode" : "Switch to dark mode"
+      );
+      btn.title = next === "dark" ? "Light mode" : "Dark mode";
+    });
   }
 
   function initTheme() {
-    const saved = localStorage.getItem(KEYS.theme);
-    const theme =
-      saved === "dark" || saved === "light"
-        ? saved
-        : matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
+    let theme = "light";
+    try {
+      const saved = localStorage.getItem(KEYS.theme);
+      if (saved === "dark" || saved === "light") theme = saved;
+      else if (matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+    } catch (_) {}
     applyTheme(theme);
-    $$("[data-theme-toggle]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        applyTheme(document.documentElement.classList.contains("dark") ? "light" : "dark");
-      });
+
+    // Bind once (login + app topbar both have toggles)
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-theme-toggle]");
+      if (!btn) return;
+      e.preventDefault();
+      const isDark = document.documentElement.classList.contains("dark");
+      applyTheme(isDark ? "light" : "dark");
     });
+
     $("#btn-light")?.addEventListener("click", () => applyTheme("light"));
     $("#btn-dark")?.addEventListener("click", () => applyTheme("dark"));
+  }
+
+  function initPasswordToggle() {
+    const input = $("#login-pass");
+    const btn = $("#toggle-pass");
+    if (!input || !btn) return;
+    btn.addEventListener("click", () => {
+      const show = input.type === "password";
+      input.type = show ? "text" : "password";
+      btn.setAttribute("aria-pressed", show ? "true" : "false");
+      btn.setAttribute("aria-label", show ? "Hide password" : "Show password");
+      btn.title = show ? "Hide password" : "Show password";
+      const eye = btn.querySelector(".pass-eye");
+      const eyeOff = btn.querySelector(".pass-eye-off");
+      if (eye) eye.classList.toggle("hidden", show);
+      if (eyeOff) eyeOff.classList.toggle("hidden", !show);
+      input.focus();
+    });
   }
 
   // ── auth / views ───────────────────────────────────────
@@ -1016,6 +1050,7 @@
 
   function boot() {
     initTheme();
+    initPasswordToggle();
     bindEvents();
     if (sessionStorage.getItem(KEYS.session) === "1") {
       unlock(sessionStorage.getItem(KEYS.email) || "Admin");
