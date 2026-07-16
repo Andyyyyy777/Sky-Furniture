@@ -704,16 +704,14 @@ function renderDashboard() {
   const todayOrders = paidOrders.filter((o) => orderTime(o) >= dayStart).length;
   const weekOrders = paidOrders.filter((o) => orderTime(o) >= weekStart).length;
 
+  // Keep KPI strip tight (prestige retail admin style: few clear metrics)
   const cards = [
-    { label: "Daily income", value: fmt(dailyIncome), sub: `${todayOrders} paid today`, tone: "is-accent" },
-    { label: "Weekly income", value: fmt(weeklyIncome), sub: `${weekOrders} paid this week`, tone: "is-accent" },
-    { label: "All-time revenue", value: fmt(revenue), sub: `${orders.length} total orders`, tone: "" },
-    { label: "Customers", value: String(customerCount), sub: "Sign-ups & buyers", tone: "" },
-    { label: "Products", value: String(products.length), sub: `${active} active · ${featured} featured`, tone: "" },
-    { label: "Low stock", value: String(low), sub: oos ? `${oos} out of stock` : "Levels look healthy", tone: low || oos ? "is-warn" : "" },
-    { label: "Product photos", value: `${withPhoto}/${products.length}`, sub: withPhoto === products.length ? "All have images" : "Some need photos", tone: withPhoto < products.length ? "is-warn" : "" },
-    { label: "Active coupons", value: String(coupons), sub: "Discount codes live", tone: "" },
-    { label: "Data mode", value: isCloudReady() ? "Live" : "Local", sub: isCloudReady() ? "Firestore connected" : "This browser only", tone: isCloudReady() ? "is-ok" : "" }
+    { label: "Today", value: fmt(dailyIncome), sub: `${todayOrders} paid order(s)`, tone: "is-accent" },
+    { label: "This week", value: fmt(weeklyIncome), sub: `${weekOrders} paid order(s)`, tone: "is-accent" },
+    { label: "Revenue", value: fmt(revenue), sub: `${orders.length} total orders`, tone: "" },
+    { label: "Customers", value: String(customerCount), sub: "Accounts & buyers", tone: "" },
+    { label: "Products", value: String(products.length), sub: `${active} active · ${withPhoto} with photos`, tone: withPhoto < products.length ? "is-warn" : "" },
+    { label: "Stock alerts", value: String(low), sub: oos ? `${oos} out of stock` : "Healthy levels", tone: low || oos ? "is-warn" : "is-ok" }
   ];
 
   const cardsEl = document.getElementById("dash-cards");
@@ -1237,17 +1235,17 @@ function loadInventory() {
             : "admin-badge is-ok";
       return `
     <tr class="${low ? "is-low-stock" : ""}">
-      <td class="p-3">
-        <div class="flex items-center gap-3 min-w-0">
+      <td>
+        <div class="admin-product-cell">
           <img src="${escapeHtml(resolveAdminAssetUrl(p.image))}" alt="" class="admin-thumb" loading="lazy" onerror="this.style.opacity='0.35'" />
-          <span class="font-medium text-sm truncate">${escapeHtml(p.name)}</span>
+          <span class="name">${escapeHtml(p.name)}</span>
         </div>
       </td>
-      <td class="p-3 text-xs font-mono text-stone-500">${escapeHtml(p.sku || "—")}</td>
-      <td class="p-3 tabular-nums font-medium ${p.stockQty <= 0 ? "text-red-700 dark:text-red-400" : ""}">${p.stockQty}</td>
-      <td class="p-3 tabular-nums text-stone-500">${p.lowStockAt}</td>
-      <td class="p-3"><span class="${badgeClass}">${status}</span></td>
-      <td class="p-3">
+      <td class="text-xs font-mono text-stone-500">${escapeHtml(p.sku || "—")}</td>
+      <td class="tabular-nums font-medium ${p.stockQty <= 0 ? "text-red-700" : ""}">${p.stockQty}</td>
+      <td class="tabular-nums text-stone-500">${p.lowStockAt}</td>
+      <td><span class="${badgeClass}">${status}</span></td>
+      <td>
         <div class="flex items-center gap-1.5">
           <button type="button" class="admin-qty-btn" data-inv="${p.id}" data-d="-1" aria-label="Decrease stock">−</button>
           <button type="button" class="admin-qty-btn" data-inv="${p.id}" data-d="1" aria-label="Increase stock">+</button>
@@ -1309,7 +1307,7 @@ function loadOrders() {
             .join(" · ")
         : "";
       return `
-    <article class="admin-card !p-5">
+    <article class="admin-card admin-order-card">
       <div class="flex flex-wrap justify-between gap-3">
         <div class="min-w-0">
           <p class="font-medium tabular-nums text-sm">${escapeHtml(id)}</p>
@@ -1498,9 +1496,9 @@ function loadCoupons() {
   root.innerHTML = list
     .map(
       (c, i) => `
-    <div class="admin-card !py-3.5 !px-4 flex flex-wrap justify-between gap-2 items-center">
+    <div class="admin-card flex flex-wrap justify-between gap-2 items-center">
       <div>
-        <p class="font-mono font-medium tracking-wide">${escapeHtml(c.code)}</p>
+        <p class="font-mono font-medium">${escapeHtml(c.code)}</p>
         <p class="text-xs text-stone-500 mt-0.5">${c.type === "percent" ? c.value + "% off" : fmt(c.value) + " off"} · <span class="${c.active === false ? "admin-badge" : "admin-badge is-ok"}">${c.active === false ? "Disabled" : "Active"}</span></p>
       </div>
       <div class="flex gap-2">
