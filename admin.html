@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sky Furniture Admin</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0c0b0a" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            night: { DEFAULT: "#0c0b0a", 50: "#141210", 100: "#1a1816", 200: "#24201c", 300: "#2e2924" },
+            gold: { DEFAULT: "#c9a66b", dim: "#a68b55", soft: "rgba(201,166,107,0.12)" },
+            silver: { DEFAULT: "#c8c4bc", mute: "#8a857c" }
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', "Georgia", "serif"],
+            sans: ["Inter", "system-ui", "sans-serif"]
+          },
+          boxShadow: {
+            glow: "0 0 0 1px rgba(201,166,107,0.15), 0 20px 50px -20px rgba(0,0,0,0.7)"
+          }
+        }
+      }
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: Inter, system-ui, sans-serif; }
+    .font-display { font-family: "Cormorant Garamond", Georgia, serif; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .nav-item.is-active {
+      background: linear-gradient(90deg, rgba(201,166,107,0.18), transparent);
+      color: #f5f0e8;
+      box-shadow: inset 3px 0 0 #c9a66b;
+    }
+    .modal-open { overflow: hidden; }
+    input[type="file"]::file-selector-button {
+      margin-right: 0.75rem;
+      padding: 0.45rem 0.9rem;
+      border: 0;
+      border-radius: 0.5rem;
+      background: #c9a66b;
+      color: #0c0b0a;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-night text-silver min-h-screen antialiased">
+
+  <!-- ========== LOGIN ========== -->
+  <div id="login-screen" class="min-h-screen flex items-center justify-center p-5 relative">
+    <div class="absolute inset-0 pointer-events-none"
+      style="background:radial-gradient(ellipse 70% 45% at 50% 0%, rgba(201,166,107,0.12), transparent 55%), linear-gradient(180deg,#0c0b0a,#141210 60%,#0c0b0a);"></div>
+    <div class="relative w-full max-w-md">
+      <div class="rounded-2xl border border-night-300 bg-night-50/95 shadow-glow p-8 text-center">
+        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-gold to-gold-dim text-night flex items-center justify-center font-display text-3xl font-semibold">S</div>
+        <h1 class="font-display text-4xl text-white tracking-tight">Sky Furniture Admin</h1>
+        <p class="mt-2 text-[11px] font-semibold tracking-[0.2em] uppercase text-gold">Private console</p>
+
+        <form id="login-form" class="mt-8 text-left space-y-4">
+          <div>
+            <label for="login-pass" class="block text-[11px] font-semibold tracking-wider uppercase text-silver-mute mb-1.5">Password</label>
+            <div class="relative">
+              <input id="login-pass" type="password" required autocomplete="current-password" placeholder="Enter password"
+                class="w-full rounded-xl border border-night-300 bg-night px-4 py-3 pr-16 text-sm text-white outline-none focus:border-gold focus:ring-2 focus:ring-gold/20" />
+              <button type="button" id="toggle-pass" class="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-semibold text-gold px-2 py-1 rounded-lg hover:bg-gold/10">Show</button>
+            </div>
+          </div>
+          <p id="login-error" class="hidden text-sm text-red-400 bg-red-950/40 border border-red-900/50 rounded-lg px-3 py-2"></p>
+          <button type="submit" class="w-full rounded-xl bg-gradient-to-r from-gold to-gold-dim text-night py-3 text-sm font-bold hover:opacity-95 transition">
+            Enter admin
+          </button>
+        </form>
+        <p class="mt-6 pt-5 border-t border-night-300 text-xs text-silver-mute">
+          <a href="shop.html" class="text-gold hover:underline">Shop</a>
+          <span class="mx-2">·</span>
+          <a href="index.html" class="text-gold hover:underline">Home</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== APP ========== -->
+  <div id="app" class="hidden min-h-screen lg:flex">
+    <!-- Sidebar -->
+    <aside class="hidden lg:flex w-60 shrink-0 flex-col sticky top-0 h-screen bg-night-50 border-r border-night-300">
+      <div class="px-5 py-5 border-b border-night-300 flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-gold to-gold-dim text-night flex items-center justify-center font-display text-lg font-semibold">S</div>
+        <div>
+          <p class="text-white text-sm font-semibold leading-tight">Sky Furniture</p>
+          <p class="text-[10px] uppercase tracking-widest text-gold">Admin</p>
+        </div>
+      </div>
+      <nav class="flex-1 p-3 space-y-1 overflow-y-auto" id="sidebar-nav">
+        <button type="button" data-view="dashboard" class="nav-item w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium text-silver-mute hover:bg-night-200 hover:text-white transition">Dashboard</button>
+        <button type="button" data-view="products" class="nav-item is-active w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium text-silver-mute hover:bg-night-200 hover:text-white transition">Products</button>
+        <button type="button" data-view="orders" class="nav-item w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium text-silver-mute hover:bg-night-200 hover:text-white transition">Orders</button>
+        <button type="button" data-view="customers" class="nav-item w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium text-silver-mute hover:bg-night-200 hover:text-white transition">Customers</button>
+        <button type="button" data-view="settings" class="nav-item w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium text-silver-mute hover:bg-night-200 hover:text-white transition">Settings</button>
+      </nav>
+      <div class="p-3 border-t border-night-300 space-y-1">
+        <a href="shop.html" target="_blank" class="block px-3 py-2.5 rounded-xl text-sm font-medium text-silver-mute hover:bg-night-200 hover:text-white transition">View shop ↗</a>
+        <button type="button" id="btn-logout" class="w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium text-red-400 hover:bg-red-950/40 transition">Sign out</button>
+      </div>
+    </aside>
+
+    <div class="flex-1 min-w-0 flex flex-col">
+      <!-- Top navbar -->
+      <header class="sticky top-0 z-30 h-16 border-b border-night-300 bg-night/90 backdrop-blur flex items-center gap-3 px-4 md:px-7">
+        <button type="button" id="btn-menu" class="lg:hidden w-10 h-10 rounded-xl border border-night-300 text-silver hover:border-gold/40" aria-label="Menu">☰</button>
+        <div class="flex-1 min-w-0">
+          <h1 class="font-display text-2xl md:text-3xl text-white tracking-tight truncate">Sky Furniture Admin</h1>
+        </div>
+        <span id="admin-who" class="hidden sm:inline text-xs text-silver-mute">Admin</span>
+        <a href="shop.html" target="_blank" class="hidden sm:inline-flex text-xs font-semibold border border-night-300 hover:border-gold/50 text-silver px-3 py-2 rounded-xl transition">Shop</a>
+      </header>
+
+      <!-- Mobile nav pills -->
+      <div class="lg:hidden flex gap-2 overflow-x-auto no-scrollbar px-4 py-3 border-b border-night-300">
+        <button type="button" data-view="dashboard" class="nav-item shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border border-night-300 text-silver-mute">Dashboard</button>
+        <button type="button" data-view="products" class="nav-item is-active shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border border-night-300 text-silver-mute">Products</button>
+        <button type="button" data-view="orders" class="nav-item shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border border-night-300 text-silver-mute">Orders</button>
+        <button type="button" data-view="customers" class="nav-item shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border border-night-300 text-silver-mute">Customers</button>
+        <button type="button" data-view="settings" class="nav-item shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border border-night-300 text-silver-mute">Settings</button>
+      </div>
+
+      <main class="flex-1 p-4 md:p-8 max-w-6xl w-full mx-auto">
+        <!-- DASHBOARD -->
+        <section id="view-dashboard" class="view hidden">
+          <div class="mb-7">
+            <p class="text-[11px] font-semibold tracking-[0.16em] uppercase text-gold">Overview</p>
+            <h2 class="font-display text-3xl md:text-4xl text-white mt-1">Dashboard</h2>
+            <p class="text-sm text-silver-mute mt-1">Sales and catalog snapshot</p>
+          </div>
+          <div id="kpi-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6"></div>
+          <div class="grid lg:grid-cols-2 gap-4">
+            <div class="rounded-2xl border border-night-300 bg-night-50 p-5">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-[11px] font-semibold tracking-widest uppercase text-silver-mute">Recent orders</h3>
+                <button type="button" data-view="orders" class="text-xs font-semibold text-gold hover:underline">View all</button>
+              </div>
+              <div id="dash-orders"></div>
+            </div>
+            <div class="rounded-2xl border border-night-300 bg-night-50 p-5">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-[11px] font-semibold tracking-widest uppercase text-silver-mute">Top products</h3>
+                <button type="button" data-view="products" class="text-xs font-semibold text-gold hover:underline">Manage</button>
+              </div>
+              <div id="dash-products"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PRODUCTS (default) -->
+        <section id="view-products" class="view">
+          <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+            <div>
+              <p class="text-[11px] font-semibold tracking-[0.16em] uppercase text-gold">Catalog</p>
+              <h2 class="font-display text-3xl md:text-4xl text-white mt-1">Products</h2>
+              <p id="product-meta" class="text-sm text-silver-mute mt-1"></p>
+            </div>
+            <button type="button" id="btn-add-product" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-gold to-gold-dim text-night px-4 py-2.5 text-sm font-bold shadow-lg shadow-gold/10 hover:opacity-95 transition">
+              + Add New Product
+            </button>
+          </div>
+
+          <div class="flex flex-wrap gap-3 mb-4">
+            <input id="search" type="search" placeholder="Search products…"
+              class="w-full sm:w-64 rounded-xl border border-night-300 bg-night-50 px-3 py-2.5 text-sm text-white outline-none focus:border-gold" />
+            <select id="filter-cat" class="rounded-xl border border-night-300 bg-night-50 px-3 py-2.5 text-sm text-white outline-none focus:border-gold">
+              <option value="all">All categories</option>
+            </select>
+          </div>
+
+          <div class="rounded-2xl border border-night-300 bg-night-50 overflow-hidden shadow-glow">
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm text-left min-w-[720px]">
+                <thead>
+                  <tr class="text-[11px] uppercase tracking-wider text-silver-mute bg-night-100/80">
+                    <th class="p-3.5 font-semibold">Image</th>
+                    <th class="p-3.5 font-semibold">Name</th>
+                    <th class="p-3.5 font-semibold">Category</th>
+                    <th class="p-3.5 font-semibold">Price (NGN)</th>
+                    <th class="p-3.5 font-semibold text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="products-body" class="divide-y divide-night-300"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ORDERS -->
+        <section id="view-orders" class="view hidden">
+          <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p class="text-[11px] font-semibold tracking-[0.16em] uppercase text-gold">Sales</p>
+              <h2 class="font-display text-3xl md:text-4xl text-white mt-1">Orders</h2>
+              <p id="orders-meta" class="text-sm text-silver-mute mt-1"></p>
+            </div>
+            <select id="order-filter" class="rounded-xl border border-night-300 bg-night-50 px-3 py-2.5 text-sm text-white outline-none focus:border-gold">
+              <option value="all">All statuses</option>
+              <option value="paid">Paid</option>
+              <option value="processing">Processing</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+              <option value="pending_payment">Pending</option>
+            </select>
+          </div>
+          <div id="orders-list" class="space-y-3"></div>
+        </section>
+
+        <!-- CUSTOMERS -->
+        <section id="view-customers" class="view hidden">
+          <div class="mb-6">
+            <p class="text-[11px] font-semibold tracking-[0.16em] uppercase text-gold">CRM</p>
+            <h2 class="font-display text-3xl md:text-4xl text-white mt-1">Customers</h2>
+            <p id="customers-meta" class="text-sm text-silver-mute mt-1"></p>
+          </div>
+          <div id="customers-list" class="rounded-2xl border border-night-300 bg-night-50 overflow-hidden divide-y divide-night-300"></div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section id="view-settings" class="view hidden">
+          <div class="mb-6">
+            <p class="text-[11px] font-semibold tracking-[0.16em] uppercase text-gold">System</p>
+            <h2 class="font-display text-3xl md:text-4xl text-white mt-1">Settings</h2>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-2xl border border-night-300 bg-night-50 p-5">
+              <h3 class="text-white font-semibold mb-1">Catalog tools</h3>
+              <p class="text-sm text-silver-mute mb-4">Load products from the shop catalog or clear admin products.</p>
+              <div class="flex flex-wrap gap-2">
+                <button type="button" id="btn-seed" class="rounded-xl bg-gold text-night px-4 py-2 text-sm font-bold hover:opacity-95">Load shop catalog</button>
+                <button type="button" id="btn-clear-products" class="rounded-xl border border-night-300 text-silver px-4 py-2 text-sm font-semibold hover:border-gold/40">Clear products</button>
+              </div>
+              <p id="settings-msg" class="text-sm text-silver-mute mt-3"></p>
+            </div>
+            <div class="rounded-2xl border border-night-300 bg-night-50 p-5">
+              <h3 class="text-white font-semibold mb-1">Import / export</h3>
+              <p class="text-sm text-silver-mute mb-4">Backup your product list as JSON.</p>
+              <div class="flex flex-wrap gap-2">
+                <button type="button" id="btn-export" class="rounded-xl border border-night-300 text-silver px-4 py-2 text-sm font-semibold hover:border-gold/40">Export JSON</button>
+                <label class="rounded-xl border border-night-300 text-silver px-4 py-2 text-sm font-semibold hover:border-gold/40 cursor-pointer">
+                  Import JSON
+                  <input type="file" id="import-json" accept="application/json,.json" class="hidden" />
+                </label>
+              </div>
+            </div>
+            <div class="rounded-2xl border border-night-300 bg-night-50 p-5 md:col-span-2">
+              <h3 class="text-white font-semibold mb-1">Quick links</h3>
+              <ul class="mt-3 space-y-2 text-sm">
+                <li><a href="shop.html" class="text-gold hover:underline">Open shop ↗</a></li>
+                <li><a href="index.html" class="text-gold hover:underline">Home page ↗</a></li>
+                <li><a href="account.html" class="text-gold hover:underline">Customer account ↗</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div id="drawer" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/60" data-close-drawer></div>
+    <div id="drawer-nav" class="absolute left-0 top-0 bottom-0 w-72 bg-night-50 border-r border-night-300 p-3 flex flex-col gap-1 overflow-y-auto"></div>
+  </div>
+
+  <!-- Product modal -->
+  <div id="modal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" data-close-modal></div>
+    <div class="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl border border-night-300 bg-night-50 shadow-glow">
+      <div class="sticky top-0 z-10 flex items-center justify-between gap-3 px-5 py-4 border-b border-night-300 bg-night-50/95 backdrop-blur">
+        <h3 id="modal-title" class="font-display text-2xl text-white">Add New Product</h3>
+        <button type="button" data-close-modal class="w-9 h-9 rounded-xl border border-night-300 text-silver hover:border-gold/40" aria-label="Close">✕</button>
+      </div>
+      <form id="product-form" class="p-5 space-y-4">
+        <input type="hidden" id="f-id" />
+        <div>
+          <label for="f-name" class="block text-[11px] font-semibold tracking-wider uppercase text-silver-mute mb-1.5">Product Name</label>
+          <input id="f-name" required class="w-full rounded-xl border border-night-300 bg-night px-3 py-2.5 text-sm text-white outline-none focus:border-gold" placeholder="Maison Cloud Sectional" />
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label for="f-category" class="block text-[11px] font-semibold tracking-wider uppercase text-silver-mute mb-1.5">Category</label>
+            <select id="f-category" required class="w-full rounded-xl border border-night-300 bg-night px-3 py-2.5 text-sm text-white outline-none focus:border-gold"></select>
+          </div>
+          <div>
+            <label for="f-price" class="block text-[11px] font-semibold tracking-wider uppercase text-silver-mute mb-1.5">Price (NGN)</label>
+            <input id="f-price" type="number" min="0" required class="w-full rounded-xl border border-night-300 bg-night px-3 py-2.5 text-sm text-white outline-none focus:border-gold" placeholder="450000" />
+          </div>
+        </div>
+        <div>
+          <label for="f-desc" class="block text-[11px] font-semibold tracking-wider uppercase text-silver-mute mb-1.5">Description</label>
+          <textarea id="f-desc" rows="3" class="w-full rounded-xl border border-night-300 bg-night px-3 py-2.5 text-sm text-white outline-none focus:border-gold" placeholder="Short product description…"></textarea>
+        </div>
+
+        <div class="rounded-xl border border-night-300 bg-night/40 p-4 space-y-3">
+          <p class="text-[11px] font-semibold tracking-wider uppercase text-gold">Image</p>
+          <div>
+            <label for="f-url" class="block text-xs text-silver-mute mb-1">Option 1 — Paste image URL</label>
+            <input id="f-url" type="url" class="w-full rounded-xl border border-night-300 bg-night px-3 py-2.5 text-sm text-white outline-none focus:border-gold" placeholder="https://…" />
+          </div>
+          <div class="flex items-center gap-3 text-[10px] uppercase tracking-widest text-silver-mute">
+            <span class="flex-1 h-px bg-night-300"></span><span>or</span><span class="flex-1 h-px bg-night-300"></span>
+          </div>
+          <div>
+            <label for="f-file" class="block text-xs text-silver-mute mb-1">Option 2 — Upload from computer / gallery</label>
+            <input id="f-file" type="file" accept="image/*" class="block w-full text-sm text-silver-mute" />
+          </div>
+          <input type="hidden" id="f-image" />
+          <div>
+            <p class="text-xs text-silver-mute mb-2">Live preview</p>
+            <div class="w-full max-w-[180px] aspect-[4/5] rounded-xl border border-night-300 overflow-hidden bg-night flex items-center justify-center">
+              <img id="f-preview" alt="Preview" class="w-full h-full object-cover hidden" />
+              <span id="f-preview-empty" class="text-xs text-silver-mute px-3 text-center">No image yet</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2 pt-1">
+          <button type="submit" class="rounded-xl bg-gradient-to-r from-gold to-gold-dim text-night px-5 py-2.5 text-sm font-bold hover:opacity-95">Save product</button>
+          <button type="button" data-close-modal class="rounded-xl border border-night-300 text-silver px-5 py-2.5 text-sm font-semibold hover:border-gold/40">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    "use strict";
+
+    const STORAGE = "sky_furniture_admin_products";
+    const SESSION = "sky_admin_ok";
+    const ORDERS_KEY = "sky_furniture_paid_orders";
+    const USERS_KEY = "sky_users";
+    const PASSWORD = "SkyAdmin2026";
+
+    const CATEGORIES = [
+      { id: "living-room", label: "Living Room" },
+      { id: "bedroom", label: "Bedroom" },
+      { id: "dining", label: "Dining" },
+      { id: "office", label: "Office & Gaming" },
+      { id: "decor", label: "Decor" },
+      { id: "artifacts", label: "Artifacts" },
+      { id: "rugs", label: "Rugs" },
+      { id: "lighting", label: "Lighting" }
+    ];
+
+    const $ = (s, r = document) => r.querySelector(s);
+    const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+    const money = (n) =>
+      new Intl.NumberFormat("en-NG", {
+        style: "currency",
+        currency: "NGN",
+        maximumFractionDigits: 0
+      }).format(Number(n) || 0);
+
+    const esc = (s) =>
+      String(s ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+
+    const catLabel = (id) => CATEGORIES.find((c) => c.id === id)?.label || id || "—";
+
+    function readProducts() {
+      try {
+        const raw = JSON.parse(localStorage.getItem(STORAGE) || "[]");
+        return Array.isArray(raw) ? raw : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function writeProducts(list) {
+      localStorage.setItem(STORAGE, JSON.stringify(list));
+      // Keep shop catalog in sync when admin edits products
+      try {
+        localStorage.setItem("sky_admin_products", JSON.stringify(list));
+        if (window.SKY_CATALOG_VERSION) {
+          localStorage.setItem("sky_catalog_version", String(window.SKY_CATALOG_VERSION));
+        }
+      } catch (_) {}
+    }
+
+    function normalize(p) {
+      return {
+        id: p.id || Date.now() + Math.floor(Math.random() * 1000),
+        name: (p.name || "Untitled").trim(),
+        category: p.category || "living-room",
+        price: Number(p.price) || 0,
+        description: (p.description || "").trim(),
+        image: p.image || "",
+        images: p.image ? [p.image] : [],
+        inStock: p.inStock !== false,
+        active: p.active !== false,
+        stockQty: p.stockQty != null ? Number(p.stockQty) : 20
+      };
+    }
+
+    // ---------- Auth ----------
+    function showLogin(err) {
+      $("#login-screen").classList.remove("hidden");
+      $("#app").classList.add("hidden");
+      const e = $("#login-error");
+      if (err) {
+        e.textContent = err;
+        e.classList.remove("hidden");
+      } else {
+        e.classList.add("hidden");
+        e.textContent = "";
+      }
+      setTimeout(() => $("#login-pass")?.focus(), 50);
+    }
+
+    function showApp() {
+      $("#login-screen").classList.add("hidden");
+      $("#app").classList.remove("hidden");
+      fillCategorySelects();
+      showView("products");
+    }
+
+    function unlock() {
+      sessionStorage.setItem(SESSION, "1");
+      showApp();
+    }
+
+    function logout() {
+      sessionStorage.removeItem(SESSION);
+      showLogin();
+    }
+
+    // ---------- Views ----------
+    function showView(name) {
+      $$(".view").forEach((el) => {
+        el.classList.toggle("hidden", el.id !== "view-" + name);
+      });
+      $$(".nav-item").forEach((btn) => {
+        btn.classList.toggle("is-active", btn.dataset.view === name);
+      });
+      closeDrawer();
+      if (name === "dashboard") renderDashboard();
+      if (name === "products") renderProducts();
+      if (name === "orders") renderOrders();
+      if (name === "customers") renderCustomers();
+    }
+
+    function fillCategorySelects() {
+      const opts = CATEGORIES.map((c) => `<option value="${c.id}">${esc(c.label)}</option>`).join("");
+      const filter =
+        `<option value="all">All categories</option>` +
+        CATEGORIES.map((c) => `<option value="${c.id}">${esc(c.label)}</option>`).join("");
+      if ($("#f-category")) $("#f-category").innerHTML = opts;
+      if ($("#filter-cat")) $("#filter-cat").innerHTML = filter;
+    }
+
+    // ---------- Dashboard ----------
+    function renderDashboard() {
+      const products = readProducts();
+      const orders = (() => {
+        try {
+          const o = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]");
+          return Array.isArray(o) ? o : [];
+        } catch {
+          return [];
+        }
+      })();
+      const revenue = orders
+        .filter((o) => o.status !== "cancelled" && o.status !== "pending_payment")
+        .reduce((s, o) => s + (Number(o.totals?.total) || 0), 0);
+      const customers = getCustomers().length;
+
+      $("#kpi-grid").innerHTML = [
+        { l: "Products", v: String(products.length), s: "In catalog" },
+        { l: "Orders", v: String(orders.length), s: "All time" },
+        { l: "Revenue", v: money(revenue), s: "Paid orders" },
+        { l: "Customers", v: String(customers), s: "Sign-ups & buyers" }
+      ]
+        .map(
+          (k) => `
+        <div class="rounded-2xl border border-night-300 bg-night-50 p-4 border-l-[3px] border-l-gold">
+          <p class="text-[11px] font-semibold tracking-wider uppercase text-silver-mute">${esc(k.l)}</p>
+          <p class="font-display text-2xl md:text-3xl text-white mt-1 tabular-nums">${esc(k.v)}</p>
+          <p class="text-xs text-silver-mute mt-1">${esc(k.s)}</p>
+        </div>`
+        )
+        .join("");
+
+      const recent = [...orders]
+        .sort((a, b) => Date.parse(b.createdAt || 0) - Date.parse(a.createdAt || 0))
+        .slice(0, 5);
+      $("#dash-orders").innerHTML = recent.length
+        ? recent
+            .map(
+              (o) => `
+          <div class="flex justify-between gap-3 py-2.5 border-b border-night-300 last:border-0 text-sm">
+            <span class="truncate text-silver">${esc(o.orderNumber || o.paymentRef || o.id || "Order")} · ${esc(o.customer?.fullName || o.customer?.email || "")}</span>
+            <strong class="text-gold tabular-nums shrink-0">${money(o.totals?.total)}</strong>
+          </div>`
+            )
+            .join("")
+        : `<p class="text-sm text-silver-mute py-2">No orders yet.</p>`;
+
+      $("#dash-products").innerHTML = products.slice(0, 5).length
+        ? products
+            .slice(0, 5)
+            .map(
+              (p) => `
+          <div class="flex items-center gap-3 py-2.5 border-b border-night-300 last:border-0">
+            <img src="${esc(p.image || "")}" alt="" class="w-10 h-10 rounded-lg object-cover border border-night-300 bg-night" onerror="this.style.opacity=.25" />
+            <div class="min-w-0 flex-1">
+              <p class="text-sm text-white truncate font-medium">${esc(p.name)}</p>
+              <p class="text-xs text-silver-mute">${esc(catLabel(p.category))}</p>
+            </div>
+            <span class="text-sm text-gold tabular-nums">${money(p.price)}</span>
+          </div>`
+            )
+            .join("")
+        : `<p class="text-sm text-silver-mute py-2">No products yet. Add one from Products.</p>`;
+    }
+
+    // ---------- Products ----------
+    function renderProducts() {
+      let list = readProducts();
+      const q = ($("#search")?.value || "").toLowerCase().trim();
+      const cat = $("#filter-cat")?.value || "all";
+      if (cat !== "all") list = list.filter((p) => p.category === cat);
+      if (q) {
+        list = list.filter(
+          (p) =>
+            (p.name || "").toLowerCase().includes(q) ||
+            (p.description || "").toLowerCase().includes(q)
+        );
+      }
+      list = [...list].sort((a, b) => String(a.name).localeCompare(String(b.name)));
+      $("#product-meta").textContent = list.length + " product" + (list.length === 1 ? "" : "s");
+
+      const body = $("#products-body");
+      if (!list.length) {
+        body.innerHTML = `<tr><td colspan="5" class="p-10 text-center text-silver-mute">No products yet. Click “Add New Product” to create one.</td></tr>`;
+        return;
+      }
+
+      body.innerHTML = list
+        .map(
+          (p) => `
+        <tr class="hover:bg-night-100/50 transition">
+          <td class="p-3.5">
+            <img src="${esc(p.image || "")}" alt="" class="w-12 h-12 rounded-xl object-cover border border-night-300 bg-night" onerror="this.style.opacity=.25" />
+          </td>
+          <td class="p-3.5">
+            <p class="font-semibold text-white">${esc(p.name)}</p>
+            <p class="text-xs text-silver-mute line-clamp-1 max-w-xs">${esc(p.description || "")}</p>
+          </td>
+          <td class="p-3.5 text-silver">${esc(catLabel(p.category))}</td>
+          <td class="p-3.5 text-gold font-semibold tabular-nums">${money(p.price)}</td>
+          <td class="p-3.5 text-right whitespace-nowrap">
+            <button type="button" data-edit="${esc(p.id)}" class="text-gold font-semibold text-sm hover:underline mr-3">Edit</button>
+            <button type="button" data-del="${esc(p.id)}" class="text-red-400 font-semibold text-sm hover:underline">Delete</button>
+          </td>
+        </tr>`
+        )
+        .join("");
+
+      body.querySelectorAll("[data-edit]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const p = readProducts().find((x) => String(x.id) === String(btn.dataset.edit));
+          if (p) openModal(p);
+        });
+      });
+      body.querySelectorAll("[data-del]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (!confirm("Delete this product?")) return;
+          writeProducts(readProducts().filter((x) => String(x.id) !== String(btn.dataset.del)));
+          renderProducts();
+          if (!$("#view-dashboard").classList.contains("hidden")) renderDashboard();
+        });
+      });
+    }
+
+    // ---------- Modal / form ----------
+    function setPreview(src) {
+      const img = $("#f-preview");
+      const empty = $("#f-preview-empty");
+      const hidden = $("#f-image");
+      if (src) {
+        img.src = src;
+        img.classList.remove("hidden");
+        empty.classList.add("hidden");
+        hidden.value = src;
+      } else {
+        img.removeAttribute("src");
+        img.classList.add("hidden");
+        empty.classList.remove("hidden");
+        hidden.value = "";
+      }
+    }
+
+    function openModal(product) {
+      $("#modal").classList.remove("hidden");
+      $("#modal").classList.add("flex");
+      document.body.classList.add("modal-open");
+      $("#modal-title").textContent = product ? "Edit Product" : "Add New Product";
+      $("#f-id").value = product?.id ?? "";
+      $("#f-name").value = product?.name || "";
+      $("#f-category").value = product?.category || "living-room";
+      $("#f-price").value = product?.price ?? "";
+      $("#f-desc").value = product?.description || "";
+      $("#f-file").value = "";
+      const img = product?.image || "";
+      $("#f-url").value = img.startsWith("data:") ? "" : img.startsWith("http") ? img : "";
+      setPreview(img);
+      setTimeout(() => $("#f-name")?.focus(), 50);
+    }
+
+    function closeModal() {
+      $("#modal").classList.add("hidden");
+      $("#modal").classList.remove("flex");
+      document.body.classList.remove("modal-open");
+    }
+
+    function fileToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        if (!file?.type?.startsWith("image/")) {
+          reject(new Error("Please choose an image file."));
+          return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+          reject(new Error("Image must be under 5 MB."));
+          return;
+        }
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error("Could not read file."));
+        reader.onload = () => {
+          const raw = reader.result;
+          const img = new Image();
+          img.onload = () => {
+            try {
+              let w = img.width;
+              let h = img.height;
+              const max = 1200;
+              if (w > max) {
+                h = Math.round((h * max) / w);
+                w = max;
+              }
+              const canvas = document.createElement("canvas");
+              canvas.width = w;
+              canvas.height = h;
+              canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+              resolve(canvas.toDataURL("image/jpeg", 0.85));
+            } catch {
+              resolve(raw);
+            }
+          };
+          img.onerror = () => resolve(raw);
+          img.src = raw;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // ---------- Orders / customers ----------
+    function getCustomers() {
+      const map = new Map();
+      try {
+        const users = JSON.parse(localStorage.getItem(USERS_KEY) || "[]");
+        if (Array.isArray(users)) {
+          users.forEach((u) => {
+            const email = String(u.email || "").toLowerCase();
+            if (!email) return;
+            map.set(email, {
+              email,
+              name: u.displayName || u.name || "",
+              phone: u.phone || "",
+              orderCount: 0,
+              totalSpent: 0,
+              source: "signup"
+            });
+          });
+        }
+      } catch (_) {}
+      try {
+        const orders = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]");
+        if (Array.isArray(orders)) {
+          orders.forEach((o) => {
+            const email = String(o.customer?.email || o.userEmail || "").toLowerCase();
+            if (!email) return;
+            const prev = map.get(email) || {
+              email,
+              name: "",
+              phone: "",
+              orderCount: 0,
+              totalSpent: 0,
+              source: "checkout"
+            };
+            prev.orderCount += 1;
+            if (o.status !== "cancelled" && o.status !== "pending_payment") {
+              prev.totalSpent += Number(o.totals?.total) || 0;
+            }
+            if (o.customer?.fullName) prev.name = o.customer.fullName;
+            if (o.customer?.phone) prev.phone = o.customer.phone;
+            map.set(email, prev);
+          });
+        }
+      } catch (_) {}
+      return [...map.values()].sort((a, b) => b.totalSpent - a.totalSpent);
+    }
+
+    function renderOrders() {
+      let orders = [];
+      try {
+        orders = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]");
+        if (!Array.isArray(orders)) orders = [];
+      } catch {
+        orders = [];
+      }
+      const filter = $("#order-filter")?.value || "all";
+      if (filter !== "all") orders = orders.filter((o) => (o.status || "paid") === filter);
+      orders = [...orders].sort((a, b) => Date.parse(b.createdAt || 0) - Date.parse(a.createdAt || 0));
+      $("#orders-meta").textContent = orders.length + " order(s)";
+
+      if (!orders.length) {
+        $("#orders-list").innerHTML =
+          '<div class="rounded-2xl border border-night-300 bg-night-50 p-6 text-sm text-silver-mute">No orders yet. Paid checkouts appear here.</div>';
+        return;
+      }
+
+      $("#orders-list").innerHTML = orders
+        .map((o, idx) => {
+          const id = o.orderNumber || o.paymentRef || o.id || "order-" + idx;
+          const status = o.status || "paid";
+          const date = o.createdAt ? new Date(o.createdAt).toLocaleString("en-NG") : "—";
+          return `
+          <article class="rounded-2xl border border-night-300 bg-night-50 p-5 flex flex-wrap justify-between gap-4">
+            <div class="min-w-0">
+              <p class="font-mono text-sm text-white font-semibold">${esc(id)}</p>
+              <p class="text-xs text-silver-mute mt-1">${esc(o.customer?.fullName || "")} · ${esc(o.customer?.email || o.userEmail || "")}</p>
+              <p class="text-xs text-silver-mute mt-1">${esc(date)}</p>
+              <p class="text-gold font-semibold mt-2 tabular-nums">${money(o.totals?.total)}</p>
+            </div>
+            <div>
+              <select data-order-id="${esc(id)}" class="order-status rounded-xl border border-night-300 bg-night px-3 py-2 text-sm text-white outline-none focus:border-gold">
+                ${["pending_payment", "paid", "processing", "shipped", "delivered", "cancelled"]
+                  .map((s) => `<option value="${s}" ${status === s ? "selected" : ""}>${s}</option>`)
+                  .join("")}
+              </select>
+            </div>
+          </article>`;
+        })
+        .join("");
+
+      $$(".order-status").forEach((sel) => {
+        sel.addEventListener("change", () => {
+          const id = sel.dataset.orderId;
+          const status = sel.value;
+          let orders2 = [];
+          try {
+            orders2 = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]") || [];
+          } catch {
+            orders2 = [];
+          }
+          orders2 = orders2.map((o) => {
+            const oid = String(o.orderNumber || o.paymentRef || o.id || "");
+            if (oid === String(id)) return { ...o, status, updatedAt: new Date().toISOString() };
+            return o;
+          });
+          localStorage.setItem(ORDERS_KEY, JSON.stringify(orders2));
+          renderOrders();
+        });
+      });
+    }
+
+    function renderCustomers() {
+      const list = getCustomers();
+      $("#customers-meta").textContent = list.length + " customer(s)";
+      if (!list.length) {
+        $("#customers-list").innerHTML =
+          '<div class="p-6 text-sm text-silver-mute">No customers yet.</div>';
+        return;
+      }
+      $("#customers-list").innerHTML = list
+        .map(
+          (c) => `
+        <div class="p-4 flex flex-wrap justify-between gap-3">
+          <div>
+            <p class="font-semibold text-white text-sm">${esc(c.name || "Customer")}</p>
+            <p class="text-xs text-silver-mute mt-0.5">${esc(c.email)} · ${esc(c.phone || "—")}</p>
+            <p class="text-[11px] text-silver-mute/80 mt-1">Source: ${esc(c.source)}</p>
+          </div>
+          <div class="text-right">
+            <p class="text-gold font-semibold tabular-nums">${money(c.totalSpent)}</p>
+            <p class="text-xs text-silver-mute">${c.orderCount} order(s)</p>
+          </div>
+        </div>`
+        )
+        .join("");
+    }
+
+    // ---------- Drawer ----------
+    function openDrawer() {
+      const drawer = $("#drawer");
+      const panel = $("#drawer-nav");
+      panel.innerHTML = "";
+      $$("#sidebar-nav .nav-item").forEach((btn) => {
+        const clone = btn.cloneNode(true);
+        clone.addEventListener("click", () => showView(clone.dataset.view));
+        panel.appendChild(clone);
+      });
+      const shop = document.createElement("a");
+      shop.href = "shop.html";
+      shop.target = "_blank";
+      shop.className =
+        "block px-3 py-2.5 rounded-xl text-sm font-medium text-silver-mute hover:bg-night-200 hover:text-white transition";
+      shop.textContent = "View shop ↗";
+      panel.appendChild(shop);
+      const out = document.createElement("button");
+      out.type = "button";
+      out.className =
+        "w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium text-red-400 hover:bg-red-950/40 transition";
+      out.textContent = "Sign out";
+      out.addEventListener("click", logout);
+      panel.appendChild(out);
+      drawer.classList.remove("hidden");
+    }
+
+    function closeDrawer() {
+      $("#drawer")?.classList.add("hidden");
+    }
+
+    // ---------- Seed from data.js if available ----------
+    function seedFromShop() {
+      const raw = window.SKY_PRODUCTS || window.PRODUCTS || [];
+      if (!Array.isArray(raw) || !raw.length) {
+        $("#settings-msg").textContent = "Shop catalog not found. Add products manually.";
+        $("#settings-msg").className = "text-sm text-red-400 mt-3";
+        return;
+      }
+      const mapped = raw.map((p) =>
+        normalize({
+          id: p.id,
+          name: p.name,
+          category: p.category,
+          price: p.price,
+          description: p.description,
+          image: p.image,
+          stockQty: p.stockQty != null ? p.stockQty : 20
+        })
+      );
+      writeProducts(mapped);
+      $("#settings-msg").textContent = "Loaded " + mapped.length + " products from the shop catalog.";
+      $("#settings-msg").className = "text-sm text-emerald-400 mt-3";
+      renderProducts();
+    }
+
+    // ---------- Bind ----------
+    function bind() {
+      $("#login-form")?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const pass = ($("#login-pass")?.value || "").trim();
+        if (!pass) return showLogin("Please enter your password.");
+        if (pass !== PASSWORD) {
+          $("#login-pass").value = "";
+          return showLogin("Incorrect password. Try again.");
+        }
+        unlock();
+      });
+
+      $("#toggle-pass")?.addEventListener("click", () => {
+        const input = $("#login-pass");
+        const btn = $("#toggle-pass");
+        const show = input.type === "password";
+        input.type = show ? "text" : "password";
+        btn.textContent = show ? "Hide" : "Show";
+        btn.setAttribute("aria-pressed", show ? "true" : "false");
+        input.focus();
+      });
+
+      $("#btn-logout")?.addEventListener("click", logout);
+      $("#btn-menu")?.addEventListener("click", openDrawer);
+      $$("[data-close-drawer]").forEach((el) => el.addEventListener("click", closeDrawer));
+
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-view]");
+        if (!btn || !btn.dataset.view) return;
+        if ($("#app").classList.contains("hidden")) return;
+        e.preventDefault();
+        showView(btn.dataset.view);
+      });
+
+      $("#search")?.addEventListener("input", renderProducts);
+      $("#filter-cat")?.addEventListener("change", renderProducts);
+      $("#btn-add-product")?.addEventListener("click", () => openModal(null));
+      $$("[data-close-modal]").forEach((el) => el.addEventListener("click", closeModal));
+
+      let urlTimer;
+      $("#f-url")?.addEventListener("input", () => {
+        clearTimeout(urlTimer);
+        urlTimer = setTimeout(() => {
+          const url = ($("#f-url").value || "").trim();
+          if (url) {
+            $("#f-file").value = "";
+            setPreview(url);
+          }
+        }, 250);
+      });
+
+      $("#f-file")?.addEventListener("change", async () => {
+        const file = $("#f-file").files?.[0];
+        if (!file) return;
+        try {
+          const dataUrl = await fileToDataUrl(file);
+          $("#f-url").value = "";
+          setPreview(dataUrl);
+        } catch (err) {
+          alert(err.message);
+          $("#f-file").value = "";
+        }
+      });
+
+      $("#product-form")?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const image = ($("#f-image").value || "").trim();
+        if (!image) {
+          alert("Please paste an image URL or upload an image.");
+          return;
+        }
+        const data = normalize({
+          id: $("#f-id").value || Date.now(),
+          name: $("#f-name").value,
+          category: $("#f-category").value,
+          price: $("#f-price").value,
+          description: $("#f-desc").value,
+          image
+        });
+        const list = readProducts();
+        const idx = list.findIndex((p) => String(p.id) === String(data.id));
+        if (idx >= 0) list[idx] = { ...list[idx], ...data };
+        else list.push(data);
+        writeProducts(list);
+        closeModal();
+        renderProducts();
+      });
+
+      $("#order-filter")?.addEventListener("change", renderOrders);
+
+      $("#btn-seed")?.addEventListener("click", () => {
+        // load data.js dynamically if not present
+        if (!(window.SKY_PRODUCTS || window.PRODUCTS)) {
+          const s = document.createElement("script");
+          s.src = "assets/js/data.js";
+          s.onload = seedFromShop;
+          s.onerror = () => {
+            $("#settings-msg").textContent = "Could not load assets/js/data.js";
+            $("#settings-msg").className = "text-sm text-red-400 mt-3";
+          };
+          document.body.appendChild(s);
+        } else seedFromShop();
+      });
+
+      $("#btn-clear-products")?.addEventListener("click", () => {
+        if (!confirm("Clear all admin products?")) return;
+        writeProducts([]);
+        $("#settings-msg").textContent = "All products cleared.";
+        $("#settings-msg").className = "text-sm text-silver-mute mt-3";
+        renderProducts();
+      });
+
+      $("#btn-export")?.addEventListener("click", () => {
+        const blob = new Blob([JSON.stringify(readProducts(), null, 2)], {
+          type: "application/json"
+        });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "sky-furniture-products-" + Date.now() + ".json";
+        a.click();
+        URL.revokeObjectURL(a.href);
+      });
+
+      $("#import-json")?.addEventListener("change", async (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        try {
+          const data = JSON.parse(await file.text());
+          if (!Array.isArray(data)) throw new Error("JSON must be an array.");
+          writeProducts(data.map(normalize));
+          $("#settings-msg").textContent = "Imported " + data.length + " products.";
+          $("#settings-msg").className = "text-sm text-emerald-400 mt-3";
+          renderProducts();
+        } catch (err) {
+          alert(err.message);
+        }
+        e.target.value = "";
+      });
+    }
+
+    function boot() {
+      bind();
+      if (sessionStorage.getItem(SESSION) === "1") showApp();
+      else showLogin();
+    }
+
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+    else boot();
+  })();
+  </script>
+</body>
+</html>

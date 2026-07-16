@@ -78,7 +78,7 @@ function signedInHtml(user) {
           </a>
           ${
             admin
-              ? `<a href="admin/index.html" role="menuitem" class="user-menu-item">
+              ? `<a href="admin.html" role="menuitem" class="user-menu-item">
                   <span class="user-menu-ico">⚙</span> Admin panel
                 </a>`
               : ""
@@ -152,7 +152,7 @@ function renderMobileAuth(user) {
     }
     const name = escapeHtml(displayLabel(user));
     const admin = isAdminUser(user)
-      ? `<a href="admin/index.html" class="py-2 text-stone-600 block">Admin panel</a>`
+      ? `<a href="admin.html" class="py-2 text-stone-600 block">Admin panel</a>`
       : "";
     el.innerHTML = `
       <p class="py-2 text-xs text-stone-400 truncate">Signed in as ${name}</p>
