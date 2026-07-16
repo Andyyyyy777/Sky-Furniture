@@ -1693,39 +1693,6 @@ function initDesignSpace() {
 }
 
 // ---------------------------------------------------------------------------
-// Admin return (only when admin session is active)
-// ---------------------------------------------------------------------------
-const ADMIN_SESSION_KEY = "sky_admin_ok";
-const ADMIN_FROM_SHOP_KEY = "sky_from_admin";
-
-function isAdminBrowsingShop() {
-  try {
-    return (
-      sessionStorage.getItem(ADMIN_SESSION_KEY) === "1" ||
-      sessionStorage.getItem(ADMIN_FROM_SHOP_KEY) === "1"
-    );
-  } catch {
-    return false;
-  }
-}
-
-function initAdminReturnButton() {
-  if (!isAdminBrowsingShop()) return;
-  if (document.getElementById("admin-return-btn")) return;
-
-  const btn = document.createElement("a");
-  btn.id = "admin-return-btn";
-  btn.href = "admin/index.html";
-  btn.className = "admin-return-btn";
-  btn.setAttribute("aria-label", "Back to admin");
-  btn.innerHTML = `
-    <span class="admin-return-btn__icon" aria-hidden="true">←</span>
-    <span class="admin-return-btn__label">Back to Admin</span>
-  `;
-  document.body.appendChild(btn);
-}
-
-// ---------------------------------------------------------------------------
 // Boot
 // ---------------------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
@@ -1733,7 +1700,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartBadge();
   ensureQuickViewModal();
   initHeader();
-  initAdminReturnButton();
 
   const page = document.body.dataset.page || "";
   if (page === "home" || document.getElementById("featured-grid")) {

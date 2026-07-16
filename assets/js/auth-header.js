@@ -5,8 +5,7 @@
 import {
   firebaseReady,
   onUserChanged,
-  logOut,
-  isAdminUser
+  logOut
 } from "./firebase.js";
 import { trackSiteUser } from "./cloud-store.js";
 
@@ -41,8 +40,6 @@ function signedInHtml(user) {
   const name = escapeHtml(displayLabel(user));
   const email = escapeHtml(user.email || "");
   const initial = escapeHtml(initialOf(user));
-  const admin = isAdminUser(user);
-
   return `
     <div class="relative user-menu-wrap" data-user-menu>
       <button type="button"
@@ -76,13 +73,6 @@ function signedInHtml(user) {
           <a href="shop.html" role="menuitem" class="user-menu-item">
             <span class="user-menu-ico">◇</span> Continue shopping
           </a>
-          ${
-            admin
-              ? `<a href="admin/index.html" role="menuitem" class="user-menu-item">
-                  <span class="user-menu-ico">⚙</span> Admin panel
-                </a>`
-              : ""
-          }
         </div>
         <div class="border-t border-sand dark:border-stone-600 py-1.5">
           <button type="button" role="menuitem" class="user-menu-item user-menu-item--danger w-full text-left" data-sign-out>
@@ -151,15 +141,11 @@ function renderMobileAuth(user) {
       return;
     }
     const name = escapeHtml(displayLabel(user));
-    const admin = isAdminUser(user)
-      ? `<a href="admin/index.html" class="py-2 text-stone-600 block">Admin panel</a>`
-      : "";
     el.innerHTML = `
       <p class="py-2 text-xs text-stone-400 truncate">Signed in as ${name}</p>
       <a href="account.html" class="py-2 text-stone-600 block">My account</a>
       <a href="account.html#orders" class="py-2 text-stone-600 block">My orders</a>
       <a href="cart.html" class="py-2 text-stone-600 block">Cart</a>
-      ${admin}
       <button type="button" class="py-2 text-red-700 dark:text-red-400 block w-full text-left" data-mobile-sign-out>Sign out</button>
     `;
     el.querySelector("[data-mobile-sign-out]")?.addEventListener("click", async () => {
