@@ -299,24 +299,41 @@ function saveCoupons(list) {
 // Access control
 // ---------------------------------------------------------------------------
 function showApp(email) {
-  document.getElementById("gate").classList.add("hidden");
-  document.getElementById("admin-app").classList.remove("hidden");
+  document.getElementById("gate")?.classList.add("hidden");
+  document.getElementById("admin-app")?.classList.remove("hidden");
   const el = document.getElementById("admin-email");
-  if (el) {
-    el.textContent = email || ADMIN_EMAIL;
-    el.classList.remove("hidden");
-  }
+  if (el) el.textContent = email || "Admin";
   const note = document.getElementById("admin-mode-note");
   if (note && !note.dataset.liveSet) {
     note.textContent =
-      "Welcome to the Sky Furniture control center — Dashboard, Products, Inventory, Orders, Customers, Coupons & Tools. Theme is shared with the shop.";
+      "Store control center — manage products, stock, orders, customers, coupons, and income. Theme is shared with the shop.";
   }
+  clearGateError();
 }
 
 function showGate(msg) {
-  document.getElementById("gate").classList.remove("hidden");
-  document.getElementById("admin-app").classList.add("hidden");
-  document.getElementById("gate-msg").textContent = msg;
+  document.getElementById("gate")?.classList.remove("hidden");
+  document.getElementById("admin-app")?.classList.add("hidden");
+  const gateMsg = document.getElementById("gate-msg");
+  if (gateMsg && msg) gateMsg.textContent = msg;
+}
+
+function clearGateError() {
+  const err = document.getElementById("gate-error");
+  if (err) {
+    err.textContent = "";
+    err.classList.add("hidden");
+  }
+}
+
+function showGateError(message) {
+  const err = document.getElementById("gate-error");
+  if (!err) {
+    alert(message);
+    return;
+  }
+  err.textContent = message;
+  err.classList.remove("hidden");
 }
 
 function markAdminShopPreview() {
@@ -356,7 +373,6 @@ function unlockAdmin(email) {
   loadOrders();
   loadCustomers();
   initLiveData().catch(() => {});
-  logActivity("Admin unlocked — full control center ready");
 }
 
 /** Merge fresh image paths from data.js onto cached admin products */
@@ -454,8 +470,7 @@ function checkAccess() {
     return;
   }
 
-  // Always show password unlock immediately so admin never looks "stuck"
-  showLocalUnlock("Enter your admin password to open the store control center.");
+  showLocalUnlock("Sign in to manage your store");
 
   // Optional: auto-unlock when signed in as Firebase admin
   import("../assets/js/firebase.js")
@@ -473,40 +488,63 @@ function checkAccess() {
 function wirePasswordUnlock() {
   if (wirePasswordUnlock._done) return;
   wirePasswordUnlock._done = true;
-  // Show the real password hint (config may override DEFAULT)
-  const expected = getLocalAdminPassword();
-  document.querySelectorAll("[data-admin-pass-hint]").forEach((el) => {
-    el.textContent = expected;
-  });
-  const go = () => {
-    const pass = document.getElementById("admin-pass")?.value || "";
-    if (pass && pass === getLocalAdminPassword()) {
+
+  const attempt = () => {
+    clearGateError();
+    const pass = (document.getElementById("admin-pass")?.value || "").trim();
+    if (!pass) {
+      showGateError("Please enter your password.");
+      return;
+    }
+    if (pass === getLocalAdminPassword()) {
       unlockAdmin(ADMIN_EMAIL);
-    } else {
-      alert("Wrong password. Use: " + getLocalAdminPassword());
+      return;
+    }
+    showGateError("Incorrect password. Try again.");
+    const input = document.getElementById("admin-pass");
+    if (input) {
+      input.value = "";
+      input.focus();
     }
   };
-  document.getElementById("admin-unlock")?.addEventListener("click", go);
-  document.getElementById("admin-pass")?.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
+
+  const form = document.getElementById("local-admin-form");
+  if (form) {
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
-      go();
+      attempt();
+    });
+  } else {
+    document.getElementById("admin-unlock")?.addEventListener("click", attempt);
+  }
+
+  // Show / hide password (never reveals the real admin password — only typed input)
+  document.getElementById("toggle-pass-vis")?.addEventListener("click", () => {
+    const input = document.getElementById("admin-pass");
+    const btn = document.getElementById("toggle-pass-vis");
+    if (!input) return;
+    const show = input.type === "password";
+    input.type = show ? "text" : "password";
+    if (btn) {
+      btn.setAttribute("aria-label", show ? "Hide password" : "Show password");
+      btn.title = show ? "Hide password" : "Show password";
     }
   });
 }
 
 function showLocalUnlock(message) {
-  showGate(message || "Enter admin password.");
+  showGate(message || "Sign in to manage your store");
   document.getElementById("gate-loading")?.classList.add("hidden");
-  // Form lives in HTML permanently — only wire handlers
   wirePasswordUnlock();
-  setTimeout(() => document.getElementById("admin-pass")?.focus(), 50);
+  setTimeout(() => document.getElementById("admin-pass")?.focus(), 60);
 }
 
 document.getElementById("admin-logout")?.addEventListener("click", () => {
   sessionStorage.removeItem(SESSION_KEY);
   sessionStorage.removeItem(FROM_ADMIN_KEY);
-  location.href = "../index.html";
+  sessionStorage.removeItem("sky_admin_email");
+  // Return to clean admin login (do not expose password)
+  location.href = "index.html";
 });
 
 function initViewShopLinks() {
@@ -706,13 +744,13 @@ function renderDashboard() {
     featuresEl.innerHTML = features
       .map(
         (f) => `
-      <button type="button" data-tab="${f.tab}" class="tab-btn admin-feature-card text-left">
-        <div class="flex items-start justify-between gap-2">
-          <p class="font-medium text-sm">${escapeHtml(f.title)}</p>
-          <span class="text-[10px] uppercase tracking-wider text-clay shrink-0">${escapeHtml(f.meta)}</span>
+      <button type="button" data-tab="${f.tab}" class="tab-btn admin-feature-card">
+        <div class="feat-top">
+          <p class="feat-title">${escapeHtml(f.title)}</p>
+          <span class="feat-meta">${escapeHtml(f.meta)}</span>
         </div>
-        <p class="text-xs text-stone-500 mt-2 leading-relaxed">${escapeHtml(f.desc)}</p>
-        <p class="text-xs text-clay mt-3 font-medium">Open →</p>
+        <p class="feat-desc">${escapeHtml(f.desc)}</p>
+        <p class="feat-go">Open →</p>
       </button>`
       )
       .join("");
@@ -837,7 +875,7 @@ function loadProducts() {
   }
 
   if (!list.length) {
-    tbody.innerHTML = `<tr><td colspan="8" class="p-6 text-center text-stone-500">No products match. Use Tools → Load catalog.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="8" class="p-6 text-center text-stone-500">No products match. Use Tools → Load catalog + photos.</td></tr>`;
     updateBulkBar();
     return;
   }
@@ -868,28 +906,28 @@ function loadProducts() {
               : "admin-badge is-ok";
       return `
     <tr>
-      <td class="p-3"><input type="checkbox" class="row-check accent-ink" value="${p.id}" /></td>
-      <td class="p-3">
-        <div class="flex items-center gap-3 min-w-0">
+      <td><input type="checkbox" class="row-check" value="${p.id}" /></td>
+      <td>
+        <div class="admin-product-cell">
           <img src="${escapeHtml(resolveAdminAssetUrl(p.image))}" alt="" class="admin-thumb" loading="lazy" onerror="this.style.opacity='0.35'" />
-          <div class="min-w-0">
-            <p class="font-medium truncate max-w-[200px]">${escapeHtml(p.name)}</p>
-            <div class="flex flex-wrap gap-1.5 mt-0.5">
-              ${p.badge ? `<span class="text-[10px] text-clay font-medium">${escapeHtml(p.badge)}</span>` : ""}
-              ${p.featured ? `<span class="text-[10px] text-amber-700 dark:text-amber-400 font-medium">Featured</span>` : ""}
+          <div class="meta">
+            <p class="name">${escapeHtml(p.name)}</p>
+            <div class="tags">
+              ${p.badge ? `<span>${escapeHtml(p.badge)}</span>` : ""}
+              ${p.featured ? `<span class="featured">Featured</span>` : ""}
             </div>
           </div>
         </div>
       </td>
-      <td class="p-3 text-xs font-mono text-stone-500">${escapeHtml(p.sku || "—")}</td>
-      <td class="p-3 text-sm">${escapeHtml(categoryLabel(p.category))}</td>
-      <td class="p-3 tabular-nums text-sm">
+      <td class="text-xs font-mono text-stone-500">${escapeHtml(p.sku || "—")}</td>
+      <td class="text-sm">${escapeHtml(categoryLabel(p.category))}</td>
+      <td class="tabular-nums text-sm">
         ${fmt(p.price)}
         ${p.originalPrice ? `<span class="block text-xs text-stone-400 line-through">${fmt(p.originalPrice)}</span>` : ""}
       </td>
-      <td class="p-3 tabular-nums text-sm font-medium ${stockClass}">${p.stockQty}</td>
-      <td class="p-3"><span class="${statusClass}">${statusLabel}</span></td>
-      <td class="p-3 text-right whitespace-nowrap text-sm">
+      <td class="tabular-nums text-sm font-medium ${stockClass}">${p.stockQty}</td>
+      <td><span class="${statusClass}">${statusLabel}</span></td>
+      <td class="text-right whitespace-nowrap text-sm">
         <button type="button" data-dup="${p.id}" class="admin-link-btn">Dup</button>
         <button type="button" data-edit="${p.id}" class="admin-link-btn is-primary">Edit</button>
         <button type="button" data-del="${p.id}" class="admin-link-btn is-danger">Del</button>
@@ -1537,14 +1575,14 @@ document.getElementById("import-json")?.addEventListener("change", async (e) => 
     if (!Array.isArray(data)) throw new Error("JSON must be an array of products.");
     saveProducts(data.map(normalizeProduct));
     status.textContent = `Imported ${data.length} products.`;
-    status.className = "mt-3 text-sm text-green-700";
+    status.className = "admin-status-msg is-ok";
     logActivity(`Imported ${data.length} products from JSON`);
     loadProducts();
     loadInventory();
     renderDashboard();
   } catch (err) {
     status.textContent = err.message;
-    status.className = "mt-3 text-sm text-red-600";
+    status.className = "admin-status-msg is-err";
   }
   e.target.value = "";
 });
@@ -1554,7 +1592,7 @@ document.getElementById("btn-seed")?.addEventListener("click", () => {
   const catalog = catalogFromDataJs();
   if (!catalog.length) {
     status.textContent = "Could not load data.js — hard refresh and try again.";
-    status.className = "mt-3 text-sm text-red-600";
+    status.className = "admin-status-msg is-err";
     return;
   }
   try {
@@ -1565,7 +1603,7 @@ document.getElementById("btn-seed")?.addEventListener("click", () => {
   } catch (_) {}
   saveProducts(catalog);
   status.textContent = `Loaded ${catalog.length} products with matching images.`;
-  status.className = "mt-3 text-sm text-green-700";
+  status.className = "admin-status-msg is-ok";
   logActivity(`Seeded ${catalog.length} products from data.js`);
   loadProducts();
   loadInventory();
@@ -1614,7 +1652,8 @@ function bootAdmin() {
   } catch (err) {
     console.error("[Admin] boot failed", err);
     try {
-      showLocalUnlock("Admin had a startup error — enter password to continue.");
+      showLocalUnlock("Sign in to manage your store");
+      showGateError("Admin had a startup error. You can still try signing in.");
     } catch (_) {
       alert("Admin failed to start: " + (err.message || err));
     }

@@ -6,7 +6,6 @@
   <title>Admin — Sky Furniture</title>
   <meta name="robots" content="noindex" />
   <meta name="theme-color" content="#F7F3EE" />
-  <!-- Prevent theme flash -->
   <script>
     (function () {
       try {
@@ -17,132 +16,99 @@
       } catch (e) {}
     })();
   </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            cream: "#F7F3EE",
-            sand: "#E8E0D5",
-            warm: "#C4A77D",
-            ink: "#2C2926",
-            clay: "#8B7355"
-          },
-          fontFamily: {
-            display: ['"Cormorant Garamond"', "Georgia", "serif"],
-            sans: ["Inter", "system-ui", "sans-serif"]
-          },
-          boxShadow: {
-            soft: "0 4px 24px -4px rgba(44, 41, 38, 0.08), 0 2px 8px -2px rgba(44, 41, 38, 0.04)",
-            lift: "0 12px 40px -12px rgba(44, 41, 38, 0.15)"
-          }
-        }
-      }
-    };
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Self-contained admin styles only (no store CSS — avoids layout fights) -->
   <link rel="stylesheet" href="admin.css" />
 </head>
-<body class="admin-body bg-cream text-ink antialiased min-h-screen dark:bg-[#161412] dark:text-[#f3efe9]">
+<body class="admin-body">
 
-  <!-- ========== LOGIN GATE ========== -->
-  <div id="gate" class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
-    <div class="admin-gate-bg absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-    <div class="relative w-full max-w-md">
-      <div class="flex justify-end mb-4">
+  <!-- ========== LOGIN ========== -->
+  <div id="gate" class="admin-login" role="main">
+    <div class="admin-login-bg" aria-hidden="true"></div>
+    <div class="admin-login-inner">
+      <div class="admin-login-top">
         <button type="button" data-theme-toggle class="theme-toggle-btn" aria-label="Toggle dark mode" aria-pressed="false">
-          <svg class="icon-sun w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-          <svg class="icon-moon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg class="icon-sun" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <svg class="icon-moon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
         </button>
       </div>
-      <div class="admin-card admin-gate-card text-center">
-        <div class="w-14 h-14 mx-auto mb-5 rounded-2xl bg-ink text-cream flex items-center justify-center shadow-soft dark:bg-[#e8e0d5] dark:text-[#161412]">
-          <span class="font-display text-2xl">S</span>
-        </div>
-        <p class="font-display text-3xl mb-1 tracking-tight">Sky Furniture</p>
-        <p class="text-xs uppercase tracking-[0.2em] text-clay mb-4">Admin studio</p>
-        <p id="gate-msg" class="text-sm text-stone-500 mb-1">Full store control center — products, stock, orders, customers, coupons &amp; income.</p>
-        <p class="text-xs text-stone-400 hidden" id="gate-loading">Preparing unlock…</p>
-        <!-- Password form always in HTML so admin never looks stuck -->
-        <div id="local-admin-form" class="mt-6 space-y-3 text-left">
-          <label class="admin-label" for="admin-pass">Admin password</label>
-          <input type="password" id="admin-pass" class="admin-input w-full" placeholder="Enter password" autocomplete="current-password" />
-          <button type="button" id="admin-unlock" class="admin-btn-primary w-full mt-1">Enter admin</button>
-          <p class="text-[11px] text-stone-400 text-center pt-1 leading-relaxed">
-            Password: <strong class="text-ink dark:text-[#f3efe9]" data-admin-pass-hint>SkyAdmin2026</strong><br/>
-            Or sign in with your admin email on the store first.
-          </p>
-          <p class="text-center text-xs mt-1">
-            <a href="../login.html?next=admin/index.html" class="text-clay hover:underline">Sign in with email</a>
-            · <a href="../shop.html" class="text-clay hover:underline">View shop</a>
-          </p>
+
+      <div class="admin-login-card">
+        <div class="admin-login-logo" aria-hidden="true">S</div>
+        <h1 class="admin-login-title">Sky Furniture</h1>
+        <p class="admin-login-kicker">Admin</p>
+        <p id="gate-msg" class="admin-login-sub">Sign in to manage your store</p>
+        <p id="gate-loading" class="admin-login-loading hidden">Loading…</p>
+        <p id="gate-error" class="admin-login-error hidden" role="alert"></p>
+
+        <form id="local-admin-form" class="admin-login-form" autocomplete="on">
+          <div class="admin-field">
+            <label class="admin-label" for="admin-pass">Password</label>
+            <div class="admin-pass-wrap">
+              <input
+                type="password"
+                id="admin-pass"
+                class="admin-input"
+                placeholder="Enter admin password"
+                autocomplete="current-password"
+                required
+              />
+              <button type="button" id="toggle-pass-vis" class="admin-pass-toggle" aria-label="Show password" title="Show password">👁</button>
+            </div>
+          </div>
+          <button type="submit" id="admin-unlock" class="admin-btn-primary admin-btn-block">Sign in</button>
+        </form>
+
+        <div class="admin-login-footer">
+          <a href="../shop.html">View shop</a>
+          <span class="admin-dot">·</span>
+          <a href="../index.html">Home</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ========== APP SHELL ========== -->
-  <div id="admin-app" class="hidden min-h-screen lg:flex">
-    <!-- Sidebar -->
-    <aside class="admin-sidebar hidden lg:flex flex-col w-64 shrink-0 sticky top-0 h-screen border-r">
-      <div class="px-6 py-6 border-b border-inherit">
-        <a href="../index.html" class="font-display text-2xl tracking-tight text-ink dark:text-[#f3efe9]">Sky Furniture</a>
-        <p class="text-[10px] uppercase tracking-[0.18em] text-clay mt-1">Admin studio</p>
+  <!-- ========== APP ========== -->
+  <div id="admin-app" class="admin-shell hidden">
+    <aside class="admin-sidebar" aria-label="Admin navigation">
+      <div class="admin-sidebar-brand">
+        <a href="../index.html" class="admin-brand-link">Sky Furniture</a>
+        <p class="admin-brand-sub">Control center</p>
       </div>
-      <nav class="flex-1 p-4 space-y-1 overflow-y-auto" aria-label="Admin sections">
-        <button type="button" data-tab="dashboard" class="tab-btn admin-nav-item is-active">
-          <span class="admin-nav-icon">◉</span> Dashboard
-        </button>
-        <button type="button" data-tab="products" class="tab-btn admin-nav-item">
-          <span class="admin-nav-icon">▣</span> Products
-        </button>
-        <button type="button" data-tab="inventory" class="tab-btn admin-nav-item">
-          <span class="admin-nav-icon">▤</span> Inventory
-        </button>
-        <button type="button" data-tab="orders" class="tab-btn admin-nav-item">
-          <span class="admin-nav-icon">◈</span> Orders
-        </button>
-        <button type="button" data-tab="customers" class="tab-btn admin-nav-item">
-          <span class="admin-nav-icon">◎</span> Customers
-        </button>
-        <button type="button" data-tab="coupons" class="tab-btn admin-nav-item">
-          <span class="admin-nav-icon">◇</span> Coupons
-        </button>
-        <button type="button" data-tab="seed" class="tab-btn admin-nav-item">
-          <span class="admin-nav-icon">⚙</span> Tools
-        </button>
+      <nav class="admin-sidebar-nav" aria-label="Sections">
+        <button type="button" data-tab="dashboard" class="tab-btn admin-nav-item is-active">Dashboard</button>
+        <button type="button" data-tab="products" class="tab-btn admin-nav-item">Products</button>
+        <button type="button" data-tab="inventory" class="tab-btn admin-nav-item">Inventory</button>
+        <button type="button" data-tab="orders" class="tab-btn admin-nav-item">Orders</button>
+        <button type="button" data-tab="customers" class="tab-btn admin-nav-item">Customers</button>
+        <button type="button" data-tab="coupons" class="tab-btn admin-nav-item">Coupons</button>
+        <button type="button" data-tab="seed" class="tab-btn admin-nav-item">Tools</button>
       </nav>
-      <div class="p-4 border-t border-inherit space-y-2">
-        <a href="../shop.html" target="_blank" class="admin-nav-item text-sm">View shop ↗</a>
-        <button type="button" id="admin-logout" class="admin-nav-item text-sm text-red-700 dark:text-red-400 w-full text-left">Sign out</button>
+      <div class="admin-sidebar-foot">
+        <a href="../shop.html" target="_blank" rel="noopener" class="admin-nav-item">View shop ↗</a>
+        <button type="button" id="admin-logout" class="admin-nav-item is-danger">Sign out</button>
       </div>
     </aside>
 
-    <!-- Main column -->
-    <div class="flex-1 min-w-0 flex flex-col">
-      <!-- Top bar -->
-      <header class="admin-topbar sticky top-0 z-30 border-b backdrop-blur-md">
-        <div class="px-4 md:px-8 h-16 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-3 min-w-0">
-            <button type="button" id="mobile-nav-toggle" class="lg:hidden admin-icon-btn" aria-label="Open menu">☰</button>
-            <div class="min-w-0">
-              <p class="text-xs text-stone-500 truncate">Signed in as</p>
-              <p id="admin-email" class="text-sm font-medium truncate">Admin</p>
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="admin-topbar-row">
+          <div class="admin-topbar-left">
+            <button type="button" id="mobile-nav-toggle" class="admin-icon-btn admin-mobile-only" aria-label="Open menu">☰</button>
+            <div>
+              <p class="admin-topbar-label">Signed in as</p>
+              <p id="admin-email" class="admin-topbar-name">Admin</p>
             </div>
           </div>
-          <div class="flex items-center gap-2">
+          <div class="admin-topbar-right">
             <button type="button" data-theme-toggle class="theme-toggle-btn" aria-label="Toggle dark mode" aria-pressed="false">
-              <svg class="icon-sun w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-              <svg class="icon-moon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+              <svg class="icon-sun" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364l-1.414-1.414M7.05 7.05L5.636 5.636m12.728 0l-1.414 1.414M7.05 16.95l-1.414 1.414M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+              <svg class="icon-moon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
             </button>
-            <a href="../shop.html" target="_blank" class="hidden sm:inline-flex admin-btn-secondary text-xs">View shop</a>
+            <a href="../shop.html" target="_blank" rel="noopener" class="admin-btn-secondary admin-desktop-only">View shop</a>
           </div>
         </div>
-        <!-- Mobile tabs -->
-        <div class="lg:hidden px-4 pb-3 flex gap-2 overflow-x-auto no-scrollbar">
+        <div class="admin-mobile-tabs admin-mobile-only" role="tablist">
           <button type="button" data-tab="dashboard" class="tab-btn admin-pill is-active">Dashboard</button>
           <button type="button" data-tab="products" class="tab-btn admin-pill">Products</button>
           <button type="button" data-tab="inventory" class="tab-btn admin-pill">Inventory</button>
@@ -153,83 +119,77 @@
         </div>
       </header>
 
-      <main class="flex-1 px-4 md:px-8 py-6 md:py-8">
-        <p id="admin-mode-note" class="admin-banner text-xs mb-6"></p>
+      <main class="admin-content">
+        <p id="admin-mode-note" class="admin-banner"></p>
 
         <!-- DASHBOARD -->
-        <section id="tab-dashboard">
-          <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <section id="tab-dashboard" class="admin-panel">
+          <div class="admin-page-head">
             <div>
-              <h1 class="font-display text-3xl md:text-4xl tracking-tight">Dashboard</h1>
-              <p class="text-sm text-stone-500 mt-1">Daily &amp; weekly income, catalog, stock, customers, and orders — all in one place.</p>
+              <h1 class="admin-page-title">Dashboard</h1>
+              <p class="admin-page-desc">Income, catalog, stock, customers, and orders.</p>
             </div>
-            <div class="flex flex-wrap gap-2">
-              <button type="button" data-tab="products" class="tab-btn admin-btn-primary text-xs">Manage products</button>
-              <button type="button" data-tab="orders" class="tab-btn admin-btn-secondary text-xs">View orders</button>
+            <div class="admin-page-actions">
+              <button type="button" data-tab="products" class="tab-btn admin-btn-primary">Manage products</button>
+              <button type="button" data-tab="orders" class="tab-btn admin-btn-secondary">View orders</button>
             </div>
           </div>
-          <div id="dash-cards" class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mb-8"></div>
-
-          <!-- Feature shortcuts — every admin capability at a glance -->
-          <div class="mb-8">
-            <h2 class="admin-card-title mb-3">Admin features</h2>
-            <div id="dash-features" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-3"></div>
-          </div>
-
-          <div class="grid lg:grid-cols-2 gap-5 md:gap-6">
+          <div id="dash-cards" class="admin-stat-grid"></div>
+          <h2 class="admin-section-label">Quick access</h2>
+          <div id="dash-features" class="admin-feature-grid"></div>
+          <div class="admin-dash-grid">
             <div class="admin-card">
-              <div class="flex items-center justify-between gap-2">
-                <h2 class="admin-card-title">Low stock alerts</h2>
-                <button type="button" data-tab="inventory" class="tab-btn admin-link-btn is-primary text-xs">Inventory →</button>
+              <div class="admin-card-head">
+                <h2 class="admin-card-title">Low stock</h2>
+                <button type="button" data-tab="inventory" class="tab-btn admin-text-link">Inventory →</button>
               </div>
-              <div id="dash-low-stock" class="space-y-2 text-sm mt-4"></div>
+              <div id="dash-low-stock"></div>
             </div>
             <div class="admin-card">
-              <div class="flex items-center justify-between gap-2">
+              <div class="admin-card-head">
                 <h2 class="admin-card-title">Recent orders</h2>
-                <button type="button" data-tab="orders" class="tab-btn admin-link-btn is-primary text-xs">All orders →</button>
+                <button type="button" data-tab="orders" class="tab-btn admin-text-link">All orders →</button>
               </div>
-              <div id="dash-recent-orders" class="space-y-2 text-sm mt-4"></div>
+              <div id="dash-recent-orders"></div>
             </div>
             <div class="admin-card">
-              <div class="flex items-center justify-between gap-2">
-                <h2 class="admin-card-title">Catalog by category</h2>
-                <button type="button" data-tab="products" class="tab-btn admin-link-btn is-primary text-xs">Products →</button>
+              <div class="admin-card-head">
+                <h2 class="admin-card-title">Categories</h2>
+                <button type="button" data-tab="products" class="tab-btn admin-text-link">Products →</button>
               </div>
-              <div id="dash-categories" class="flex flex-wrap gap-2 mt-4"></div>
+              <div id="dash-categories" class="admin-chip-row"></div>
             </div>
             <div class="admin-card">
-              <div class="flex items-center justify-between gap-2">
-                <h2 class="admin-card-title">Product photo check</h2>
-                <button type="button" data-tab="seed" class="tab-btn admin-link-btn is-primary text-xs">Tools →</button>
+              <div class="admin-card-head">
+                <h2 class="admin-card-title">Photo check</h2>
+                <button type="button" data-tab="seed" class="tab-btn admin-text-link">Tools →</button>
               </div>
-              <div id="dash-image-health" class="space-y-2 text-sm mt-4"></div>
+              <div id="dash-image-health"></div>
             </div>
-            <div class="admin-card lg:col-span-2">
-              <div class="flex items-center justify-between gap-2">
-                <h2 class="admin-card-title">Latest activity</h2>
-                <button type="button" data-tab="seed" class="tab-btn admin-link-btn is-primary text-xs">Full log →</button>
+            <div class="admin-card admin-card-wide">
+              <div class="admin-card-head">
+                <h2 class="admin-card-title">Activity</h2>
+                <button type="button" data-tab="seed" class="tab-btn admin-text-link">Full log →</button>
               </div>
-              <div id="dash-activity" class="text-xs text-stone-500 space-y-1.5 max-h-36 overflow-y-auto font-mono mt-4"></div>
+              <div id="dash-activity" class="admin-activity"></div>
             </div>
           </div>
         </section>
 
         <!-- PRODUCTS -->
-        <section id="tab-products" class="hidden">
-          <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+        <section id="tab-products" class="admin-panel hidden">
+          <div class="admin-page-head">
             <div>
-              <h1 class="font-display text-3xl md:text-4xl tracking-tight">Products</h1>
-              <p id="product-stats" class="text-xs text-stone-500 mt-1 max-w-3xl"></p>
+              <h1 class="admin-page-title">Products</h1>
+              <p id="product-stats" class="admin-page-desc"></p>
             </div>
-            <div class="flex flex-wrap gap-2">
+            <div class="admin-page-actions">
               <button type="button" id="btn-export-json" class="admin-btn-secondary">Export JSON</button>
               <button type="button" id="btn-new-product" class="admin-btn-primary">+ Add product</button>
             </div>
           </div>
-
-          <div class="flex flex-wrap gap-3 mb-4">
-            <input id="admin-search" type="search" placeholder="Search name or SKU…" class="admin-input w-full sm:w-56" />
+          <div class="admin-toolbar">
+            <input id="admin-search" type="search" placeholder="Search name or SKU…" class="admin-input" />
             <select id="admin-cat-filter" class="admin-input"></select>
             <select id="admin-status-filter" class="admin-input">
               <option value="all">All status</option>
@@ -240,96 +200,91 @@
               <option value="featured">Featured</option>
             </select>
           </div>
-
-          <div id="bulk-bar" class="hidden admin-bulk-bar mb-4">
-            <span id="bulk-count" class="font-medium">0 selected</span>
+          <div id="bulk-bar" class="admin-bulk-bar hidden">
+            <span id="bulk-count" class="admin-bulk-count">0 selected</span>
             <button type="button" data-bulk="activate" class="admin-chip-btn">Activate</button>
             <button type="button" data-bulk="hide" class="admin-chip-btn">Hide</button>
             <button type="button" data-bulk="instock" class="admin-chip-btn">In stock</button>
             <button type="button" data-bulk="oos" class="admin-chip-btn">OOS</button>
             <button type="button" data-bulk="feature" class="admin-chip-btn">Feature</button>
             <button type="button" data-bulk="discount10" class="admin-chip-btn">-10% sale</button>
-            <button type="button" data-bulk="delete" class="admin-chip-btn text-red-700 dark:text-red-400">Delete</button>
+            <button type="button" data-bulk="delete" class="admin-chip-btn is-danger">Delete</button>
           </div>
 
-          <div id="product-form-wrap" class="hidden admin-card mb-8">
-            <h2 class="font-display text-2xl mb-5" id="form-title">New product</h2>
-            <form id="product-form" class="grid sm:grid-cols-2 gap-4">
+          <div id="product-form-wrap" class="admin-card admin-form-card hidden">
+            <h2 class="admin-form-title" id="form-title">New product</h2>
+            <form id="product-form" class="admin-form-grid">
               <input type="hidden" id="pf-id" />
-              <div class="sm:col-span-2">
+              <div class="admin-field admin-span-2">
                 <label class="admin-label" for="pf-name">Name</label>
-                <input id="pf-name" required class="admin-input w-full" />
+                <input id="pf-name" required class="admin-input" />
               </div>
-              <div>
+              <div class="admin-field">
                 <label class="admin-label" for="pf-sku">SKU</label>
-                <input id="pf-sku" class="admin-input w-full" placeholder="SF-LR-001" />
+                <input id="pf-sku" class="admin-input" placeholder="SF-LR-001" />
               </div>
-              <div>
+              <div class="admin-field">
                 <label class="admin-label" for="pf-category">Category</label>
-                <select id="pf-category" class="admin-input w-full"></select>
+                <select id="pf-category" class="admin-input"></select>
               </div>
-              <div>
+              <div class="admin-field">
                 <label class="admin-label" for="pf-price">Price (NGN)</label>
-                <input id="pf-price" type="number" required min="0" class="admin-input w-full" />
+                <input id="pf-price" type="number" required min="0" class="admin-input" />
               </div>
-              <div>
+              <div class="admin-field">
                 <label class="admin-label" for="pf-original">Compare-at price</label>
-                <input id="pf-original" type="number" min="0" class="admin-input w-full" />
+                <input id="pf-original" type="number" min="0" class="admin-input" />
               </div>
-              <div>
+              <div class="admin-field">
                 <label class="admin-label" for="pf-stock-qty">Stock quantity</label>
-                <input id="pf-stock-qty" type="number" min="0" value="20" class="admin-input w-full" />
+                <input id="pf-stock-qty" type="number" min="0" value="20" class="admin-input" />
               </div>
-              <div>
+              <div class="admin-field">
                 <label class="admin-label" for="pf-low-stock">Low-stock alert at</label>
-                <input id="pf-low-stock" type="number" min="0" value="5" class="admin-input w-full" />
+                <input id="pf-low-stock" type="number" min="0" value="5" class="admin-input" />
               </div>
-              <div>
+              <div class="admin-field">
                 <label class="admin-label" for="pf-badge">Badge</label>
-                <input id="pf-badge" class="admin-input w-full" placeholder="Sale, New…" />
+                <input id="pf-badge" class="admin-input" placeholder="Sale, New…" />
               </div>
-              <div class="flex items-end pb-1">
-                <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="pf-featured" class="accent-ink" /> Featured</label>
+              <div class="admin-field admin-field-check">
+                <label class="admin-check"><input type="checkbox" id="pf-featured" /> Featured</label>
               </div>
-
-              <div class="sm:col-span-2 admin-image-panel space-y-4">
-                <p class="admin-label !mb-0">Product image</p>
-                <p class="text-xs text-stone-500">Upload a file <strong>or</strong> paste a URL.</p>
-                <div>
+              <div class="admin-span-2 admin-image-panel">
+                <p class="admin-label">Product image</p>
+                <p class="admin-help">Upload a file or paste a URL.</p>
+                <div class="admin-field">
                   <label class="admin-label" for="pf-image-file">Upload</label>
                   <input id="pf-image-file" type="file" accept="image/*" class="admin-file-input" />
                 </div>
-                <div class="flex items-center gap-3 text-xs text-stone-400">
-                  <span class="flex-1 h-px bg-stone-200 dark:bg-stone-600"></span><span>OR</span><span class="flex-1 h-px bg-stone-200 dark:bg-stone-600"></span>
-                </div>
-                <div>
+                <div class="admin-or"><span>or</span></div>
+                <div class="admin-field">
                   <label class="admin-label" for="pf-image">Image URL</label>
-                  <input id="pf-image" type="url" class="admin-input w-full" placeholder="https://…" />
+                  <input id="pf-image" type="url" class="admin-input" placeholder="https://…" />
                 </div>
-                <div>
+                <div class="admin-field">
                   <p class="admin-label">Preview</p>
                   <div class="admin-preview-box">
-                    <img id="pf-image-preview" src="" alt="Product preview" class="hidden w-full h-full object-cover" />
-                    <span id="pf-image-preview-empty" class="text-xs text-stone-400 px-4 text-center">No image yet</span>
+                    <img id="pf-image-preview" src="" alt="Product preview" class="hidden" />
+                    <span id="pf-image-preview-empty" class="admin-preview-empty">No image yet</span>
                   </div>
-                  <button type="button" id="pf-image-clear" class="mt-2 text-xs text-red-600 dark:text-red-400 hover:underline hidden">Clear image</button>
+                  <button type="button" id="pf-image-clear" class="admin-text-danger hidden">Clear image</button>
                 </div>
                 <input type="hidden" id="pf-image-data" value="" />
               </div>
-
-              <div class="sm:col-span-2">
+              <div class="admin-field admin-span-2">
                 <label class="admin-label" for="pf-desc">Description</label>
-                <textarea id="pf-desc" rows="3" class="admin-input w-full"></textarea>
+                <textarea id="pf-desc" rows="3" class="admin-input"></textarea>
               </div>
-              <div class="sm:col-span-2">
+              <div class="admin-field admin-span-2">
                 <label class="admin-label" for="pf-details">Details (one per line)</label>
-                <textarea id="pf-details" rows="3" class="admin-input w-full" placeholder="Material&#10;Dimensions"></textarea>
+                <textarea id="pf-details" rows="3" class="admin-input" placeholder="Material&#10;Dimensions"></textarea>
               </div>
-              <div class="sm:col-span-2 flex flex-wrap gap-4">
-                <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="pf-stock" checked class="accent-ink" /> In stock</label>
-                <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="pf-active" checked class="accent-ink" /> Active on shop</label>
+              <div class="admin-span-2 admin-checks">
+                <label class="admin-check"><input type="checkbox" id="pf-stock" checked /> In stock</label>
+                <label class="admin-check"><input type="checkbox" id="pf-active" checked /> Active on shop</label>
               </div>
-              <div class="sm:col-span-2 flex flex-wrap gap-2">
+              <div class="admin-span-2 admin-form-actions">
                 <button type="submit" class="admin-btn-primary">Save product</button>
                 <button type="button" id="btn-cancel-form" class="admin-btn-secondary">Cancel</button>
               </div>
@@ -337,17 +292,17 @@
           </div>
 
           <div class="admin-table-wrap">
-            <table class="w-full text-sm text-left">
+            <table class="admin-table">
               <thead>
                 <tr>
-                  <th class="p-3 w-10"><input type="checkbox" id="select-all" class="accent-ink" title="Select all" /></th>
-                  <th class="p-3">Product</th>
-                  <th class="p-3">SKU</th>
-                  <th class="p-3">Category</th>
-                  <th class="p-3">Price</th>
-                  <th class="p-3">Stock</th>
-                  <th class="p-3">Status</th>
-                  <th class="p-3"></th>
+                  <th class="col-check"><input type="checkbox" id="select-all" title="Select all" /></th>
+                  <th>Product</th>
+                  <th>SKU</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Status</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody id="products-tbody"></tbody>
@@ -356,21 +311,23 @@
         </section>
 
         <!-- INVENTORY -->
-        <section id="tab-inventory" class="hidden">
-          <div class="mb-6">
-            <h1 class="font-display text-3xl md:text-4xl tracking-tight">Inventory</h1>
-            <p class="text-sm text-stone-500 mt-1">Quick stock levels. Low-stock rows are highlighted.</p>
+        <section id="tab-inventory" class="admin-panel hidden">
+          <div class="admin-page-head">
+            <div>
+              <h1 class="admin-page-title">Inventory</h1>
+              <p class="admin-page-desc">Adjust stock quickly. Low-stock rows are highlighted.</p>
+            </div>
           </div>
           <div class="admin-table-wrap">
-            <table class="w-full text-sm text-left">
+            <table class="admin-table">
               <thead>
                 <tr>
-                  <th class="p-3">Product</th>
-                  <th class="p-3">SKU</th>
-                  <th class="p-3">Qty</th>
-                  <th class="p-3">Alert at</th>
-                  <th class="p-3">Status</th>
-                  <th class="p-3">Quick adjust</th>
+                  <th>Product</th>
+                  <th>SKU</th>
+                  <th>Qty</th>
+                  <th>Alert at</th>
+                  <th>Status</th>
+                  <th>Quick adjust</th>
                 </tr>
               </thead>
               <tbody id="inventory-tbody"></tbody>
@@ -379,15 +336,15 @@
         </section>
 
         <!-- ORDERS -->
-        <section id="tab-orders" class="hidden">
-          <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+        <section id="tab-orders" class="admin-panel hidden">
+          <div class="admin-page-head">
             <div>
-              <h1 class="font-display text-3xl md:text-4xl tracking-tight">Orders</h1>
-              <p class="text-sm text-stone-500 mt-1">All site payments &amp; checkouts — updates live when Firestore is on.</p>
-              <p id="orders-meta" class="text-xs text-stone-400 mt-1"></p>
+              <h1 class="admin-page-title">Orders</h1>
+              <p class="admin-page-desc">Payments and checkouts from the shop.</p>
+              <p id="orders-meta" class="admin-meta"></p>
             </div>
-            <div class="flex flex-wrap items-center gap-2">
-              <button type="button" id="btn-refresh-orders" class="admin-btn-secondary text-xs">Refresh</button>
+            <div class="admin-page-actions">
+              <button type="button" id="btn-refresh-orders" class="admin-btn-secondary">Refresh</button>
               <select id="order-status-filter" class="admin-input">
                 <option value="all">All statuses</option>
                 <option value="paid">Paid</option>
@@ -399,100 +356,103 @@
               </select>
             </div>
           </div>
-          <div id="orders-admin" class="space-y-3"></div>
+          <div id="orders-admin" class="admin-stack"></div>
         </section>
 
         <!-- CUSTOMERS -->
-        <section id="tab-customers" class="hidden">
-          <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+        <section id="tab-customers" class="admin-panel hidden">
+          <div class="admin-page-head">
             <div>
-              <h1 class="font-display text-3xl md:text-4xl tracking-tight">Customers</h1>
-              <p class="text-sm text-stone-500 mt-1">Everyone who signed up, signed in, or placed an order on the site.</p>
-              <p id="customers-meta" class="text-xs text-stone-400 mt-1"></p>
+              <h1 class="admin-page-title">Customers</h1>
+              <p class="admin-page-desc">Sign-ups, logins, and buyers.</p>
+              <p id="customers-meta" class="admin-meta"></p>
             </div>
-            <button type="button" id="btn-refresh-customers" class="admin-btn-secondary text-xs">Refresh</button>
+            <button type="button" id="btn-refresh-customers" class="admin-btn-secondary">Refresh</button>
           </div>
-          <div id="customers-list" class="admin-card !p-0 divide-y divide-stone-100 dark:divide-stone-700 overflow-hidden"></div>
+          <div id="customers-list" class="admin-card admin-list-card"></div>
         </section>
 
         <!-- COUPONS -->
-        <section id="tab-coupons" class="hidden">
-          <div class="mb-6">
-            <h1 class="font-display text-3xl md:text-4xl tracking-tight">Coupons</h1>
-            <p class="text-sm text-stone-500 mt-1">Discount codes stored locally.</p>
-          </div>
-          <form id="coupon-form" class="admin-card grid sm:grid-cols-4 gap-3 mb-6">
+        <section id="tab-coupons" class="admin-panel hidden">
+          <div class="admin-page-head">
             <div>
-              <label class="admin-label">Code</label>
-              <input id="cp-code" required class="admin-input w-full uppercase" placeholder="WELCOME10" />
+              <h1 class="admin-page-title">Coupons</h1>
+              <p class="admin-page-desc">Discount codes for the shop.</p>
             </div>
-            <div>
-              <label class="admin-label">Type</label>
-              <select id="cp-type" class="admin-input w-full">
+          </div>
+          <form id="coupon-form" class="admin-card admin-coupon-form">
+            <div class="admin-field">
+              <label class="admin-label" for="cp-code">Code</label>
+              <input id="cp-code" required class="admin-input" placeholder="WELCOME10" style="text-transform:uppercase" />
+            </div>
+            <div class="admin-field">
+              <label class="admin-label" for="cp-type">Type</label>
+              <select id="cp-type" class="admin-input">
                 <option value="percent">Percent off</option>
                 <option value="fixed">Fixed NGN off</option>
               </select>
             </div>
-            <div>
-              <label class="admin-label">Value</label>
-              <input id="cp-value" type="number" min="1" required class="admin-input w-full" placeholder="10" />
+            <div class="admin-field">
+              <label class="admin-label" for="cp-value">Value</label>
+              <input id="cp-value" type="number" min="1" required class="admin-input" placeholder="10" />
             </div>
-            <div class="flex items-end">
-              <button type="submit" class="admin-btn-primary w-full">Add coupon</button>
+            <div class="admin-field admin-field-end">
+              <button type="submit" class="admin-btn-primary admin-btn-block">Add coupon</button>
             </div>
           </form>
-          <div id="coupons-list" class="space-y-2"></div>
+          <div id="coupons-list" class="admin-stack"></div>
         </section>
 
         <!-- TOOLS -->
-        <section id="tab-seed" class="hidden">
-          <div class="mb-6">
-            <h1 class="font-display text-3xl md:text-4xl tracking-tight">Tools</h1>
-            <p class="text-sm text-stone-500 mt-1">Catalog sync, photo refresh, backup, theme, and activity.</p>
+        <section id="tab-seed" class="admin-panel hidden">
+          <div class="admin-page-head">
+            <div>
+              <h1 class="admin-page-title">Tools</h1>
+              <p class="admin-page-desc">Catalog sync, backup, theme, and activity.</p>
+            </div>
           </div>
-          <div class="grid md:grid-cols-2 gap-5">
+          <div class="admin-tools-grid">
             <div class="admin-card">
               <h2 class="admin-card-title">Catalog sync</h2>
-              <p class="text-sm text-stone-500 mt-2 mb-4">Reload all products and matching photos from <code class="admin-code">data.js</code>.</p>
-              <div class="flex flex-wrap gap-2">
+              <p class="admin-help">Reload products and photos from the site catalog.</p>
+              <div class="admin-inline-actions">
                 <button type="button" id="btn-seed" class="admin-btn-primary">Load catalog + photos</button>
                 <button type="button" id="btn-clear-catalog" class="admin-btn-secondary">Reset to defaults</button>
               </div>
-              <p id="seed-status" class="mt-3 text-sm text-stone-500"></p>
+              <p id="seed-status" class="admin-status-msg"></p>
             </div>
             <div class="admin-card">
               <h2 class="admin-card-title">Import / export</h2>
-              <p class="text-sm text-stone-500 mt-2 mb-4">Backup or restore catalog as JSON.</p>
-              <div class="flex flex-wrap gap-2">
-                <button type="button" id="btn-export-json-2" class="admin-btn-secondary">Export products JSON</button>
-                <label class="admin-btn-secondary cursor-pointer">
+              <p class="admin-help">Backup or restore the product catalog as JSON.</p>
+              <div class="admin-inline-actions">
+                <button type="button" id="btn-export-json-2" class="admin-btn-secondary">Export products</button>
+                <label class="admin-btn-secondary admin-file-label">
                   Import JSON
-                  <input type="file" id="import-json" accept="application/json,.json" class="hidden" />
+                  <input type="file" id="import-json" accept="application/json,.json" hidden />
                 </label>
               </div>
-              <p id="import-status" class="mt-3 text-sm text-stone-500"></p>
+              <p id="import-status" class="admin-status-msg"></p>
             </div>
             <div class="admin-card">
               <h2 class="admin-card-title">Appearance</h2>
-              <p class="text-sm text-stone-500 mt-2 mb-4">Light / dark mode is shared with the shop sitewide.</p>
-              <div class="flex flex-wrap gap-2">
-                <button type="button" id="btn-theme-light" class="admin-btn-secondary text-xs">Light mode</button>
-                <button type="button" id="btn-theme-dark" class="admin-btn-secondary text-xs">Dark mode</button>
+              <p class="admin-help">Light and dark mode are shared with the shop.</p>
+              <div class="admin-inline-actions">
+                <button type="button" id="btn-theme-light" class="admin-btn-secondary">Light mode</button>
+                <button type="button" id="btn-theme-dark" class="admin-btn-secondary">Dark mode</button>
               </div>
-              <p class="mt-3 text-xs text-stone-400">Password: <span class="font-mono text-ink dark:text-[#f3efe9]" data-admin-pass-hint>SkyAdmin2026</span></p>
             </div>
             <div class="admin-card">
               <h2 class="admin-card-title">Quick links</h2>
-              <ul class="mt-3 space-y-2 text-sm">
-                <li><a href="../shop.html" target="_blank" class="text-clay hover:underline">Open shop ↗</a></li>
-                <li><a href="../index.html" target="_blank" class="text-clay hover:underline">Home page ↗</a></li>
-                <li><a href="../account.html" target="_blank" class="text-clay hover:underline">Customer account ↗</a></li>
-                <li><button type="button" data-tab="coupons" class="tab-btn text-clay hover:underline text-left">Manage coupons</button></li>
+              <ul class="admin-link-list">
+                <li><a href="../shop.html" target="_blank" rel="noopener">Open shop ↗</a></li>
+                <li><a href="../index.html" target="_blank" rel="noopener">Home page ↗</a></li>
+                <li><a href="../account.html" target="_blank" rel="noopener">Customer account ↗</a></li>
+                <li><button type="button" data-tab="coupons" class="tab-btn admin-text-link">Manage coupons</button></li>
               </ul>
             </div>
-            <div class="admin-card md:col-span-2">
+            <div class="admin-card admin-card-wide">
               <h2 class="admin-card-title">Activity log</h2>
-              <div id="activity-log" class="text-xs text-stone-500 space-y-1.5 max-h-48 overflow-y-auto font-mono mt-4"></div>
+              <div id="activity-log" class="admin-activity"></div>
             </div>
           </div>
         </section>
@@ -500,26 +460,25 @@
     </div>
   </div>
 
-  <!-- Mobile sidebar drawer (simple) -->
-  <div id="mobile-drawer" class="hidden fixed inset-0 z-40 lg:hidden">
-    <div class="absolute inset-0 bg-ink/40 backdrop-blur-sm" data-close-drawer></div>
-    <div class="admin-sidebar absolute left-0 top-0 bottom-0 w-72 flex flex-col shadow-lift">
-      <div class="px-5 py-5 border-b border-inherit flex justify-between items-center">
-        <span class="font-display text-xl">Menu</span>
+  <!-- Mobile drawer -->
+  <div id="mobile-drawer" class="admin-drawer hidden" aria-hidden="true">
+    <div class="admin-drawer-backdrop" data-close-drawer></div>
+    <div class="admin-drawer-panel">
+      <div class="admin-drawer-head">
+        <span class="admin-brand-link">Menu</span>
         <button type="button" data-close-drawer class="admin-icon-btn" aria-label="Close">✕</button>
       </div>
-      <nav class="p-3 space-y-1 flex-1" id="mobile-nav-copy"></nav>
+      <nav class="admin-drawer-nav" id="mobile-nav-copy"></nav>
     </div>
   </div>
 
   <script src="../assets/js/data.js"></script>
   <script src="../config/admin-access.js"></script>
   <script>
-    // Optional private password override (file may not exist)
     (function () {
       var s = document.createElement("script");
       s.src = "../config/admin-access.local.js";
-      s.onerror = function () { /* no private override */ };
+      s.onerror = function () {};
       document.body.appendChild(s);
     })();
   </script>
