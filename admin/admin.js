@@ -1,8 +1,5 @@
 /**
- * Sky Furniture — Admin console (clean rebuild)
- * Products: localStorage sky_admin_products + data.js seed
- * Orders: sky_furniture_paid_orders
- * Coupons: sky_admin_coupons
+ * Sky Furniture Admin — full working console
  */
 (function () {
   "use strict";
@@ -40,9 +37,8 @@
     artifacts: "decor"
   };
 
-  // ── helpers ────────────────────────────────────────────
-  const $ = (sel, root = document) => root.querySelector(sel);
-  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
   function money(n) {
     return new Intl.NumberFormat("en-NG", {
@@ -67,9 +63,7 @@
   function assetUrl(url) {
     if (!url) return "";
     if (/^(https?:|data:|blob:)/i.test(url)) return url;
-    const clean = String(url).replace(/^\//, "");
-    if (clean.startsWith("assets/")) return "../" + clean;
-    return "../" + clean;
+    return "../" + String(url).replace(/^\//, "");
   }
 
   function readJSON(key, fallback) {
@@ -86,8 +80,7 @@
   }
 
   function password() {
-    const p = String(window.SKY_ADMIN_ACCESS?.localPassword || "").trim();
-    return p || DEFAULT_PASS;
+    return String(window.SKY_ADMIN_ACCESS?.localPassword || "").trim() || DEFAULT_PASS;
   }
 
   function log(msg) {
@@ -130,8 +123,7 @@
   }
 
   function seedFromDataJs() {
-    const raw = window.SKY_PRODUCTS || window.PRODUCTS || [];
-    return raw.map(normalizeProduct);
+    return (window.SKY_PRODUCTS || window.PRODUCTS || []).map(normalizeProduct);
   }
 
   function getProducts() {
@@ -151,7 +143,6 @@
       return list;
     }
 
-    // Patch broken/stale images from data.js
     const seed = seedFromDataJs();
     const byId = new Map(seed.map((p) => [String(p.id), p]));
     let changed = false;
@@ -180,7 +171,6 @@
     return normalized;
   }
 
-  // ── orders / customers / coupons ───────────────────────
   function getOrders() {
     const list = readJSON(KEYS.orders, []);
     return Array.isArray(list) ? list : [];
@@ -215,7 +205,7 @@
 
   function getCustomers() {
     const map = new Map();
-    readJSON(KEYS.users, []).forEach((u) => {
+    (readJSON(KEYS.users, []) || []).forEach((u) => {
       const email = String(u.email || "").toLowerCase();
       if (!email) return;
       map.set(email, {
@@ -249,7 +239,7 @@
   }
 
   function getCoupons() {
-    return readJSON(KEYS.coupons, []);
+    return readJSON(KEYS.coupons, []) || [];
   }
 
   function saveCoupons(list) {
@@ -261,7 +251,7 @@
     document.documentElement.classList.toggle("dark", theme === "dark");
     localStorage.setItem(KEYS.theme, theme);
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = theme === "dark" ? "#0f0e0d" : "#f3efe8";
+    if (meta) meta.content = theme === "dark" ? "#0F0E0D" : "#F4F0EA";
   }
 
   function initTheme() {
@@ -285,32 +275,38 @@
   // ── auth / views ───────────────────────────────────────
   function showLogin(err) {
     document.body.classList.remove("is-app");
-    $("#login-screen").hidden = false;
-    $("#app").hidden = true;
+    const login = $("#login-screen");
+    const app = $("#app");
+    if (login) login.hidden = false;
+    if (app) app.hidden = true;
     $("#drawer").hidden = true;
     const errEl = $("#login-error");
-    if (err) {
-      errEl.hidden = false;
-      errEl.textContent = err;
-    } else {
-      errEl.hidden = true;
-      errEl.textContent = "";
+    if (errEl) {
+      if (err) {
+        errEl.classList.remove("hidden");
+        errEl.textContent = err;
+      } else {
+        errEl.classList.add("hidden");
+        errEl.textContent = "";
+      }
     }
-    setTimeout(() => $("#login-pass")?.focus(), 50);
+    setTimeout(() => $("#login-pass")?.focus(), 40);
   }
 
   function showApp(name) {
     document.body.classList.add("is-app");
-    $("#login-screen").hidden = true;
-    $("#app").hidden = false;
-    $("#admin-name").textContent = name || "Admin";
+    const login = $("#login-screen");
+    const app = $("#app");
+    if (login) login.hidden = true;
+    if (app) app.hidden = false;
+    if ($("#admin-name")) $("#admin-name").textContent = name || "Admin";
     fillCategorySelects();
     showView("dashboard");
   }
 
   function unlock(name) {
     sessionStorage.setItem(KEYS.session, "1");
-    if (name) sessionStorage.setItem(KEYS.email, name);
+    sessionStorage.setItem(KEYS.email, name || "Admin");
     sessionStorage.setItem(KEYS.fromAdmin, "1");
     showApp(name || "Admin");
   }
@@ -324,10 +320,12 @@
 
   function showView(name) {
     $$(".view").forEach((el) => {
-      el.hidden = el.id !== `view-${name}`;
+      el.hidden = el.id !== "view-" + name;
     });
-    $$(".nav-item[data-view]").forEach((btn) => {
-      btn.classList.toggle("active", btn.dataset.view === name);
+    $$("[data-view]").forEach((btn) => {
+      const on = btn.dataset.view === name;
+      btn.classList.toggle("is-active", on);
+      btn.classList.toggle("active", on);
     });
     closeDrawer();
     if (name === "dashboard") renderDashboard();
@@ -356,27 +354,31 @@
     const day = startOfDay();
     const week = startOfWeek();
     const paid = orders.filter(isRevenue);
-    const daily = paid.filter((o) => orderTime(o) >= day).reduce((s, o) => s + (Number(o.totals?.total) || 0), 0);
-    const weekly = paid.filter((o) => orderTime(o) >= week).reduce((s, o) => s + (Number(o.totals?.total) || 0), 0);
+    const todayOrders = paid.filter((o) => orderTime(o) >= day);
+    const weekOrders = paid.filter((o) => orderTime(o) >= week);
+    const daily = todayOrders.reduce((s, o) => s + (Number(o.totals?.total) || 0), 0);
+    const weekly = weekOrders.reduce((s, o) => s + (Number(o.totals?.total) || 0), 0);
     const revenue = paid.reduce((s, o) => s + (Number(o.totals?.total) || 0), 0);
     const low = products.filter((p) => p.stockQty > 0 && p.stockQty <= p.lowStockAt).length;
     const oos = products.filter((p) => p.stockQty <= 0).length;
     const active = products.filter((p) => p.active).length;
 
-    $("#kpi-grid").innerHTML = [
-      { label: "Today", value: money(daily), sub: `${paid.filter((o) => orderTime(o) >= day).length} paid` },
-      { label: "This week", value: money(weekly), sub: `${paid.filter((o) => orderTime(o) >= week).length} paid` },
-      { label: "All revenue", value: money(revenue), sub: `${orders.length} orders` },
+    const kpis = [
+      { label: "Today", value: money(daily), sub: todayOrders.length + " paid" },
+      { label: "This week", value: money(weekly), sub: weekOrders.length + " paid" },
+      { label: "All revenue", value: money(revenue), sub: orders.length + " orders" },
       { label: "Customers", value: String(customers.length), sub: "Sign-ups & buyers" },
-      { label: "Products", value: String(products.length), sub: `${active} active` },
-      { label: "Stock alerts", value: String(low), sub: oos ? `${oos} out of stock` : "Healthy", warn: low || oos }
-    ]
+      { label: "Products", value: String(products.length), sub: active + " active" },
+      { label: "Stock alerts", value: String(low), sub: oos ? oos + " out of stock" : "Healthy", warn: low || oos }
+    ];
+
+    $("#kpi-grid").innerHTML = kpis
       .map(
         (k) => `
       <div class="kpi${k.warn ? " warn" : ""}">
-        <div class="label">${esc(k.label)}</div>
-        <div class="value">${esc(k.value)}</div>
-        <div class="sub">${esc(k.sub)}</div>
+        <div class="kpi-label">${esc(k.label)}</div>
+        <div class="kpi-value">${esc(k.value)}</div>
+        <div class="kpi-sub">${esc(k.sub)}</div>
       </div>`
       )
       .join("");
@@ -387,8 +389,8 @@
           .map(
             (o) => `
         <div class="list-row">
-          <span class="truncate">${esc(o.orderNumber || o.paymentRef || o.id || "Order")} · ${esc(o.customer?.fullName || o.customer?.email || "")}</span>
-          <strong class="money">${money(o.totals?.total)}</strong>
+          <span class="truncate min-w-0">${esc(o.orderNumber || o.paymentRef || o.id || "Order")} · ${esc(o.customer?.fullName || o.customer?.email || "")}</span>
+          <strong class="tabular-nums shrink-0">${money(o.totals?.total)}</strong>
         </div>`
           )
           .join("")
@@ -401,7 +403,7 @@
             (p) => `
         <div class="list-row">
           <span class="truncate">${esc(p.name)}</span>
-          <strong style="color:var(--danger)">${p.stockQty} left</strong>
+          <strong class="text-red-600 tabular-nums">${p.stockQty} left</strong>
         </div>`
           )
           .join("")
@@ -437,11 +439,12 @@
     if (status === "low") list = list.filter((p) => p.stockQty > 0 && p.stockQty <= p.lowStockAt);
 
     list = [...list].sort((a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name));
-    $("#product-count").textContent = `Showing ${list.length} of ${getProducts().length}`;
+    if ($("#product-count")) $("#product-count").textContent = `Showing ${list.length} of ${getProducts().length}`;
 
     const body = $("#products-body");
+    if (!body) return;
     if (!list.length) {
-      body.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:28px;color:var(--muted)">No products match. Use Tools → Load catalog.</td></tr>`;
+      body.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-stone-400">No products match. Use Tools → Load catalog + photos.</td></tr>`;
       return;
     }
 
@@ -449,68 +452,67 @@
       .map((p) => {
         const low = p.stockQty > 0 && p.stockQty <= p.lowStockAt;
         const label = !p.active ? "Hidden" : p.stockQty <= 0 ? "OOS" : low ? "Low" : "Active";
-        const badge =
-          label === "OOS"
-            ? "danger"
-            : label === "Low"
-              ? "warn"
-              : label === "Active"
-                ? "ok"
-                : "";
+        const badge = label === "OOS" ? "danger" : label === "Low" ? "warn" : label === "Active" ? "ok" : "";
         return `
       <tr>
-        <td>
-          <div class="prod">
-            <img class="thumb" src="${esc(assetUrl(p.image))}" alt="" loading="lazy" onerror="this.style.opacity=.3" />
-            <div>
-              <div class="name">${esc(p.name)}</div>
-              <div class="tags">
+        <td class="p-3">
+          <div class="prod-cell">
+            <img class="prod-thumb" src="${esc(assetUrl(p.image))}" alt="" loading="lazy" onerror="this.style.opacity=.3" />
+            <div class="min-w-0">
+              <div class="prod-name">${esc(p.name)}</div>
+              <div class="prod-tags">
                 ${p.badge ? `<span>${esc(p.badge)}</span>` : ""}
                 ${p.featured ? `<span>Featured</span>` : ""}
               </div>
             </div>
           </div>
         </td>
-        <td class="mono">${esc(p.sku || "—")}</td>
-        <td>${esc(catLabel(p.category))}</td>
-        <td class="money">${money(p.price)}${p.originalPrice ? `<span class="strike">${money(p.originalPrice)}</span>` : ""}</td>
-        <td class="money" style="${p.stockQty <= 0 ? "color:var(--danger)" : low ? "color:var(--warn)" : ""}">${p.stockQty}</td>
-        <td><span class="badge ${badge}">${label}</span></td>
-        <td class="row-actions">
-          <button type="button" data-edit="${p.id}" class="primary">Edit</button>
-          <button type="button" data-dup="${p.id}">Dup</button>
-          <button type="button" data-del="${p.id}" class="danger">Del</button>
+        <td class="p-3 font-mono text-xs text-stone-400">${esc(p.sku || "—")}</td>
+        <td class="p-3">${esc(catLabel(p.category))}</td>
+        <td class="p-3 tabular-nums">${money(p.price)}${
+          p.originalPrice
+            ? `<span class="block text-xs text-stone-400 line-through">${money(p.originalPrice)}</span>`
+            : ""
+        }</td>
+        <td class="p-3 tabular-nums font-medium ${p.stockQty <= 0 ? "text-red-600" : low ? "text-amber-600" : ""}">${p.stockQty}</td>
+        <td class="p-3"><span class="badge ${badge}">${label}</span></td>
+        <td class="p-3 text-right whitespace-nowrap">
+          <button type="button" class="row-btn primary" data-edit="${p.id}">Edit</button>
+          <button type="button" class="row-btn" data-dup="${p.id}">Dup</button>
+          <button type="button" class="row-btn danger" data-del="${p.id}">Del</button>
         </td>
       </tr>`;
       })
       .join("");
 
     body.querySelectorAll("[data-edit]").forEach((btn) => {
-      btn.addEventListener("click", () => openEditor(getProducts().find((p) => String(p.id) === btn.dataset.edit)));
+      btn.addEventListener("click", () => {
+        openEditor(getProducts().find((p) => String(p.id) === btn.dataset.edit));
+      });
     });
     body.querySelectorAll("[data-del]").forEach((btn) => {
       btn.addEventListener("click", () => {
         if (!confirm("Delete this product?")) return;
         saveProducts(getProducts().filter((p) => String(p.id) !== btn.dataset.del));
-        log(`Deleted product #${btn.dataset.del}`);
+        log("Deleted product #" + btn.dataset.del);
         renderProducts();
-        renderDashboard();
       });
     });
     body.querySelectorAll("[data-dup]").forEach((btn) => {
       btn.addEventListener("click", () => {
         const src = getProducts().find((p) => String(p.id) === btn.dataset.dup);
         if (!src) return;
-        const copy = normalizeProduct({
-          ...src,
-          id: Date.now(),
-          name: src.name + " (copy)",
-          sku: (src.sku || "SF") + "-C"
-        });
         const list2 = getProducts();
-        list2.push(copy);
+        list2.push(
+          normalizeProduct({
+            ...src,
+            id: Date.now(),
+            name: src.name + " (copy)",
+            sku: (src.sku || "SF") + "-C"
+          })
+        );
         saveProducts(list2);
-        log(`Duplicated ${src.name}`);
+        log("Duplicated " + src.name);
         renderProducts();
       });
     });
@@ -520,21 +522,24 @@
     const img = $("#f-preview");
     const empty = $("#f-preview-empty");
     const data = $("#f-image-data");
+    if (!img || !empty) return;
     if (src) {
       img.src = assetUrl(src);
-      img.hidden = false;
-      empty.hidden = true;
+      img.classList.remove("hidden");
+      empty.classList.add("hidden");
       if (data) data.value = src;
     } else {
       img.removeAttribute("src");
-      img.hidden = true;
-      empty.hidden = false;
+      img.classList.add("hidden");
+      empty.classList.remove("hidden");
       if (data) data.value = "";
     }
   }
 
   function openEditor(product) {
-    $("#product-editor").hidden = false;
+    const wrap = $("#product-editor");
+    if (!wrap) return;
+    wrap.hidden = false;
     $("#editor-title").textContent = product ? "Edit product" : "New product";
     $("#f-id").value = product?.id ?? "";
     $("#f-name").value = product?.name || "";
@@ -550,48 +555,50 @@
     $("#f-details").value = (product?.details || []).join("\n");
     $("#f-instock").checked = product?.inStock !== false;
     $("#f-active").checked = product?.active !== false;
-    $("#f-file").value = "";
+    if ($("#f-file")) $("#f-file").value = "";
     const img = product?.image || "";
-    $("#f-image").value = img.startsWith("data:") ? "" : img;
+    if ($("#f-image")) $("#f-image").value = img.startsWith("data:") ? "" : img;
     setPreview(img);
-    $("#product-editor").scrollIntoView({ behavior: "smooth", block: "start" });
+    wrap.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function closeEditor() {
-    $("#product-editor").hidden = true;
+    if ($("#product-editor")) $("#product-editor").hidden = true;
   }
 
   function renderInventory() {
+    const body = $("#inventory-body");
+    if (!body) return;
     const list = [...getProducts()].sort((a, b) => a.stockQty - b.stockQty);
-    $("#inventory-body").innerHTML = list
+    body.innerHTML = list
       .map((p) => {
         const low = p.stockQty <= p.lowStockAt;
         const label = p.stockQty <= 0 ? "Out of stock" : low ? "Low stock" : "OK";
         const badge = p.stockQty <= 0 ? "danger" : low ? "warn" : "ok";
         return `
-      <tr class="${low ? "low" : ""}">
-        <td>
-          <div class="prod">
-            <img class="thumb" src="${esc(assetUrl(p.image))}" alt="" loading="lazy" onerror="this.style.opacity=.3" />
-            <span class="name">${esc(p.name)}</span>
+      <tr class="${low ? "tr-low" : ""}">
+        <td class="p-3">
+          <div class="prod-cell">
+            <img class="prod-thumb" src="${esc(assetUrl(p.image))}" alt="" loading="lazy" onerror="this.style.opacity=.3" />
+            <span class="prod-name">${esc(p.name)}</span>
           </div>
         </td>
-        <td class="mono">${esc(p.sku || "—")}</td>
-        <td class="money" style="${p.stockQty <= 0 ? "color:var(--danger)" : ""}">${p.stockQty}</td>
-        <td class="money muted">${p.lowStockAt}</td>
-        <td><span class="badge ${badge}">${label}</span></td>
-        <td>
-          <div class="qty-btns">
-            <button type="button" data-inv="${p.id}" data-d="-1">−</button>
-            <button type="button" data-inv="${p.id}" data-d="1">+</button>
-            <button type="button" data-inv="${p.id}" data-d="10">+10</button>
+        <td class="p-3 font-mono text-xs text-stone-400">${esc(p.sku || "—")}</td>
+        <td class="p-3 tabular-nums font-medium ${p.stockQty <= 0 ? "text-red-600" : ""}">${p.stockQty}</td>
+        <td class="p-3 tabular-nums text-stone-400">${p.lowStockAt}</td>
+        <td class="p-3"><span class="badge ${badge}">${label}</span></td>
+        <td class="p-3">
+          <div class="flex gap-1.5">
+            <button type="button" class="qty-btn" data-inv="${p.id}" data-d="-1">−</button>
+            <button type="button" class="qty-btn" data-inv="${p.id}" data-d="1">+</button>
+            <button type="button" class="qty-btn px-2 text-xs" data-inv="${p.id}" data-d="10">+10</button>
           </div>
         </td>
       </tr>`;
       })
       .join("");
 
-    $$("#inventory-body [data-inv]").forEach((btn) => {
+    body.querySelectorAll("[data-inv]").forEach((btn) => {
       btn.addEventListener("click", () => {
         const id = btn.dataset.inv;
         const d = Number(btn.dataset.d);
@@ -612,16 +619,18 @@
     let orders = getOrders();
     if (filter !== "all") orders = orders.filter((o) => (o.status || "paid") === filter);
     orders = [...orders].sort((a, b) => orderTime(b) - orderTime(a));
-    $("#orders-meta").textContent = `${orders.length} order(s)`;
+    if ($("#orders-meta")) $("#orders-meta").textContent = orders.length + " order(s)";
 
+    const root = $("#orders-list");
+    if (!root) return;
     if (!orders.length) {
-      $("#orders-list").innerHTML = `<div class="card"><p class="empty">No orders for this filter yet.</p></div>`;
+      root.innerHTML = `<div class="card"><p class="empty">No orders for this filter yet.</p></div>`;
       return;
     }
 
-    $("#orders-list").innerHTML = orders
+    root.innerHTML = orders
       .map((o, idx) => {
-        const id = o.orderNumber || o.paymentRef || o.id || `local-${idx}`;
+        const id = o.orderNumber || o.paymentRef || o.id || "local-" + idx;
         const status = o.status || "paid";
         const date = o.createdAt ? new Date(o.createdAt).toLocaleString("en-NG") : "—";
         const items = Array.isArray(o.items) ? o.items : [];
@@ -630,17 +639,17 @@
           .map((i) => `${esc(i.name || "Item")} ×${i.quantity || i.qty || 1}`)
           .join(" · ");
         return `
-      <article class="card order-card">
-        <div>
-          <strong class="mono">${esc(id)}</strong>
-          <div class="meta">${esc(o.customer?.fullName || "")} · ${esc(o.customer?.email || o.userEmail || "")} · ${esc(o.customer?.phone || "")}</div>
-          <div class="meta">${esc(date)}</div>
-          <div style="margin-top:8px;font-weight:600">${money(o.totals?.total)} · ${esc(o.payment || "Paystack")}</div>
-          <div class="meta">${esc([o.customer?.address, o.customer?.lga, o.customer?.state].filter(Boolean).join(", "))}</div>
-          ${preview ? `<div class="meta" style="margin-top:6px">${preview}</div>` : ""}
+      <article class="card flex flex-wrap justify-between gap-4">
+        <div class="min-w-0">
+          <p class="font-mono text-sm font-semibold">${esc(id)}</p>
+          <p class="text-xs text-stone-500 mt-1">${esc(o.customer?.fullName || "")} · ${esc(o.customer?.email || o.userEmail || "")} · ${esc(o.customer?.phone || "")}</p>
+          <p class="text-xs text-stone-400 mt-1">${esc(date)}</p>
+          <p class="text-sm font-semibold mt-2">${money(o.totals?.total)} · ${esc(o.payment || "Paystack")}</p>
+          <p class="text-xs text-stone-500 mt-1">${esc([o.customer?.address, o.customer?.lga, o.customer?.state].filter(Boolean).join(", "))}</p>
+          ${preview ? `<p class="text-xs text-stone-400 mt-2">${preview}</p>` : ""}
         </div>
-        <div class="order-side">
-          <select class="input order-status" data-id="${esc(id)}" style="width:auto;min-width:140px">
+        <div>
+          <select class="field order-status" data-id="${esc(id)}">
             ${["pending_payment", "paid", "processing", "shipped", "delivered", "cancelled"]
               .map((s) => `<option value="${s}" ${status === s ? "selected" : ""}>${s}</option>`)
               .join("")}
@@ -650,7 +659,7 @@
       })
       .join("");
 
-    $$(".order-status").forEach((sel) => {
+    root.querySelectorAll(".order-status").forEach((sel) => {
       sel.addEventListener("change", () => {
         const id = sel.dataset.id;
         const status = sel.value;
@@ -662,30 +671,31 @@
         saveOrders(next);
         log(`Order ${id} → ${status}`);
         renderOrders();
-        renderDashboard();
       });
     });
   }
 
   function renderCustomers() {
     const list = getCustomers();
-    $("#customers-meta").textContent = `${list.length} customer(s)`;
+    if ($("#customers-meta")) $("#customers-meta").textContent = list.length + " customer(s)";
+    const root = $("#customers-list");
+    if (!root) return;
     if (!list.length) {
-      $("#customers-list").innerHTML = `<div class="row"><p class="empty" style="padding:8px">No customers yet.</p></div>`;
+      root.innerHTML = `<div class="p-6"><p class="empty">No customers yet.</p></div>`;
       return;
     }
-    $("#customers-list").innerHTML = list
+    root.innerHTML = list
       .map(
         (c) => `
-      <div class="row">
+      <div class="p-4 flex flex-wrap justify-between gap-3">
         <div>
-          <strong>${esc(c.name || "Customer")}</strong>
-          <div class="meta" style="color:var(--muted);font-size:12.5px;margin-top:2px">${esc(c.email)} · ${esc(c.phone || "—")}</div>
-          <div class="meta" style="color:var(--muted);font-size:11.5px;margin-top:2px">Source: ${esc(c.source)}</div>
+          <p class="font-semibold text-sm">${esc(c.name || "Customer")}</p>
+          <p class="text-xs text-stone-500 mt-0.5">${esc(c.email)} · ${esc(c.phone || "—")}</p>
+          <p class="text-[11px] text-stone-400 mt-1">Source: ${esc(c.source)}</p>
         </div>
-        <div style="text-align:right">
-          <strong class="money">${money(c.totalSpent)}</strong>
-          <div style="color:var(--muted);font-size:12px">${c.orderCount} order(s)</div>
+        <div class="text-right">
+          <p class="font-semibold tabular-nums">${money(c.totalSpent)}</p>
+          <p class="text-xs text-stone-400">${c.orderCount} order(s)</p>
         </div>
       </div>`
       )
@@ -693,31 +703,33 @@
   }
 
   function renderCoupons() {
+    const root = $("#coupons-list");
+    if (!root) return;
     const list = getCoupons();
     if (!list.length) {
-      $("#coupons-list").innerHTML = `<div class="card"><p class="empty">No coupons yet. Create WELCOME10 for 10% off.</p></div>`;
+      root.innerHTML = `<div class="card"><p class="empty">No coupons yet. Try WELCOME10 for 10% off.</p></div>`;
       return;
     }
-    $("#coupons-list").innerHTML = list
+    root.innerHTML = list
       .map(
         (c, i) => `
-      <div class="card" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center">
+      <div class="card flex flex-wrap items-center justify-between gap-3">
         <div>
-          <strong class="mono" style="letter-spacing:.04em">${esc(c.code)}</strong>
-          <div class="meta" style="color:var(--muted);font-size:12.5px;margin-top:4px">
+          <p class="font-mono font-semibold tracking-wide">${esc(c.code)}</p>
+          <p class="text-xs text-stone-500 mt-1">
             ${c.type === "percent" ? c.value + "% off" : money(c.value) + " off"}
             · <span class="badge ${c.active === false ? "" : "ok"}">${c.active === false ? "Disabled" : "Active"}</span>
-          </div>
+          </p>
         </div>
-        <div class="actions">
-          <button type="button" class="btn btn-ghost" data-cp-toggle="${i}">${c.active === false ? "Enable" : "Disable"}</button>
-          <button type="button" class="btn btn-ghost" data-cp-del="${i}" style="color:var(--danger)">Delete</button>
+        <div class="flex gap-2">
+          <button type="button" class="btn-secondary text-xs" data-cp-toggle="${i}">${c.active === false ? "Enable" : "Disable"}</button>
+          <button type="button" class="btn-secondary text-xs text-red-600" data-cp-del="${i}">Delete</button>
         </div>
       </div>`
       )
       .join("");
 
-    $$("[data-cp-del]").forEach((btn) => {
+    root.querySelectorAll("[data-cp-del]").forEach((btn) => {
       btn.addEventListener("click", () => {
         const list2 = getCoupons();
         list2.splice(Number(btn.dataset.cpDel), 1);
@@ -726,7 +738,7 @@
         renderCoupons();
       });
     });
-    $$("[data-cp-toggle]").forEach((btn) => {
+    root.querySelectorAll("[data-cp-toggle]").forEach((btn) => {
       btn.addEventListener("click", () => {
         const list2 = getCoupons();
         const i = Number(btn.dataset.cpToggle);
@@ -752,9 +764,11 @@
   function openDrawer() {
     const drawer = $("#drawer");
     const panel = $("#drawer-nav");
+    if (!drawer || !panel) return;
     panel.innerHTML = "";
-    $$("#sidebar-nav .nav-item").forEach((btn) => {
+    $$("#sidebar-nav [data-view]").forEach((btn) => {
       const clone = btn.cloneNode(true);
+      clone.className = "nav-btn" + (clone.classList.contains("is-active") ? " is-active" : "");
       clone.addEventListener("click", () => showView(clone.dataset.view));
       panel.appendChild(clone);
     });
@@ -762,30 +776,34 @@
     shop.href = "../shop.html";
     shop.target = "_blank";
     shop.rel = "noopener";
-    shop.className = "nav-item";
+    shop.className = "nav-btn";
     shop.textContent = "Open shop ↗";
     panel.appendChild(shop);
     const out = document.createElement("button");
     out.type = "button";
-    out.className = "nav-item danger";
+    out.className = "nav-btn text-red-300";
     out.textContent = "Sign out";
     out.addEventListener("click", logout);
     panel.appendChild(out);
+    drawer.classList.remove("hidden");
     drawer.hidden = false;
   }
 
   function closeDrawer() {
-    $("#drawer").hidden = true;
+    const drawer = $("#drawer");
+    if (!drawer) return;
+    drawer.classList.add("hidden");
+    drawer.hidden = true;
   }
 
-  // ── events ─────────────────────────────────────────────
+  // ── bind ───────────────────────────────────────────────
   function bindEvents() {
     $("#login-form")?.addEventListener("submit", (e) => {
       e.preventDefault();
       const pass = ($("#login-pass")?.value || "").trim();
       if (!pass) return showLogin("Please enter your password.");
       if (pass !== password()) {
-        $("#login-pass").value = "";
+        if ($("#login-pass")) $("#login-pass").value = "";
         return showLogin("Incorrect password. Try again.");
       }
       unlock("Admin");
@@ -798,7 +816,9 @@
     document.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-view]");
       if (!btn || !btn.dataset.view) return;
-      if ($("#app")?.hidden) return;
+      if (!document.body.classList.contains("is-app")) return;
+      // ignore plain links that also have data-view accidentally
+      if (btn.tagName === "A" && btn.getAttribute("href") && !btn.dataset.view) return;
       e.preventDefault();
       showView(btn.dataset.view);
     });
@@ -809,7 +829,7 @@
     $("#btn-add-product")?.addEventListener("click", () => openEditor(null));
     $("#btn-cancel-edit")?.addEventListener("click", closeEditor);
 
-    $("#f-file")?.addEventListener("change", async () => {
+    $("#f-file")?.addEventListener("change", () => {
       const file = $("#f-file").files?.[0];
       if (!file) return;
       if (!file.type.startsWith("image/")) return alert("Choose an image file.");
@@ -831,7 +851,7 @@
           canvas.height = h;
           canvas.getContext("2d").drawImage(img, 0, 0, w, h);
           const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
-          $("#f-image").value = "";
+          if ($("#f-image")) $("#f-image").value = "";
           setPreview(dataUrl);
         };
         img.onerror = () => setPreview(raw);
@@ -840,16 +860,16 @@
       reader.readAsDataURL(file);
     });
 
-    let t;
+    let debounce;
     $("#f-image")?.addEventListener("input", () => {
-      clearTimeout(t);
-      t = setTimeout(() => {
-        const url = $("#f-image").value.trim();
+      clearTimeout(debounce);
+      debounce = setTimeout(() => {
+        const url = ($("#f-image")?.value || "").trim();
         if (url) {
-          $("#f-file").value = "";
+          if ($("#f-file")) $("#f-file").value = "";
           setPreview(url);
         }
-      }, 300);
+      }, 250);
     });
 
     $("#product-form")?.addEventListener("submit", (e) => {
@@ -884,10 +904,10 @@
         data.rating = list[idx].rating;
         data.reviews = list[idx].reviews;
         list[idx] = data;
-        log(`Updated ${data.name}`);
+        log("Updated " + data.name);
       } else {
         list.push(data);
-        log(`Created ${data.name}`);
+        log("Created " + data.name);
       }
       saveProducts(list);
       closeEditor();
@@ -914,7 +934,7 @@
       if (list.some((c) => c.code === code)) return alert("That code already exists.");
       list.push({ code, type, value, active: true, createdAt: new Date().toISOString() });
       saveCoupons(list);
-      log(`Coupon ${code} created`);
+      log("Coupon " + code + " created");
       e.target.reset();
       renderCoupons();
     });
@@ -923,7 +943,7 @@
       const blob = new Blob([JSON.stringify(getProducts(), null, 2)], { type: "application/json" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = `sky-products-${Date.now()}.json`;
+      a.download = "sky-products-" + Date.now() + ".json";
       a.click();
       URL.revokeObjectURL(a.href);
       log("Exported products JSON");
@@ -939,13 +959,17 @@
         const data = JSON.parse(await file.text());
         if (!Array.isArray(data)) throw new Error("JSON must be an array of products.");
         saveProducts(data.map(normalizeProduct));
-        msg.textContent = `Imported ${data.length} products.`;
-        msg.className = "status ok";
-        log(`Imported ${data.length} products`);
+        if (msg) {
+          msg.textContent = "Imported " + data.length + " products.";
+          msg.className = "text-sm mt-3 status-ok";
+        }
+        log("Imported " + data.length + " products");
         renderProducts();
       } catch (err) {
-        msg.textContent = err.message;
-        msg.className = "status err";
+        if (msg) {
+          msg.textContent = err.message;
+          msg.className = "text-sm mt-3 status-err";
+        }
       }
       e.target.value = "";
     });
@@ -954,8 +978,10 @@
       const catalog = seedFromDataJs();
       const msg = $("#seed-msg");
       if (!catalog.length) {
-        msg.textContent = "Could not load catalog. Hard refresh and try again.";
-        msg.className = "status err";
+        if (msg) {
+          msg.textContent = "Could not load catalog. Hard refresh and try again.";
+          msg.className = "text-sm mt-3 status-err";
+        }
         return;
       }
       localStorage.removeItem(KEYS.products);
@@ -963,9 +989,11 @@
         localStorage.setItem(KEYS.catalogVersion, String(window.SKY_CATALOG_VERSION));
       }
       saveProducts(catalog);
-      msg.textContent = `Loaded ${catalog.length} products with photos.`;
-      msg.className = "status ok";
-      log(`Seeded ${catalog.length} products`);
+      if (msg) {
+        msg.textContent = "Loaded " + catalog.length + " products with photos.";
+        msg.className = "text-sm mt-3 status-ok";
+      }
+      log("Seeded " + catalog.length + " products");
       renderProducts();
       renderDashboard();
     });
@@ -975,19 +1003,20 @@
       localStorage.removeItem(KEYS.products);
       localStorage.removeItem(KEYS.catalogVersion);
       saveProducts(seedFromDataJs());
-      $("#seed-msg").textContent = "Reset to catalog defaults.";
-      $("#seed-msg").className = "status ok";
+      const msg = $("#seed-msg");
+      if (msg) {
+        msg.textContent = "Reset to catalog defaults.";
+        msg.className = "text-sm mt-3 status-ok";
+      }
       log("Reset catalog overrides");
       renderProducts();
       renderDashboard();
     });
   }
 
-  // ── boot ───────────────────────────────────────────────
   function boot() {
     initTheme();
     bindEvents();
-    // Always start on login unless session exists
     if (sessionStorage.getItem(KEYS.session) === "1") {
       unlock(sessionStorage.getItem(KEYS.email) || "Admin");
     } else {
