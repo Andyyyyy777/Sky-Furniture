@@ -15,33 +15,36 @@ body {
 
 /* =========================================================
    MOBILE NAV ONLY (< 768px)
-   Desktop/PC header stays exactly as deployed.
-   Phone: logo left · open middle · icons glued far right
+   Desktop/PC header stays as deployed.
+   Phone: logo left · space in middle · icons pack on far right
    ========================================================= */
 @media screen and (max-width: 767.98px) {
   .site-header > .max-w-7xl {
-    padding-left: 8px !important;
-    padding-right: 2px !important;
+    padding-left: 10px !important;
+    padding-right: 6px !important;
   }
 
+  /* Slightly larger logo; leave room for middle gap */
   .site-header .header-logo {
-    font-size: 1.25rem !important;
-    max-width: 48% !important;
+    font-size: 1.5rem !important;
+    max-width: 44% !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
+    line-height: 1.1 !important;
   }
 
-  /* Icon pack: zero gap, flush right (desktop gap classes ignored here) */
+  /* Icon pack: moderate size, easy to tap, still right-aligned */
   .site-header .header-icons {
     display: flex !important;
     flex-wrap: nowrap !important;
     align-items: center !important;
     justify-content: flex-end !important;
-    margin-left: auto !important;
-    gap: 0 !important;
-    column-gap: 0 !important;
+    margin-left: auto !important; /* keeps open space after logo */
+    gap: 2px !important;
+    column-gap: 2px !important;
     padding: 0 !important;
+    flex-shrink: 0 !important;
   }
 
   /* Search form already hidden under sm; keep it out of the pack */
@@ -49,45 +52,78 @@ body {
     display: none !important;
   }
 
+  /* ~40px tap targets (comfortable mobile size) */
   .site-header .header-icons > button,
   .site-header .header-icons > a,
   .site-header .header-icons > [data-auth-slot] {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: 0 -1px !important;
+    margin: 0 !important;
     padding: 0 !important;
-    width: 26px !important;
-    height: 26px !important;
-    min-width: 26px !important;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
     line-height: 0 !important;
+    border-radius: 999px !important;
   }
 
   .site-header .header-icons > [data-auth-slot] {
     width: auto !important;
     min-width: 0 !important;
     max-width: none !important;
+    height: 40px !important;
+    padding: 0 2px !important;
   }
 
+  /* Default icon size inside buttons */
   .site-header .header-icons svg {
-    width: 16px !important;
-    height: 16px !important;
-    display: block !important;
+    width: 22px !important;
+    height: 22px !important;
+    flex-shrink: 0 !important;
   }
 
   .site-header .header-icons #mobile-menu-btn svg {
-    width: 18px !important;
-    height: 18px !important;
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  /*
+   * Theme toggle: ONE icon only.
+   * (Earlier mobile rule forced display:block on all SVGs and showed sun+moon.)
+   */
+  .site-header .header-icons [data-theme-toggle] {
+    position: relative !important;
+  }
+
+  .site-header .header-icons [data-theme-toggle] svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  html:not(.dark) .site-header .header-icons [data-theme-toggle] .icon-moon {
+    display: none !important;
+  }
+  html:not(.dark) .site-header .header-icons [data-theme-toggle] .icon-sun {
+    display: block !important;
+  }
+  html.dark .site-header .header-icons [data-theme-toggle] .icon-sun {
+    display: none !important;
+  }
+  html.dark .site-header .header-icons [data-theme-toggle] .icon-moon {
+    display: block !important;
   }
 
   .site-header .header-icons [data-auth-slot] a,
   .site-header .header-icons a[href="login.html"] {
-    font-size: 10px !important;
+    font-size: 12px !important;
     font-weight: 600 !important;
-    padding: 0 6px !important;
-    height: 22px !important;
-    line-height: 22px !important;
+    padding: 0 10px !important;
+    height: 32px !important;
+    line-height: 32px !important;
     width: auto !important;
+    min-width: 0 !important;
     white-space: nowrap !important;
     border: 1px solid #e8e0d5 !important;
     border-radius: 999px !important;
@@ -101,17 +137,25 @@ body {
     gap: 0 !important;
     padding: 0 !important;
     max-width: none !important;
+    width: 40px !important;
+    height: 40px !important;
   }
 
   .site-header .header-icons .user-avatar {
-    width: 22px !important;
-    height: 22px !important;
-    font-size: 10px !important;
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 12px !important;
   }
 
   .site-header .header-icons .user-menu-btn span:not(.user-avatar),
   .site-header .header-icons .user-menu-btn > svg {
     display: none !important;
+  }
+
+  .site-header .header-icons [data-cart-count] {
+    width: 16px !important;
+    height: 16px !important;
+    font-size: 9px !important;
   }
 }
 
@@ -214,18 +258,18 @@ html.dark footer.bg-ink {
   color: #a8a29e !important;
 }
 
-/* Theme toggle icon swap */
+/* Theme toggle: show only one icon (single button) */
 html.dark .icon-sun {
-  display: none;
+  display: none !important;
 }
 html:not(.dark) .icon-moon {
-  display: none;
+  display: none !important;
 }
 html.dark .icon-moon {
-  display: block;
+  display: block !important;
 }
 html:not(.dark) .icon-sun {
-  display: block;
+  display: block !important;
 }
 
 /* Account dropdown (auth-header.js) */
