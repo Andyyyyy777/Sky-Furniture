@@ -151,8 +151,8 @@
         </div>
       </div>
       <nav class="flex-1 p-3 space-y-1 overflow-y-auto" id="sidebar-nav">
-        <button type="button" data-view="dashboard" class="nav-item w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-white/5 hover:text-cream transition">Dashboard</button>
-        <button type="button" data-view="products" class="nav-item is-active w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-white/5 hover:text-cream transition">Products</button>
+        <button type="button" data-view="dashboard" class="nav-item is-active w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-white/5 hover:text-cream transition">Dashboard</button>
+        <button type="button" data-view="products" class="nav-item w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-white/5 hover:text-cream transition">Products</button>
         <button type="button" data-view="orders" class="nav-item w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-white/5 hover:text-cream transition">Orders</button>
         <button type="button" data-view="customers" class="nav-item w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-white/5 hover:text-cream transition">Customers</button>
         <button type="button" data-view="settings" class="nav-item w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium hover:bg-white/5 hover:text-cream transition">Settings</button>
@@ -178,21 +178,39 @@
       </header>
 
       <div class="lg:hidden flex gap-2 overflow-x-auto no-scrollbar px-4 py-3 border-b border-sand dark:border-stone-800">
-        <button type="button" data-view="dashboard" class="nav-item pill-nav shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border border-sand dark:border-stone-600 text-stone-500">Dashboard</button>
-        <button type="button" data-view="products" class="nav-item pill-nav is-active shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border border-sand dark:border-stone-600 text-stone-500">Products</button>
+        <button type="button" data-view="dashboard" class="nav-item pill-nav is-active shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border border-sand dark:border-stone-600 text-stone-500">Dashboard</button>
+        <button type="button" data-view="products" class="nav-item pill-nav shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border border-sand dark:border-stone-600 text-stone-500">Products</button>
         <button type="button" data-view="orders" class="nav-item pill-nav shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border border-sand dark:border-stone-600 text-stone-500">Orders</button>
         <button type="button" data-view="customers" class="nav-item pill-nav shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border border-sand dark:border-stone-600 text-stone-500">Customers</button>
         <button type="button" data-view="settings" class="nav-item pill-nav shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border border-sand dark:border-stone-600 text-stone-500">Settings</button>
       </div>
 
       <main class="flex-1 p-4 md:p-8 max-w-6xl w-full mx-auto">
-        <section id="view-dashboard" class="view hidden">
+        <section id="view-dashboard" class="view">
           <div class="mb-7">
             <p class="text-[11px] font-semibold tracking-[0.16em] uppercase text-clay dark:text-warm">Overview</p>
             <h2 class="font-display text-3xl md:text-4xl text-ink dark:text-[#f3efe9] mt-1">Dashboard</h2>
-            <p class="text-sm text-stone-500 mt-1">Sales and catalog snapshot</p>
+            <p class="text-sm text-stone-500 mt-1">Daily &amp; weekly revenue, catalog, and sales snapshot</p>
           </div>
+
+          <h3 class="text-[11px] font-semibold tracking-widest uppercase text-stone-400 mb-3">Revenue overview</h3>
+          <div id="revenue-kpis" class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-6">
+            <!-- Always visible; values filled from LocalStorage orders -->
+            <div class="rounded-2xl border border-sand dark:border-stone-700 bg-white dark:bg-[#221f1c] p-5 border-l-[3px] border-l-ink dark:border-l-warm shadow-soft">
+              <p class="text-[11px] font-semibold tracking-wider uppercase text-stone-400">Daily revenue</p>
+              <p id="daily-revenue" class="font-display text-3xl md:text-4xl text-ink dark:text-[#f3efe9] mt-2 tabular-nums">₦0</p>
+              <p id="daily-revenue-sub" class="text-xs text-stone-500 mt-2">No orders today</p>
+            </div>
+            <div class="rounded-2xl border border-sand dark:border-stone-700 bg-white dark:bg-[#221f1c] p-5 border-l-[3px] border-l-ink dark:border-l-warm shadow-soft">
+              <p class="text-[11px] font-semibold tracking-wider uppercase text-stone-400">Weekly revenue</p>
+              <p id="weekly-revenue" class="font-display text-3xl md:text-4xl text-ink dark:text-[#f3efe9] mt-2 tabular-nums">₦0</p>
+              <p id="weekly-revenue-sub" class="text-xs text-stone-500 mt-2">No orders this week</p>
+            </div>
+          </div>
+
+          <h3 class="text-[11px] font-semibold tracking-widest uppercase text-stone-400 mb-3">Store snapshot</h3>
           <div id="kpi-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6"></div>
+
           <div class="grid lg:grid-cols-2 gap-4">
             <div class="rounded-2xl border border-sand dark:border-stone-700 bg-white dark:bg-[#221f1c] p-5 shadow-soft">
               <div class="flex items-center justify-between mb-3">
@@ -211,7 +229,7 @@
           </div>
         </section>
 
-        <section id="view-products" class="view">
+        <section id="view-products" class="view hidden">
           <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
             <div>
               <p class="text-[11px] font-semibold tracking-[0.16em] uppercase text-clay dark:text-warm">Catalog</p>
@@ -403,7 +421,15 @@
       { id: "decor", label: "Decor" },
       { id: "artifacts", label: "Artifacts" },
       { id: "rugs", label: "Rugs" },
-      { id: "lighting", label: "Lighting" }
+      { id: "lighting", label: "Lighting" },
+      { id: "outdoor-patio", label: "Outdoor / Patio" },
+      { id: "storage", label: "Storage" },
+      { id: "kitchen", label: "Kitchen" },
+      { id: "diffusers", label: "Diffusers" },
+      { id: "bedding-essentials", label: "Bedding Essentials" },
+      { id: "massage-chairs", label: "Massage Chairs" },
+      { id: "hotel-commercial", label: "Hotel & Commercial" },
+      { id: "coming-soon", label: "Coming Soon" }
     ];
 
     const $ = (s, r = document) => r.querySelector(s);
@@ -479,7 +505,8 @@
       $("#login-screen").classList.add("hidden");
       $("#app").classList.remove("hidden");
       fillCategorySelects();
-      showView("products");
+      // Open Dashboard first so Daily / Weekly revenue are always visible
+      showView("dashboard");
     }
 
     function unlock() {
@@ -517,39 +544,136 @@
     }
 
     // ---------- Dashboard ----------
+    /** Load orders from LocalStorage (website keys + optional "orders") */
+    function loadSiteOrders() {
+      const keys = ["orders", ORDERS_KEY, "sky_furniture_orders"];
+      const seen = new Set();
+      const out = [];
+      for (const key of keys) {
+        try {
+          const raw = JSON.parse(localStorage.getItem(key) || "null");
+          if (!Array.isArray(raw)) continue;
+          raw.forEach((o, i) => {
+            const id = String(o.orderNumber || o.paymentRef || o.id || key + "-" + i);
+            if (seen.has(id)) return;
+            seen.add(id);
+            out.push(o);
+          });
+        } catch (_) {}
+      }
+      return out;
+    }
+
+    /** Normalize total from order object (total | totals.total) */
+    function orderTotal(o) {
+      if (o == null) return 0;
+      if (o.total != null && o.total !== "") return Number(o.total) || 0;
+      if (o.totals?.total != null) return Number(o.totals.total) || 0;
+      if (o.amount != null) return Number(o.amount) || 0;
+      return 0;
+    }
+
+    /** Normalize date from order object (date | createdAt | updatedAt) */
+    function orderDateMs(o) {
+      const raw = o?.date || o?.createdAt || o?.updatedAt || o?.paidAt || null;
+      if (!raw) return 0;
+      const t = new Date(raw).getTime();
+      return Number.isFinite(t) ? t : 0;
+    }
+
+    function isCountableOrder(o) {
+      const st = String(o?.status || "paid").toLowerCase();
+      return st !== "cancelled" && st !== "canceled" && st !== "pending_payment" && st !== "failed";
+    }
+
+    /** Start of local calendar day */
+    function startOfTodayMs() {
+      const x = new Date();
+      x.setHours(0, 0, 0, 0);
+      return x.getTime();
+    }
+
+    /** Rolling window: last 7 days including today */
+    function sevenDaysAgoMs() {
+      return startOfTodayMs() - 6 * 24 * 60 * 60 * 1000;
+    }
+
+    /**
+     * Daily = sum of order totals with date on calendar today
+     * Weekly = sum of order totals with date in last 7 days
+     * Uses real LocalStorage data only — ₦0 if none
+     */
+    function computeRevenueFromOrders(orders) {
+      const dayStart = startOfTodayMs();
+      const dayEnd = dayStart + 24 * 60 * 60 * 1000;
+      const weekStart = sevenDaysAgoMs();
+      let daily = 0;
+      let weekly = 0;
+      let allTime = 0;
+      let dailyCount = 0;
+      let weeklyCount = 0;
+
+      (orders || []).forEach((o) => {
+        if (!isCountableOrder(o)) return;
+        const total = orderTotal(o);
+        const t = orderDateMs(o);
+        allTime += total;
+        if (t >= dayStart && t < dayEnd) {
+          daily += total;
+          dailyCount += 1;
+        }
+        if (t >= weekStart) {
+          weekly += total;
+          weeklyCount += 1;
+        }
+      });
+
+      return { daily, weekly, allTime, dailyCount, weeklyCount };
+    }
+
     function renderDashboard() {
       const products = readProducts();
-      const orders = (() => {
-        try {
-          const o = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]");
-          return Array.isArray(o) ? o : [];
-        } catch {
-          return [];
-        }
-      })();
-      const revenue = orders
-        .filter((o) => o.status !== "cancelled" && o.status !== "pending_payment")
-        .reduce((s, o) => s + (Number(o.totals?.total) || 0), 0);
+      const orders = loadSiteOrders();
+      const rev = computeRevenueFromOrders(orders);
       const customers = getCustomers().length;
 
+      const cardHtml = (k) => `
+        <div class="rounded-2xl border border-sand dark:border-stone-700 bg-white dark:bg-[#221f1c] p-5 border-l-[3px] ${k.accent ? "border-l-ink dark:border-l-warm shadow-soft" : "border-l-warm"}">
+          <p class="text-[11px] font-semibold tracking-wider uppercase text-stone-400">${esc(k.l)}</p>
+          <p class="font-display text-3xl md:text-4xl text-ink dark:text-[#f3efe9] mt-2 tabular-nums">${esc(k.v)}</p>
+          <p class="text-xs text-stone-500 mt-2">${esc(k.s)}</p>
+        </div>`;
+
+      // Daily + Weekly revenue — update fixed cards (always in the HTML)
+      const dailyEl = $("#daily-revenue");
+      const dailySub = $("#daily-revenue-sub");
+      const weeklyEl = $("#weekly-revenue");
+      const weeklySub = $("#weekly-revenue-sub");
+      if (dailyEl) dailyEl.textContent = money(rev.daily);
+      if (dailySub) {
+        dailySub.textContent = rev.dailyCount
+          ? rev.dailyCount + " order(s) today"
+          : "No orders today";
+      }
+      if (weeklyEl) weeklyEl.textContent = money(rev.weekly);
+      if (weeklySub) {
+        weeklySub.textContent = rev.weeklyCount
+          ? rev.weeklyCount + " order(s) in the last 7 days"
+          : "No orders in the last 7 days";
+      }
+
+      // Store snapshot KPIs
       $("#kpi-grid").innerHTML = [
+        { l: "All-time revenue", v: money(rev.allTime), s: "From stored orders" },
         { l: "Products", v: String(products.length), s: "In catalog" },
         { l: "Orders", v: String(orders.length), s: "All time" },
-        { l: "Revenue", v: money(revenue), s: "Paid orders" },
         { l: "Customers", v: String(customers), s: "Sign-ups & buyers" }
       ]
-        .map(
-          (k) => `
-        <div class="rounded-2xl border border-sand dark:border-stone-700 bg-white dark:bg-[#221f1c] p-4 border-l-[3px] border-l-warm">
-          <p class="text-[11px] font-semibold tracking-wider uppercase text-stone-400">${esc(k.l)}</p>
-          <p class="font-display text-2xl md:text-3xl text-ink dark:text-[#f3efe9] mt-1 tabular-nums">${esc(k.v)}</p>
-          <p class="text-xs text-stone-500 mt-1">${esc(k.s)}</p>
-        </div>`
-        )
+        .map(cardHtml)
         .join("");
 
       const recent = [...orders]
-        .sort((a, b) => Date.parse(b.createdAt || 0) - Date.parse(a.createdAt || 0))
+        .sort((a, b) => orderDateMs(b) - orderDateMs(a))
         .slice(0, 5);
       $("#dash-orders").innerHTML = recent.length
         ? recent
@@ -557,7 +681,7 @@
               (o) => `
           <div class="flex justify-between gap-3 py-2.5 border-b border-sand dark:border-stone-700 last:border-0 text-sm">
             <span class="truncate text-stone-600 dark:text-stone-300">${esc(o.orderNumber || o.paymentRef || o.id || "Order")} · ${esc(o.customer?.fullName || o.customer?.email || "")}</span>
-            <strong class="text-clay dark:text-warm tabular-nums shrink-0">${money(o.totals?.total)}</strong>
+            <strong class="text-clay dark:text-warm tabular-nums shrink-0">${money(orderTotal(o))}</strong>
           </div>`
             )
             .join("")

@@ -89,7 +89,15 @@ const CATEGORIES = Array.isArray(window.SKY_CATEGORIES)
       { id: "dining", label: "Dining" },
       { id: "rugs", label: "Rugs" },
       { id: "lighting", label: "Lighting" },
-      { id: "decor", label: "Decor & Artifacts" }
+      { id: "decor", label: "Decor & Artifacts" },
+      { id: "outdoor-patio", label: "Outdoor / Patio" },
+      { id: "storage", label: "Storage" },
+      { id: "kitchen", label: "Kitchen" },
+      { id: "diffusers", label: "Diffusers" },
+      { id: "bedding-essentials", label: "Bedding Essentials" },
+      { id: "massage-chairs", label: "Massage Chairs" },
+      { id: "hotel-commercial", label: "Hotel & Commercial" },
+      { id: "coming-soon", label: "Coming Soon" }
     ];
 
 const CART_KEY = "sky_furniture_cart";
